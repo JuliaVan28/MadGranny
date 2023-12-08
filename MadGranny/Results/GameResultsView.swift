@@ -13,7 +13,8 @@ struct GameResultsView: View {
     @Binding var currentGameState: GameState
     
     var body: some View {
-        Text("Just use GitHub App.")
+        Text("Just use GitHub App")
+        Text("Vanda is a Github App user now 🥳")
     }
 }
 
