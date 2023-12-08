@@ -106,7 +106,7 @@ extension GameScene {
         let xConstraint = SKConstraint.positionX(xRange)
         
         // Defining Playable area for the Y-axis
-        let yRange = SKRange(lowerLimit: -254, upperLimit: 355)
+        let yRange = SKRange(lowerLimit: -254, upperLimit: 275)
         let yConstraint = SKConstraint.positionY(yRange)
         
         // Defining Playable area for the child
