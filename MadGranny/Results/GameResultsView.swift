@@ -15,6 +15,7 @@ struct GameResultsView: View {
     var body: some View {
         Text("Just use GitHub App")
         Text("Vanda is a Github App user now 🥳")
+        Text("Manu wishes to become one too")
     }
 }
 
