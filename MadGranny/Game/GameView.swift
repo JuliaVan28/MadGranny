@@ -33,24 +33,28 @@ struct GameView: View {
                 .frame(width: screenWidth, height: screenHeight)
                 .statusBar(hidden: true)
                 .ignoresSafeArea()
-            
-            HStack() {
-                /**
-                 * UI element showing the duration of the game session.
-                 */
-              //  TimerView(time: $gameLogic.timerDuration)
                 
-                Spacer()
+            HStack {
+                GameTimerView(time: $gameLogic.timerDuration)
+                    .padding()
                 
-                /**
-                 * UI element showing the current score of the player.
-                 */
-               // ScoreView(score: $gameLogic.currentScore)
-            
+                GamePointsView(score: $gameLogic.currentScore)
+                    .padding()
+                
+                Button(action: {print("")}) {
+                    Image(systemName: "pause")
+                        .font(.headline)
+                }
+                    .frame(minWidth: 50)
+                    .padding(24)
+                    .foregroundColor(.white)
+                    .background(Color(UIColor.systemGray))
+                    .cornerRadius(10)
+                    .padding()
             }
-            .padding()
-            .padding(.top, 40)
             
+            .padding(.top, 10)
+            .padding()
         }
         .onChange(of: gameLogic.isGameOver) {
             if gameLogic.isGameOver {
