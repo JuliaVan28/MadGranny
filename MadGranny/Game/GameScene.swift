@@ -8,6 +8,16 @@
 import SpriteKit
 import SwiftUI
 
+// Using the Device data to make sure that the AnalogJoystick always stays at the center of device
+struct ScreenSize {
+    static let width        = UIScreen.main.bounds.size.width
+    static let height       = UIScreen.main.bounds.size.height
+    static let maxLength    = max(ScreenSize.width, ScreenSize.height)
+    static let minLength    = min(ScreenSize.width, ScreenSize.height)
+    static let size         = CGSize(width: ScreenSize.width, height: ScreenSize.height)
+}
+
+
 class GameScene: SKScene {
     /**
      * # The Game Logic
@@ -15,21 +25,51 @@ class GameScene: SKScene {
      **/
     var gameLogic: GameLogic = GameLogic.shared
     
+    // this will be used to accelerate the child
+    let velocityMultiplier: CGFloat = 0.13
+    
+    
     // Keeps track of when the last update happend.
     // Used to calculate how much time has passed between updates.
     var lastUpdate: TimeInterval = 0
     
+    // The Z Position for the Child and the JoyStick on the screen
+    enum NodesZPosition: CGFloat {
+        case child, joystick
+    }
+    
     //MARK: - Characters
     
-    var child: SKSpriteNode!
+    // Child
+    var child: SKSpriteNode =  {
+        var sprite = SKSpriteNode(imageNamed: "child")
+        sprite.position = CGPoint.zero
+        sprite.zPosition = NodesZPosition.child.rawValue
+        return sprite
+    }()
     
+    // Granny
     var granny: SKSpriteNode!
+    
+    
+    //MARK: - Configuring the AnalogJoystick
+    
+    var analogJoystick: AnalogJoystick = {
+        let js = AnalogJoystick(diameter: 100, colors: nil, images: (substrate: #imageLiteral(resourceName: "outterCircle"), stick: #imageLiteral(resourceName: "innerCircle")))
+        js.position = CGPoint(x: ScreenSize.width * -0.235 + js.radius + 45, y: ScreenSize.height * -0.5 + js.radius + 45)
+        js.zPosition = NodesZPosition.joystick.rawValue
+        return js
+    }()
     
     //MARK: - SKScene override functions
     
     // When the view is presented
     override func didMove(to view: SKView) {
         self.setUpGame()
+        
+        // Adding the AnalogJoystick to the gameScene
+        self.setupJoystick()
+        
         self.setUpPhysicsWorld()
     }
     
@@ -49,7 +89,6 @@ class GameScene: SKScene {
         
         self.lastUpdate = currentTime
     }
-    
 }
 
 // MARK: - Game Scene Set Up
@@ -57,13 +96,27 @@ extension GameScene {
     
     private func setUpGame() {
         self.gameLogic.setUpGame()
-      //  self.backgroundColor = SKColor.white
+        //  self.backgroundColor = SKColor.white
         
+        // Anchoring the Child to the center of the screen
+        anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        addChild(child)
+    }
+    
+//MARK: - setting up the analogJoyStick, take a look at the File AnalogJoystick insdie the Controller Folder
+    // References: https://docs.swift.org/swift-book/documentation/the-swift-programming-language/automaticreferencecounting/#
+    
+    func setupJoystick() {
+        addChild(analogJoystick)
+        analogJoystick.trackingHandler = { [unowned self] data in
+            self.child.position = CGPoint(x: self.child.position.x + (data.velocity.x * self.velocityMultiplier),
+                                          y: self.child.position.y + (data.velocity.y * self.velocityMultiplier))
+        }
     }
     
     private func setUpPhysicsWorld() {
-       physicsWorld.gravity = CGVector(dx: 0, dy: -0.9)
-      //  physicsWorld.contactDelegate = self
+        physicsWorld.gravity = CGVector(dx: 0, dy: -0.9)
+        //  physicsWorld.contactDelegate = self
     }
     
     private func restartGame() {
@@ -96,9 +149,7 @@ extension GameScene {
     }
     
     private func finishGame() {
-                
         gameLogic.isGameOver = true
     }
     
 }
-

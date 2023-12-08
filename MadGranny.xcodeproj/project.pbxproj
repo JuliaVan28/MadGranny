@@ -17,6 +17,7 @@
 		325BDD742B2208320098149D /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD732B2208320098149D /* GameLogic.swift */; };
 		325BDD7A2B2209890098149D /* GameResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD792B2209890098149D /* GameResultsView.swift */; };
 		325BDD7D2B229C000098149D /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD7C2B229C000098149D /* GameState.swift */; };
+		3C3F13F62B23492300AD3D62 /* AnalogJoystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3F13F52B23492300AD3D62 /* AnalogJoystick.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		325BDD732B2208320098149D /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
 		325BDD792B2209890098149D /* GameResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResultsView.swift; sourceTree = "<group>"; };
 		325BDD7C2B229C000098149D /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		3C3F13F52B23492300AD3D62 /* AnalogJoystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogJoystick.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				325BDD6F2B2207F40098149D /* GameView.swift */,
 				325BDD712B22081E0098149D /* GameScene.swift */,
 				325BDD732B2208320098149D /* GameLogic.swift */,
+				3C3F13F72B23492C00AD3D62 /* Controller */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -123,6 +126,14 @@
 				32031CAB2B21E59800F7AE47 /* ContentView.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		3C3F13F72B23492C00AD3D62 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3C3F13F52B23492300AD3D62 /* AnalogJoystick.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				325BDD742B2208320098149D /* GameLogic.swift in Sources */,
+				3C3F13F62B23492300AD3D62 /* AnalogJoystick.swift in Sources */,
 				325BDD7D2B229C000098149D /* GameState.swift in Sources */,
 				325BDD722B22081E0098149D /* GameScene.swift in Sources */,
 				32031CAC2B21E59800F7AE47 /* ContentView.swift in Sources */,
@@ -336,6 +348,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MadGranny/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -364,6 +377,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MadGranny/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
