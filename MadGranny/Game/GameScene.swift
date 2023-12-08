@@ -56,7 +56,7 @@ class GameScene: SKScene {
     
     var analogJoystick: AnalogJoystick = {
         let js = AnalogJoystick(diameter: 100, colors: nil, images: (substrate: #imageLiteral(resourceName: "outterCircle"), stick: #imageLiteral(resourceName: "innerCircle")))
-        js.position = CGPoint(x: ScreenSize.width * -0.235 + js.radius + 45, y: ScreenSize.height * -0.5 + js.radius + 45)
+        js.position = CGPoint(x: ScreenSize.width * -0.235 + js.radius + 45, y: ScreenSize.height * -0.5 + js.radius + 35)
         js.zPosition = NodesZPosition.joystick.rawValue
         return js
     }()
@@ -100,6 +100,18 @@ extension GameScene {
         
         // Anchoring the Child to the center of the screen
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        
+        // Defining Playable area for the X-axis
+        let xRange = SKRange(lowerLimit: -170, upperLimit: 170)
+        let xConstraint = SKConstraint.positionX(xRange)
+        
+        // Defining Playable area for the Y-axis
+        let yRange = SKRange(lowerLimit: -254, upperLimit: 355)
+        let yConstraint = SKConstraint.positionY(yRange)
+        
+        // Defining Playable area for the child
+        self.child.constraints = [xConstraint, yConstraint]
+        
         addChild(child)
     }
     
