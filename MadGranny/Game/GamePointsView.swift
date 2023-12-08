@@ -26,7 +26,7 @@ struct GamePointsView: View {
             Text("\(score)")
                 .font(.headline)
         }
-        .frame(minWidth: 50)
+        .frame(minWidth: 60)
         .padding(24)
         .foregroundColor(.white)
         .background(Color(UIColor.systemGray))

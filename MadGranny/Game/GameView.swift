@@ -36,24 +36,24 @@ struct GameView: View {
                 
             HStack {
                 GameTimerView(time: $gameLogic.timerDuration)
-                    .padding()
+                    //.padding()
                 
                 GamePointsView(score: $gameLogic.currentScore)
-                    .padding()
+                    //.padding()
                 
                 Button(action: {print("")}) {
                     Image(systemName: "pause")
                         .font(.headline)
                 }
-                    .frame(minWidth: 50)
+                    .frame(minWidth: 60)
                     .padding(24)
                     .foregroundColor(.white)
                     .background(Color(UIColor.systemGray))
                     .cornerRadius(10)
-                    .padding()
+                    //.padding()
             }
             
-            .padding(.top, 10)
+            .padding(.top, 20)
             .padding()
         }
         .onChange(of: gameLogic.isGameOver) {
