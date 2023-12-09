@@ -17,6 +17,18 @@ struct ScreenSize {
     static let size         = CGSize(width: ScreenSize.width, height: ScreenSize.height)
 }
 
+//  Extension
+extension CGFloat {
+    static func randomNumber() -> CGFloat {
+        return CGFloat(Float(arc4random()) / Float(UInt32.max))
+    }
+    
+    static func randomNumber(min: CGFloat, max: CGFloat) -> CGFloat {
+        assert(min < max)
+        return CGFloat.randomNumber() * (max - min) + min
+    }
+}
+
 
 class GameScene: SKScene {
     /**
@@ -71,24 +83,48 @@ class GameScene: SKScene {
         self.setupJoystick()
         
         self.setUpPhysicsWorld()
+    
+        run(SKAction.repeatForever(SKAction.sequence([SKAction.run(spawnCandy), SKAction.wait(forDuration: 10.0)])))
     }
     
-//    override func update(_ currentTime: TimeInterval) {
-//        
-//        // If the game over condition is met, the game will finish
-//        if self.isGameOver { self.finishGame() }
-//        
-//        // The first time the update function is called we must initialize the
-//        // lastUpdate variable
-//        if self.lastUpdate == 0 { self.lastUpdate = currentTime }
-//        
-//        // Calculates how much time has passed since the last update
-//        let timeElapsedSinceLastUpdate = currentTime - self.lastUpdate
-//        // Increments the length of the game session at the game logic
-//        self.gameLogic.increaseSessionTime(by: timeElapsedSinceLastUpdate)
-//        
-//        self.lastUpdate = currentTime
-//    }
+    func spawnCandy() {
+        let candy = SKSpriteNode(imageNamed: "candy")
+        let carrot = SKSpriteNode(imageNamed: "carrot")
+        candy.position = CGPoint(x: CGFloat.randomNumber(min: -150, max: 150), y: CGFloat.randomNumber(min: -350, max: 280))
+        carrot.position = CGPoint(x: CGFloat.randomNumber(min: -150, max: 150), y: CGFloat.randomNumber(min: -350, max: 280))
+        candy.setScale(0)
+        carrot.setScale(0)
+        candy.size = CGSize(width: 120, height: 120)
+        carrot.size = CGSize(width: 120, height: 120)
+        addChild(candy)
+        addChild(carrot)
+        
+        let apear = SKAction.scale(to: 1.0, duration: 0.5)
+        let wait = SKAction.wait(forDuration: 5)
+        let disappear = SKAction.scale(to: 0, duration: 0.5)
+        let removeFromParent = SKAction.removeFromParent()
+        let actions = [apear, wait, disappear, removeFromParent]
+        candy.run(SKAction.sequence(actions))
+        carrot.run(SKAction.sequence(actions))
+    }
+    
+    
+    //    override func update(_ currentTime: TimeInterval) {
+    //
+    //        // If the game over condition is met, the game will finish
+    //        if self.isGameOver { self.finishGame() }
+    //
+    //        // The first time the update function is called we must initialize the
+    //        // lastUpdate variable
+    //        if self.lastUpdate == 0 { self.lastUpdate = currentTime }
+    //
+    //        // Calculates how much time has passed since the last update
+    //        let timeElapsedSinceLastUpdate = currentTime - self.lastUpdate
+    //        // Increments the length of the game session at the game logic
+    //        self.gameLogic.increaseSessionTime(by: timeElapsedSinceLastUpdate)
+    //
+    //        self.lastUpdate = currentTime
+    //    }
 }
 
 // MARK: - Game Scene Set Up
