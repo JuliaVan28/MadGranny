@@ -56,7 +56,7 @@ class GameScene: SKScene {
     
     var analogJoystick: AnalogJoystick = {
         let js = AnalogJoystick(diameter: 100, colors: nil, images: (substrate: #imageLiteral(resourceName: "outterCircle"), stick: #imageLiteral(resourceName: "innerCircle")))
-        js.position = CGPoint(x: ScreenSize.width * -0.235 + js.radius + 45, y: ScreenSize.height * -0.5 + js.radius + 35)
+        js.position = CGPoint(x: ScreenSize.width * -0.235 + js.radius + 45, y: ScreenSize.height * -0.5 + js.radius + 45)
         js.zPosition = NodesZPosition.joystick.rawValue
         return js
     }()
@@ -73,22 +73,22 @@ class GameScene: SKScene {
         self.setUpPhysicsWorld()
     }
     
-    override func update(_ currentTime: TimeInterval) {
-        
-        // If the game over condition is met, the game will finish
-        if self.isGameOver { self.finishGame() }
-        
-        // The first time the update function is called we must initialize the
-        // lastUpdate variable
-        if self.lastUpdate == 0 { self.lastUpdate = currentTime }
-        
-        // Calculates how much time has passed since the last update
-        let timeElapsedSinceLastUpdate = currentTime - self.lastUpdate
-        // Increments the length of the game session at the game logic
-        self.gameLogic.increaseSessionTime(by: timeElapsedSinceLastUpdate)
-        
-        self.lastUpdate = currentTime
-    }
+//    override func update(_ currentTime: TimeInterval) {
+//        
+//        // If the game over condition is met, the game will finish
+//        if self.isGameOver { self.finishGame() }
+//        
+//        // The first time the update function is called we must initialize the
+//        // lastUpdate variable
+//        if self.lastUpdate == 0 { self.lastUpdate = currentTime }
+//        
+//        // Calculates how much time has passed since the last update
+//        let timeElapsedSinceLastUpdate = currentTime - self.lastUpdate
+//        // Increments the length of the game session at the game logic
+//        self.gameLogic.increaseSessionTime(by: timeElapsedSinceLastUpdate)
+//        
+//        self.lastUpdate = currentTime
+//    }
 }
 
 // MARK: - Game Scene Set Up
@@ -102,11 +102,12 @@ extension GameScene {
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
         // Defining Playable area for the X-axis
-        let xRange = SKRange(lowerLimit: -170, upperLimit: 170)
+        // Yulli said that: I'm not quite sure if hard coding is a good practice, like i dont know already, Anyway here is a NASA quality code
+        let xRange = SKRange(lowerLimit: -(ScreenSize.width / 2) + 27, upperLimit: (ScreenSize.width / 2) - 27)
         let xConstraint = SKConstraint.positionX(xRange)
         
         // Defining Playable area for the Y-axis
-        let yRange = SKRange(lowerLimit: -254, upperLimit: 275)
+        let yRange = SKRange(lowerLimit: -(ScreenSize.height / 2) + 40, upperLimit: 275)
         let yConstraint = SKConstraint.positionY(yRange)
         
         // Defining Playable area for the child
