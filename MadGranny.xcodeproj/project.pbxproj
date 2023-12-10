@@ -24,6 +24,8 @@
 		325BDD892B251EA70098149D /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD882B251EA70098149D /* Child.swift */; };
 		325BDD8B2B2545650098149D /* EntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD8A2B2545650098149D /* EntityType.swift */; };
 		3C3F13F62B23492300AD3D62 /* AnalogJoystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3F13F52B23492300AD3D62 /* AnalogJoystick.swift */; };
+		9B033BEF2B238D2D008BC0E6 /* GameTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B033BEE2B238D2D008BC0E6 /* GameTimerView.swift */; };
+		9B033BF12B239E58008BC0E6 /* GamePointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B033BF02B239E58008BC0E6 /* GamePointsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		325BDD882B251EA70098149D /* Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
 		325BDD8A2B2545650098149D /* EntityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityType.swift; sourceTree = "<group>"; };
 		3C3F13F52B23492300AD3D62 /* AnalogJoystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogJoystick.swift; sourceTree = "<group>"; };
+		9B033BEE2B238D2D008BC0E6 /* GameTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimerView.swift; sourceTree = "<group>"; };
+		9B033BF02B239E58008BC0E6 /* GamePointsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePointsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,8 @@
 				325BDD6F2B2207F40098149D /* GameView.swift */,
 				325BDD712B22081E0098149D /* GameScene.swift */,
 				325BDD732B2208320098149D /* GameLogic.swift */,
+				9B033BEE2B238D2D008BC0E6 /* GameTimerView.swift */,
+				9B033BF02B239E58008BC0E6 /* GamePointsView.swift */,
 				3C3F13F72B23492C00AD3D62 /* Controller */,
 			);
 			path = Game;
@@ -242,6 +248,7 @@
 			files = (
 				325BDD8B2B2545650098149D /* EntityType.swift in Sources */,
 				325BDD832B25105D0098149D /* EntityManager.swift in Sources */,
+				9B033BEF2B238D2D008BC0E6 /* GameTimerView.swift in Sources */,
 				325BDD742B2208320098149D /* GameLogic.swift in Sources */,
 				3C3F13F62B23492300AD3D62 /* AnalogJoystick.swift in Sources */,
 				325BDD7D2B229C000098149D /* GameState.swift in Sources */,
@@ -251,6 +258,7 @@
 				325BDD6D2B2207770098149D /* MenuView.swift in Sources */,
 				325BDD812B250F9F0098149D /* SpriteComponent.swift in Sources */,
 				325BDD872B2512150098149D /* MoveComponent.swift in Sources */,
+				9B033BF12B239E58008BC0E6 /* GamePointsView.swift in Sources */,
 				325BDD702B2207F40098149D /* GameView.swift in Sources */,
 				32031CAA2B21E59800F7AE47 /* MadGrannyApp.swift in Sources */,
 				325BDD892B251EA70098149D /* Child.swift in Sources */,

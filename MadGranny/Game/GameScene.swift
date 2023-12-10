@@ -25,6 +25,19 @@ struct PhysicsCategory {
     static let granny: UInt32  = 0b10
 }
 
+//  Extension
+extension CGFloat {
+    static func randomNumber() -> CGFloat {
+        return CGFloat(Float(arc4random()) / Float(UInt32.max))
+    }
+    
+    static func randomNumber(min: CGFloat, max: CGFloat) -> CGFloat {
+        assert(min < max)
+        return CGFloat.randomNumber() * (max - min) + min
+    }
+}
+
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     /**
      * # The Game Logic
@@ -71,6 +84,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var analogJoystick: AnalogJoystick = {
         let js = AnalogJoystick(diameter: 100, colors: nil, images: (substrate: #imageLiteral(resourceName: "outterCircle"), stick: #imageLiteral(resourceName: "innerCircle")))
+        js.name = "joystick"
         js.position = CGPoint(x: ScreenSize.width * -0.235 + js.radius + 45, y: ScreenSize.height * -0.5 + js.radius + 45)
         js.zPosition = NodesZPosition.joystick.rawValue
         return js
@@ -89,8 +103,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
         // Adding the AnalogJoystick to the gameScene
         self.setupJoystick()
+            
+        run(SKAction.repeatForever(SKAction.sequence([SKAction.run(spawnCandy), SKAction.wait(forDuration: 10.0)])))
+    }
+    
+    func spawnCandy() {
+        let candy = SKSpriteNode(imageNamed: "candy")
+        let carrot = SKSpriteNode(imageNamed: "carrot")
+        candy.position = CGPoint(x: CGFloat.randomNumber(min: -150, max: 150), y: CGFloat.randomNumber(min: -350, max: 280))
+        carrot.position = CGPoint(x: CGFloat.randomNumber(min: -150, max: 150), y: CGFloat.randomNumber(min: -350, max: 280))
+        candy.setScale(0)
+        carrot.setScale(0)
+        candy.size = CGSize(width: 120, height: 120)
+        carrot.size = CGSize(width: 120, height: 120)
+        addChild(candy)
+        addChild(carrot)
         
-        
+        let apear = SKAction.scale(to: 1.0, duration: 0.5)
+        let wait = SKAction.wait(forDuration: 5)
+        let disappear = SKAction.scale(to: 0, duration: 0.5)
+        let removeFromParent = SKAction.removeFromParent()
+        let actions = [apear, wait, disappear, removeFromParent]
+        candy.run(SKAction.sequence(actions))
+        carrot.run(SKAction.sequence(actions))
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -170,27 +205,25 @@ extension GameScene {
     }
     
     //MARK: - setting up the analogJoyStick, take a look at the File AnalogJoystick insdie the Controller Folder
-    // References: https://docs.swift.org/swift-book/documentation/the-swift-programming-language/automaticreferencecounting/#
-    
-    func setupJoystick() {
-        print("setting up joystick")
-        self.addChild(analogJoystick)
-        if let child = entityManager.entities.first(where: {$0.component(ofType: SpriteComponent.self)?.entityType == .child}) {
-            //(where: { $0.component(ofType: SpriteComponent.self)?.node.physicsBody?.categoryBitMask == PhysicsCategory.child }) {
-            print("unwrapped child for joystick tracking handler")
+// References: https://docs.swift.org/swift-book/documentation/the-swift-programming-language/automaticreferencecounting/#
+        
+        func setupJoystick() {
+            addChild(analogJoystick)
+            print(scene?.childNode(withName: "joystick")?.description)
+            
             analogJoystick.trackingHandler = { [unowned self] data in
-
-                if var childPosition = child.component(ofType:
-                                                        SpriteComponent.self)?.node.position {
-                    print("unwrapped child's position")
-
-                    childPosition = CGPoint(x: childPosition.x + (data.velocity.x * self.velocityMultiplier),
-                                            y: childPosition.y + (data.velocity.y * self.velocityMultiplier))
-                    child.component(ofType: SpriteComponent.self)?.node.position = childPosition
+                if let child = entityManager.entities.first(where: {$0.component(ofType: SpriteComponent.self)?.entityType == .child}) {
+                    print("unwrapped child for joystick tracking handler")
+                    if var childPosition = child.component(ofType: SpriteComponent.self)?.node.position {
+                        print("unwrapped child's position")
+                        
+                        childPosition = CGPoint(x: childPosition.x + (data.velocity.x * self.velocityMultiplier),
+                                                y: childPosition.y + (data.velocity.y * self.velocityMultiplier))
+                        child.component(ofType: SpriteComponent.self)?.node.position = childPosition
+                    }
                 }
             }
         }
-    }
     
     private func setUpPhysicsWorld() {
         physicsWorld.gravity = CGVector(dx: 0, dy: -0.9)
