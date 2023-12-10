@@ -23,6 +23,11 @@
 		325BDD872B2512150098149D /* MoveComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD862B2512150098149D /* MoveComponent.swift */; };
 		325BDD892B251EA70098149D /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD882B251EA70098149D /* Child.swift */; };
 		325BDD8B2B2545650098149D /* EntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD8A2B2545650098149D /* EntityType.swift */; };
+		325BDD8D2B262FD40098149D /* Candy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD8C2B262FD40098149D /* Candy.swift */; };
+		325BDD8F2B262FDE0098149D /* Carrot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD8E2B262FDE0098149D /* Carrot.swift */; };
+		325BDD912B2635E20098149D /* BonusComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD902B2635E20098149D /* BonusComponent.swift */; };
+		325BDD932B263EDB0098149D /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD922B263EDB0098149D /* CGFloatExtension.swift */; };
+		325BDD952B263F060098149D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD942B263F060098149D /* Constants.swift */; };
 		3C3F13F62B23492300AD3D62 /* AnalogJoystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3F13F52B23492300AD3D62 /* AnalogJoystick.swift */; };
 		9B033BEF2B238D2D008BC0E6 /* GameTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B033BEE2B238D2D008BC0E6 /* GameTimerView.swift */; };
 		9B033BF12B239E58008BC0E6 /* GamePointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B033BF02B239E58008BC0E6 /* GamePointsView.swift */; };
@@ -46,6 +51,11 @@
 		325BDD862B2512150098149D /* MoveComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveComponent.swift; sourceTree = "<group>"; };
 		325BDD882B251EA70098149D /* Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
 		325BDD8A2B2545650098149D /* EntityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityType.swift; sourceTree = "<group>"; };
+		325BDD8C2B262FD40098149D /* Candy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Candy.swift; sourceTree = "<group>"; };
+		325BDD8E2B262FDE0098149D /* Carrot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carrot.swift; sourceTree = "<group>"; };
+		325BDD902B2635E20098149D /* BonusComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusComponent.swift; sourceTree = "<group>"; };
+		325BDD922B263EDB0098149D /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
+		325BDD942B263F060098149D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3C3F13F52B23492300AD3D62 /* AnalogJoystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogJoystick.swift; sourceTree = "<group>"; };
 		9B033BEE2B238D2D008BC0E6 /* GameTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimerView.swift; sourceTree = "<group>"; };
 		9B033BF02B239E58008BC0E6 /* GamePointsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePointsView.swift; sourceTree = "<group>"; };
@@ -81,9 +91,9 @@
 		32031CA82B21E59800F7AE47 /* MadGranny */ = {
 			isa = PBXGroup;
 			children = (
+				325BDD7B2B2209BB0098149D /* App */,
 				325BDD7F2B250F690098149D /* Components */,
 				325BDD7E2B250F500098149D /* Entities */,
-				325BDD7B2B2209BB0098149D /* App */,
 				325BDD6B2B2207630098149D /* Menu */,
 				325BDD6E2B22078E0098149D /* Game */,
 				325BDD782B2209680098149D /* Results */,
@@ -127,7 +137,8 @@
 			isa = PBXGroup;
 			children = (
 				325BDD7C2B229C000098149D /* GameState.swift */,
-				325BDD8A2B2545650098149D /* EntityType.swift */,
+				325BDD922B263EDB0098149D /* CGFloatExtension.swift */,
+				325BDD942B263F060098149D /* Constants.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -152,9 +163,12 @@
 		325BDD7E2B250F500098149D /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				325BDD8A2B2545650098149D /* EntityType.swift */,
 				325BDD822B25105D0098149D /* EntityManager.swift */,
 				325BDD842B2511910098149D /* Granny.swift */,
 				325BDD882B251EA70098149D /* Child.swift */,
+				325BDD8C2B262FD40098149D /* Candy.swift */,
+				325BDD8E2B262FDE0098149D /* Carrot.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -164,6 +178,7 @@
 			children = (
 				325BDD802B250F9F0098149D /* SpriteComponent.swift */,
 				325BDD862B2512150098149D /* MoveComponent.swift */,
+				325BDD902B2635E20098149D /* BonusComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -247,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				325BDD8B2B2545650098149D /* EntityType.swift in Sources */,
+				325BDD952B263F060098149D /* Constants.swift in Sources */,
 				325BDD832B25105D0098149D /* EntityManager.swift in Sources */,
 				9B033BEF2B238D2D008BC0E6 /* GameTimerView.swift in Sources */,
 				325BDD742B2208320098149D /* GameLogic.swift in Sources */,
@@ -256,11 +272,15 @@
 				32031CAC2B21E59800F7AE47 /* ContentView.swift in Sources */,
 				325BDD852B2511910098149D /* Granny.swift in Sources */,
 				325BDD6D2B2207770098149D /* MenuView.swift in Sources */,
+				325BDD932B263EDB0098149D /* CGFloatExtension.swift in Sources */,
 				325BDD812B250F9F0098149D /* SpriteComponent.swift in Sources */,
 				325BDD872B2512150098149D /* MoveComponent.swift in Sources */,
 				9B033BF12B239E58008BC0E6 /* GamePointsView.swift in Sources */,
+				325BDD8D2B262FD40098149D /* Candy.swift in Sources */,
+				325BDD8F2B262FDE0098149D /* Carrot.swift in Sources */,
 				325BDD702B2207F40098149D /* GameView.swift in Sources */,
 				32031CAA2B21E59800F7AE47 /* MadGrannyApp.swift in Sources */,
+				325BDD912B2635E20098149D /* BonusComponent.swift in Sources */,
 				325BDD892B251EA70098149D /* Child.swift in Sources */,
 				325BDD7A2B2209890098149D /* GameResultsView.swift in Sources */,
 			);

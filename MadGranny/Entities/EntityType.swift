@@ -14,5 +14,7 @@ import Foundation
 enum EntityType {
     case child
     case granny
+    case candy
+    case carrot
     case unknown
 }

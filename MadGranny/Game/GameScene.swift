@@ -8,36 +8,6 @@
 import SpriteKit
 import SwiftUI
 
-// Using the Device data to make sure that the AnalogJoystick always stays at the center of device
-struct ScreenSize {
-    static let width        = UIScreen.main.bounds.size.width
-    static let height       = UIScreen.main.bounds.size.height
-    static let maxLength    = max(ScreenSize.width, ScreenSize.height)
-    static let minLength    = min(ScreenSize.width, ScreenSize.height)
-    static let size         = CGSize(width: ScreenSize.width, height: ScreenSize.height)
-}
-
-// Identifies SKSpriteNodes
-struct PhysicsCategory {
-    static let none: UInt32    = 0
-    static let all: UInt32     = UInt32.max
-    static let child: UInt32   = 0b1
-    static let granny: UInt32  = 0b10
-}
-
-//  Extension
-extension CGFloat {
-    static func randomNumber() -> CGFloat {
-        return CGFloat(Float(arc4random()) / Float(UInt32.max))
-    }
-    
-    static func randomNumber(min: CGFloat, max: CGFloat) -> CGFloat {
-        assert(min < max)
-        return CGFloat.randomNumber() * (max - min) + min
-    }
-}
-
-
 class GameScene: SKScene, SKPhysicsContactDelegate {
     /**
      * # The Game Logic
@@ -64,19 +34,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //MARK: - Characters
     
     // Child
-    /*
-     var child: SKSpriteNode =  {
-     var sprite = SKSpriteNode(imageNamed: "child")
-     sprite.position = CGPoint.zero
-     sprite.zPosition = NodesZPosition.child.rawValue
-     return sprite
-     }()*/
-    
     var child: Child?
     
     // Granny
-    // var granny: SKSpriteNode!
-    
     var granny: Granny?
     
     
@@ -104,28 +64,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Adding the AnalogJoystick to the gameScene
         self.setupJoystick()
             
-        run(SKAction.repeatForever(SKAction.sequence([SKAction.run(spawnCandy), SKAction.wait(forDuration: 10.0)])))
-    }
-    
-    func spawnCandy() {
-        let candy = SKSpriteNode(imageNamed: "candy")
-        let carrot = SKSpriteNode(imageNamed: "carrot")
-        candy.position = CGPoint(x: CGFloat.randomNumber(min: -150, max: 150), y: CGFloat.randomNumber(min: -350, max: 280))
-        carrot.position = CGPoint(x: CGFloat.randomNumber(min: -150, max: 150), y: CGFloat.randomNumber(min: -350, max: 280))
-        candy.setScale(0)
-        carrot.setScale(0)
-        candy.size = CGSize(width: 120, height: 120)
-        carrot.size = CGSize(width: 120, height: 120)
-        addChild(candy)
-        addChild(carrot)
-        
-        let apear = SKAction.scale(to: 1.0, duration: 0.5)
-        let wait = SKAction.wait(forDuration: 5)
-        let disappear = SKAction.scale(to: 0, duration: 0.5)
-        let removeFromParent = SKAction.removeFromParent()
-        let actions = [apear, wait, disappear, removeFromParent]
-        candy.run(SKAction.sequence(actions))
-        carrot.run(SKAction.sequence(actions))
+        run(SKAction.repeatForever(SKAction.sequence([SKAction.run(entityManager.spawnCandy), SKAction.wait(forDuration: 10.0)])))
+        run(SKAction.repeatForever(SKAction.sequence([SKAction.run(entityManager.spawnCarrot), SKAction.wait(forDuration: 5.0)])))
+
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -186,10 +127,19 @@ extension GameScene {
         
         self.granny = Granny(entityManager: entityManager)
         if let spriteComponent = granny?.component(ofType: SpriteComponent.self) {
+            let xRange = SKRange(lowerLimit: 0, upperLimit: frame.width)
+            let xConstraint = SKConstraint.positionX(xRange)
+            
+            let yRange = SKRange(lowerLimit: 0, upperLimit: frame.height)
+            let yConstraint = SKConstraint.positionY(yRange)
+            
             spriteComponent.node.name = "granny"
             spriteComponent.node.zPosition = NodesZPosition.granny.rawValue
             spriteComponent.node.position = CGPoint(x: ScreenSize.width - ScreenSize.width/4, y: ScreenSize.height - ScreenSize.height/4)
             spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.granny
+            
+            spriteComponent.node.constraints = [xConstraint, yConstraint]
+
             print("configured granny")
 
         }
@@ -197,9 +147,6 @@ extension GameScene {
             print("added granny")
             entityManager.add(granny)
         }
-        
-        
-        
         print("Entities: \(entityManager.entities)")
         
     }

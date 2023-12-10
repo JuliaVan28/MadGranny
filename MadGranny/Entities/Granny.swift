@@ -16,7 +16,7 @@ let type: EntityType = .granny
     
     super.init()
     let texture = SKTexture(imageNamed: "granny0")
-      let spriteComponent = SpriteComponent(entity: self, texture: texture, size: texture.size(), entityType: type)
+      let spriteComponent = SpriteComponent(entity: self, texture: texture, size: CGSize(width: texture.size().width * 2, height: texture.size().height * 2), entityType: type)
       
     addComponent(spriteComponent)
     addComponent(MoveComponent(maxSpeed: 50, maxAcceleration: 5, radius: Float(texture.size().width * 0.3), entityManager: entityManager))
