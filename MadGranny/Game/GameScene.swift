@@ -17,13 +17,23 @@ struct ScreenSize {
     static let size         = CGSize(width: ScreenSize.width, height: ScreenSize.height)
 }
 
+// Identifies SKSpriteNodes
+struct PhysicsCategory {
+    static let none: UInt32    = 0
+    static let all: UInt32     = UInt32.max
+    static let child: UInt32   = 0b1
+    static let granny: UInt32  = 0b10
+}
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     /**
      * # The Game Logic
      *     The game logic keeps track of the game variables
      **/
     var gameLogic: GameLogic = GameLogic.shared
+    
+    // Entity-component system
+    var entityManager: EntityManager!
     
     // this will be used to accelerate the child
     let velocityMultiplier: CGFloat = 0.13
@@ -35,21 +45,26 @@ class GameScene: SKScene {
     
     // The Z Position for the Child and the JoyStick on the screen
     enum NodesZPosition: CGFloat {
-        case child, joystick
+        case child, granny, joystick
     }
     
     //MARK: - Characters
     
     // Child
-    var child: SKSpriteNode =  {
-        var sprite = SKSpriteNode(imageNamed: "child")
-        sprite.position = CGPoint.zero
-        sprite.zPosition = NodesZPosition.child.rawValue
-        return sprite
-    }()
+    /*
+     var child: SKSpriteNode =  {
+     var sprite = SKSpriteNode(imageNamed: "child")
+     sprite.position = CGPoint.zero
+     sprite.zPosition = NodesZPosition.child.rawValue
+     return sprite
+     }()*/
+    
+    var child: Child?
     
     // Granny
-    var granny: SKSpriteNode!
+    // var granny: SKSpriteNode!
+    
+    var granny: Granny?
     
     
     //MARK: - Configuring the AnalogJoystick
@@ -65,12 +80,17 @@ class GameScene: SKScene {
     
     // When the view is presented
     override func didMove(to view: SKView) {
+        // Create entity manager
+        entityManager = EntityManager(scene: self)
+        
         self.setUpGame()
         
+        self.setUpPhysicsWorld()
+    
         // Adding the AnalogJoystick to the gameScene
         self.setupJoystick()
         
-        self.setUpPhysicsWorld()
+        
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -84,10 +104,15 @@ class GameScene: SKScene {
         
         // Calculates how much time has passed since the last update
         let timeElapsedSinceLastUpdate = currentTime - self.lastUpdate
+       
         // Increments the length of the game session at the game logic
-        self.gameLogic.increaseSessionTime(by: timeElapsedSinceLastUpdate)
+        // self.gameLogic.increaseSessionTime(by: timeElapsedSinceLastUpdate)
         
         self.lastUpdate = currentTime
+        
+        //Update Components in entityManager
+        entityManager.update(timeElapsedSinceLastUpdate)
+        
     }
 }
 
@@ -96,32 +121,139 @@ extension GameScene {
     
     private func setUpGame() {
         self.gameLogic.setUpGame()
-        //  self.backgroundColor = SKColor.white
         
-        // Anchoring the Child to the center of the screen
-        anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        addChild(child)
+        setUpCharacters()
     }
     
-//MARK: - setting up the analogJoyStick, take a look at the File AnalogJoystick insdie the Controller Folder
+    private func setUpCharacters() {
+        self.child = Child(entityManager: entityManager)
+        if let spriteComponent = child?.component(ofType: SpriteComponent.self) {
+            let xRange = SKRange(lowerLimit: 0, upperLimit: frame.width)
+            let xConstraint = SKConstraint.positionX(xRange)
+            
+            let yRange = SKRange(lowerLimit: 0, upperLimit: frame.height)
+            let yConstraint = SKConstraint.positionY(yRange)
+            
+            spriteComponent.node.name = "child"
+            spriteComponent.node.position = CGPoint.zero
+            spriteComponent.node.position =  CGPoint(x: ScreenSize.width/2, y: ScreenSize.height/2)
+            spriteComponent.node.zPosition = NodesZPosition.child.rawValue
+            spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.child
+            
+            spriteComponent.node.constraints = [xConstraint, yConstraint]
+
+            print("configured child")
+        }
+        if let child = child {
+            print("added child")
+            entityManager.add(child)
+        }
+        
+        self.granny = Granny(entityManager: entityManager)
+        if let spriteComponent = granny?.component(ofType: SpriteComponent.self) {
+            spriteComponent.node.name = "granny"
+            spriteComponent.node.zPosition = NodesZPosition.granny.rawValue
+            spriteComponent.node.position = CGPoint(x: ScreenSize.width - ScreenSize.width/4, y: ScreenSize.height - ScreenSize.height/4)
+            spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.granny
+            print("configured granny")
+
+        }
+        if let granny = granny {
+            print("added granny")
+            entityManager.add(granny)
+        }
+        
+        
+        
+        print("Entities: \(entityManager.entities)")
+        
+    }
+    
+    //MARK: - setting up the analogJoyStick, take a look at the File AnalogJoystick insdie the Controller Folder
     // References: https://docs.swift.org/swift-book/documentation/the-swift-programming-language/automaticreferencecounting/#
     
     func setupJoystick() {
-        addChild(analogJoystick)
-        analogJoystick.trackingHandler = { [unowned self] data in
-            self.child.position = CGPoint(x: self.child.position.x + (data.velocity.x * self.velocityMultiplier),
-                                          y: self.child.position.y + (data.velocity.y * self.velocityMultiplier))
+        print("setting up joystick")
+        self.addChild(analogJoystick)
+        if let child = entityManager.entities.first(where: {$0.component(ofType: SpriteComponent.self)?.entityType == .child}) {
+            //(where: { $0.component(ofType: SpriteComponent.self)?.node.physicsBody?.categoryBitMask == PhysicsCategory.child }) {
+            print("unwrapped child for joystick tracking handler")
+            analogJoystick.trackingHandler = { [unowned self] data in
+
+                if var childPosition = child.component(ofType:
+                                                        SpriteComponent.self)?.node.position {
+                    print("unwrapped child's position")
+
+                    childPosition = CGPoint(x: childPosition.x + (data.velocity.x * self.velocityMultiplier),
+                                            y: childPosition.y + (data.velocity.y * self.velocityMultiplier))
+                    child.component(ofType: SpriteComponent.self)?.node.position = childPosition
+                }
+            }
         }
     }
     
     private func setUpPhysicsWorld() {
         physicsWorld.gravity = CGVector(dx: 0, dy: -0.9)
-        //  physicsWorld.contactDelegate = self
+        physicsWorld.contactDelegate = self
     }
     
     private func restartGame() {
         self.gameLogic.restartGame()
     }
+}
+
+//MARK: - Granny Set up and Logic
+//SpriteKit way
+extension GameScene {
+    
+    /*
+     private func createGranny(at position: CGPoint) {
+     let xRange = SKRange(lowerLimit: 0, upperLimit: frame.width)
+     let xConstraint = SKConstraint.positionX(xRange)
+     
+     let yRange = SKRange(lowerLimit: 0, upperLimit: frame.height)
+     let yConstraint = SKConstraint.positionY(yRange)
+     
+     //TODO: Change to granny image
+     self.granny = SKSpriteNode(imageNamed: "child")
+     self.granny.name = "granny"
+     self.granny.zPosition = NodesZPosition.granny.rawValue
+     
+     self.granny.position = position
+     
+     
+     self.granny.physicsBody = SKPhysicsBody(circleOfRadius: 100.0)
+     self.granny.physicsBody?.affectedByGravity = false
+     
+     self.granny.physicsBody?.categoryBitMask = PhysicsCategory.granny
+     
+     //TODO: add contactTestBitMask and collisionBitMask
+     
+     self.granny.constraints = [xConstraint, yConstraint]
+     
+     addChild(self.granny)
+     
+     }*/
+    /*
+     private func moveGrannyToChild(_ granny: SKSpriteNode ) {
+     let location = self.child.position
+     
+     // Aim
+     let dx = location.x - granny.position.x
+     let dy = location.y - granny.position.y
+     let angle = atan2(dy, dx)
+     
+     granny.zRotation = angle
+     
+     // Seek
+     let vx = cos(angle) * grannySpeed
+     let vy = sin(angle) * grannySpeed
+     
+     granny.position.x += vx
+     granny.position.y += vy
+     }
+     */
+    
 }
 
 // MARK: - Game Over Condition
