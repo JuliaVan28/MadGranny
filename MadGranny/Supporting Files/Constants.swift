@@ -23,4 +23,6 @@ struct PhysicsCategory {
     static let all: UInt32     = UInt32.max
     static let child: UInt32   = 0b1
     static let granny: UInt32  = 0b10
+    static let carrot : UInt32 = 0b100
+    static let candy  : UInt32 = 0b1000
 }

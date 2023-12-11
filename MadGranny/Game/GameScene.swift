@@ -69,6 +69,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     }
     
+    func didBegin(_ contact: SKPhysicsContact) {
+      var firstBody: SKPhysicsBody
+      var secondBody: SKPhysicsBody
+      if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+        firstBody = contact.bodyA
+        secondBody = contact.bodyB
+      } else {
+        firstBody = contact.bodyB
+        secondBody = contact.bodyA
+      }
+     
+      
+      if ((firstBody.categoryBitMask & PhysicsCategory.child != 0) &&
+          (secondBody.categoryBitMask & PhysicsCategory.granny != 0)) {
+        if let child = firstBody.node as? SKSpriteNode,
+          let granny = secondBody.node as? SKSpriteNode {
+            grannyDidCollideWithChild(granny: granny, child: child)
+        }
+      }
+    }
+
+    
     override func update(_ currentTime: TimeInterval) {
         
         // If the game over condition is met, the game will finish
@@ -116,6 +138,13 @@ extension GameScene {
             spriteComponent.node.zPosition = NodesZPosition.child.rawValue
             spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.child
             
+            // Creating Physics body and binding its contact
+            spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 30, height: 30))
+            spriteComponent.node.physicsBody?.isDynamic = true
+            spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.child
+            spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.granny
+            spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.none
+            
             spriteComponent.node.constraints = [xConstraint, yConstraint]
 
             print("configured child")
@@ -137,6 +166,14 @@ extension GameScene {
             spriteComponent.node.zPosition = NodesZPosition.granny.rawValue
             spriteComponent.node.position = CGPoint(x: ScreenSize.width - ScreenSize.width/4, y: ScreenSize.height - ScreenSize.height/4)
             spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.granny
+            
+            // Creating Physics body and binding its contact
+            spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.size)
+            spriteComponent.node.physicsBody?.isDynamic = true
+            spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.granny
+            spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.child
+            spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.none
+            spriteComponent.node.physicsBody?.usesPreciseCollisionDetection = true
             
             spriteComponent.node.constraints = [xConstraint, yConstraint]
 
@@ -173,7 +210,8 @@ extension GameScene {
         }
     
     private func setUpPhysicsWorld() {
-        physicsWorld.gravity = CGVector(dx: 0, dy: -0.9)
+//        physicsWorld.gravity = CGVector(dx: 0, dy: -0.9)
+        physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self
     }
     
@@ -261,6 +299,11 @@ extension GameScene {
     }
     
     private func finishGame() {
+        gameLogic.isGameOver = true
+    }
+    
+    func grannyDidCollideWithChild(granny: SKSpriteNode, child: SKSpriteNode) {
+        print("Hit")
         gameLogic.isGameOver = true
     }
     
