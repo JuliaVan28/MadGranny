@@ -16,7 +16,7 @@ class AnalogJoystickEntity: GKEntity {
     init( entityManager: EntityManager) {
         joystickNode = AnalogJoystick(diameter: 100, colors: nil, images: (substrate: #imageLiteral(resourceName: "outterCircle"), stick: #imageLiteral(resourceName: "innerCircle")))
         joystickNode.name = "joystick"
-        joystickNode.position = CGPoint(x:ScreenSize.width/2, y: ScreenSize.height/8 )
+        joystickNode.position = CGPoint(x: ScreenSize.width/2,  y: ScreenSize.height/8 )
         joystickNode.zPosition = 5
 
         super.init()

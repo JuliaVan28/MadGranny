@@ -8,28 +8,6 @@
 import SpriteKit
 import SwiftUI
 
-// Using the Device data to make sure that the AnalogJoystick always stays at the center of device
-struct ScreenSize {
-    static let width        = UIScreen.main.bounds.size.width
-    static let height       = UIScreen.main.bounds.size.height
-    static let maxLength    = max(ScreenSize.width, ScreenSize.height)
-    static let minLength    = min(ScreenSize.width, ScreenSize.height)
-    static let size         = CGSize(width: ScreenSize.width, height: ScreenSize.height)
-}
-
-//  Extension
-extension CGFloat {
-    static func randomNumber() -> CGFloat {
-        return CGFloat(Float(arc4random()) / Float(UInt32.max))
-    }
-    
-    static func randomNumber(min: CGFloat, max: CGFloat) -> CGFloat {
-        assert(min < max)
-        return CGFloat.randomNumber() * (max - min) + min
-    }
-}
-
-
 class GameScene: SKScene, SKPhysicsContactDelegate {
     /**
      * # The Game Logic
@@ -73,19 +51,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         entityManager = EntityManager(scene: self)
         
         view.showsNodeCount = true
-        
+        /*
         // Add background
-        let background = SKSpriteNode(imageNamed: "mapBackground")
+//        let background = SKSpriteNode(imageNamed: "mapBackground")
         background.position = CGPoint(x: size.width/2, y: size.height/2)
         background.zPosition = -1
         addChild(background)
-        
+        */
         self.setUpGame()
         
         self.setUpPhysicsWorld()
         
         // Adding the AnalogJoystick to the gameScene
-        self.setupJoystick()
+       // self.setupJoystick()
         
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run(entityManager.spawnCandy), SKAction.wait(forDuration: 10.0)])))
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run(entityManager.spawnCarrot), SKAction.wait(forDuration: 5.0)])))
