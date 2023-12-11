@@ -25,7 +25,7 @@ public struct AnalogJoystickData: CustomStringConvertible {
     }
 }
 
-//MARK: - AnalogJoystickComponent
+//MARK: - AnalogJoystickComponent = DONE
 open class AnalogJoystickComponent: SKSpriteNode {
     private var kvoContext = UInt8(1)
     var borderWidth = CGFloat(0) {
@@ -255,5 +255,3 @@ open class AnalogJoystick: SKNode {
         stopHandler?();
     }
 }
-
-typealias 🕹 = AnalogJoystick

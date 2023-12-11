@@ -34,9 +34,15 @@ class EntityManager {
         }
         
         if let spriteNode = entity.component(ofType: SpriteComponent.self)?.node {
+            print("added to the scene \(spriteNode.name)")
             scene.addChild(spriteNode)
         }
         
+    }
+    
+    func addJoyStick(_ entity: AnalogJoystickEntity) {
+        entities.insert(entity)
+        scene.addChild(entity.joystickNode)
     }
     
     func remove(_ entity: GKEntity) {
