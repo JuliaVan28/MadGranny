@@ -20,7 +20,7 @@ class Candy: GKEntity {
       let spriteComponent = SpriteComponent(entity: self, texture: texture, size: texture.size(), entityType: type)
       
     addComponent(spriteComponent)
-    addComponent(MoveComponent(maxSpeed: 50, maxAcceleration: 0, radius: Float(texture.size().width), entityManager: entityManager))
+    addComponent(MoveComponent(maxSpeed: 0, maxAcceleration: 0, radius: Float(texture.size().width), entityManager: entityManager))
     addComponent(BonusComponent(score: 20))
     
   }

@@ -39,16 +39,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // Granny
     var granny: Granny?
     
+    // AnalogJoystick
+    var analogJoystick: AnalogJoystickEntity?
     
-    //MARK: - Configuring the AnalogJoystick
-    
-    var analogJoystick: AnalogJoystick = {
-        let js = AnalogJoystick(diameter: 100, colors: nil, images: (substrate: #imageLiteral(resourceName: "outterCircle"), stick: #imageLiteral(resourceName: "innerCircle")))
-        js.name = "joystick"
-        js.position = CGPoint(x: ScreenSize.width * -0.235 + js.radius + 45, y: ScreenSize.height * -0.5 + js.radius + 45)
-        js.zPosition = NodesZPosition.joystick.rawValue
-        return js
-    }()
     
     //MARK: - SKScene override functions
     
@@ -57,16 +50,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Create entity manager
         entityManager = EntityManager(scene: self)
         
+        view.showsNodeCount = true
+        
+        // Add background
+        let background = SKSpriteNode(imageNamed: "mapBackground")
+        background.position = CGPoint(x: size.width/2, y: size.height/2)
+        background.zPosition = -1
+        addChild(background)
+        
         self.setUpGame()
         
         self.setUpPhysicsWorld()
-    
+        
         // Adding the AnalogJoystick to the gameScene
         self.setupJoystick()
-            
+        
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run(entityManager.spawnCandy), SKAction.wait(forDuration: 10.0)])))
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run(entityManager.spawnCarrot), SKAction.wait(forDuration: 5.0)])))
-
+        
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -102,7 +103,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Calculates how much time has passed since the last update
         let timeElapsedSinceLastUpdate = currentTime - self.lastUpdate
-       
+        
         // Increments the length of the game session at the game logic
         // self.gameLogic.increaseSessionTime(by: timeElapsedSinceLastUpdate)
         
@@ -146,7 +147,7 @@ extension GameScene {
             spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.none
             
             spriteComponent.node.constraints = [xConstraint, yConstraint]
-
+            
             print("configured child")
         }
         if let child = child {
@@ -176,9 +177,9 @@ extension GameScene {
             spriteComponent.node.physicsBody?.usesPreciseCollisionDetection = true
             
             spriteComponent.node.constraints = [xConstraint, yConstraint]
-
+            
             print("configured granny")
-
+            
         }
         if let granny = granny {
             print("added granny")
@@ -189,25 +190,24 @@ extension GameScene {
     }
     
     //MARK: - setting up the analogJoyStick, take a look at the File AnalogJoystick insdie the Controller Folder
-// References: https://docs.swift.org/swift-book/documentation/the-swift-programming-language/automaticreferencecounting/#
+    // References: https://docs.swift.org/swift-book/documentation/the-swift-programming-language/automaticreferencecounting/#
+    func setupJoystick() {
+        analogJoystick = AnalogJoystickEntity(entityManager: entityManager)
+        if let analogJoystick = analogJoystick {
+            entityManager.addJoyStick(analogJoystick)
+        }
         
-        func setupJoystick() {
-            addChild(analogJoystick)
-            print(scene?.childNode(withName: "joystick")?.description)
-            
-            analogJoystick.trackingHandler = { [unowned self] data in
-                if let child = entityManager.entities.first(where: {$0.component(ofType: SpriteComponent.self)?.entityType == .child}) {
-                    print("unwrapped child for joystick tracking handler")
-                    if var childPosition = child.component(ofType: SpriteComponent.self)?.node.position {
-                        print("unwrapped child's position")
-                        
-                        childPosition = CGPoint(x: childPosition.x + (data.velocity.x * self.velocityMultiplier),
-                                                y: childPosition.y + (data.velocity.y * self.velocityMultiplier))
-                        child.component(ofType: SpriteComponent.self)?.node.position = childPosition
-                    }
+        analogJoystick?.joystickNode.trackingHandler = { [unowned self] data in
+            if let child = entityManager.entities.first(where: {$0.component(ofType: SpriteComponent.self)?.entityType == .child}) {
+                if var childPosition = child.component(ofType: SpriteComponent.self)?.node.position {
+                    
+                    childPosition = CGPoint(x: childPosition.x + (data.velocity.x * self.velocityMultiplier),
+                                            y: childPosition.y + (data.velocity.y * self.velocityMultiplier))
+                    child.component(ofType: SpriteComponent.self)?.node.position = childPosition
                 }
             }
         }
+    }
     
     private func setUpPhysicsWorld() {
 //        physicsWorld.gravity = CGVector(dx: 0, dy: -0.9)
@@ -220,59 +220,6 @@ extension GameScene {
     }
 }
 
-//MARK: - Granny Set up and Logic
-//SpriteKit way
-extension GameScene {
-    
-    /*
-     private func createGranny(at position: CGPoint) {
-     let xRange = SKRange(lowerLimit: 0, upperLimit: frame.width)
-     let xConstraint = SKConstraint.positionX(xRange)
-     
-     let yRange = SKRange(lowerLimit: 0, upperLimit: frame.height)
-     let yConstraint = SKConstraint.positionY(yRange)
-     
-     //TODO: Change to granny image
-     self.granny = SKSpriteNode(imageNamed: "child")
-     self.granny.name = "granny"
-     self.granny.zPosition = NodesZPosition.granny.rawValue
-     
-     self.granny.position = position
-     
-     
-     self.granny.physicsBody = SKPhysicsBody(circleOfRadius: 100.0)
-     self.granny.physicsBody?.affectedByGravity = false
-     
-     self.granny.physicsBody?.categoryBitMask = PhysicsCategory.granny
-     
-     //TODO: add contactTestBitMask and collisionBitMask
-     
-     self.granny.constraints = [xConstraint, yConstraint]
-     
-     addChild(self.granny)
-     
-     }*/
-    /*
-     private func moveGrannyToChild(_ granny: SKSpriteNode ) {
-     let location = self.child.position
-     
-     // Aim
-     let dx = location.x - granny.position.x
-     let dy = location.y - granny.position.y
-     let angle = atan2(dy, dx)
-     
-     granny.zRotation = angle
-     
-     // Seek
-     let vx = cos(angle) * grannySpeed
-     let vy = sin(angle) * grannySpeed
-     
-     granny.position.x += vx
-     granny.position.y += vy
-     }
-     */
-    
-}
 
 // MARK: - Game Over Condition
 extension GameScene {
