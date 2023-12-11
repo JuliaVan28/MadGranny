@@ -130,6 +130,7 @@
 				325BDD732B2208320098149D /* GameLogic.swift */,
 				9B033BEE2B238D2D008BC0E6 /* GameTimerView.swift */,
 				9B033BF02B239E58008BC0E6 /* GamePointsView.swift */,
+				3C3F13F72B23492C00AD3D62 /* Controller */,
 			);
 			path = Game;
 			sourceTree = "<group>";

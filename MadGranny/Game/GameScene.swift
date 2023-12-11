@@ -8,6 +8,28 @@
 import SpriteKit
 import SwiftUI
 
+// Using the Device data to make sure that the AnalogJoystick always stays at the center of device
+struct ScreenSize {
+    static let width        = UIScreen.main.bounds.size.width
+    static let height       = UIScreen.main.bounds.size.height
+    static let maxLength    = max(ScreenSize.width, ScreenSize.height)
+    static let minLength    = min(ScreenSize.width, ScreenSize.height)
+    static let size         = CGSize(width: ScreenSize.width, height: ScreenSize.height)
+}
+
+//  Extension
+extension CGFloat {
+    static func randomNumber() -> CGFloat {
+        return CGFloat(Float(arc4random()) / Float(UInt32.max))
+    }
+    
+    static func randomNumber(min: CGFloat, max: CGFloat) -> CGFloat {
+        assert(min < max)
+        return CGFloat.randomNumber() * (max - min) + min
+    }
+}
+
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     /**
      * # The Game Logic
