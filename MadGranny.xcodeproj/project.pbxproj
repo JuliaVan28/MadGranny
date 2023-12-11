@@ -11,13 +11,25 @@
 		32031CAC2B21E59800F7AE47 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32031CAB2B21E59800F7AE47 /* ContentView.swift */; };
 		32031CAE2B21E59B00F7AE47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32031CAD2B21E59B00F7AE47 /* Assets.xcassets */; };
 		32031CB12B21E59B00F7AE47 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32031CB02B21E59B00F7AE47 /* Preview Assets.xcassets */; };
+		32528A6B2B2776300042BBF9 /* AnalogJoystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32528A6A2B2776300042BBF9 /* AnalogJoystick.swift */; };
 		325BDD6D2B2207770098149D /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD6C2B2207770098149D /* MenuView.swift */; };
 		325BDD702B2207F40098149D /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD6F2B2207F40098149D /* GameView.swift */; };
 		325BDD722B22081E0098149D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD712B22081E0098149D /* GameScene.swift */; };
 		325BDD742B2208320098149D /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD732B2208320098149D /* GameLogic.swift */; };
 		325BDD7A2B2209890098149D /* GameResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD792B2209890098149D /* GameResultsView.swift */; };
 		325BDD7D2B229C000098149D /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD7C2B229C000098149D /* GameState.swift */; };
-		3C3F13F62B23492300AD3D62 /* AnalogJoystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3F13F52B23492300AD3D62 /* AnalogJoystick.swift */; };
+		325BDD812B250F9F0098149D /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD802B250F9F0098149D /* SpriteComponent.swift */; };
+		325BDD832B25105D0098149D /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD822B25105D0098149D /* EntityManager.swift */; };
+		325BDD852B2511910098149D /* Granny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD842B2511910098149D /* Granny.swift */; };
+		325BDD872B2512150098149D /* MoveComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD862B2512150098149D /* MoveComponent.swift */; };
+		325BDD892B251EA70098149D /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD882B251EA70098149D /* Child.swift */; };
+		325BDD8B2B2545650098149D /* EntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD8A2B2545650098149D /* EntityType.swift */; };
+		325BDD8D2B262FD40098149D /* Candy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD8C2B262FD40098149D /* Candy.swift */; };
+		325BDD8F2B262FDE0098149D /* Carrot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD8E2B262FDE0098149D /* Carrot.swift */; };
+		325BDD912B2635E20098149D /* BonusComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD902B2635E20098149D /* BonusComponent.swift */; };
+		325BDD932B263EDB0098149D /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD922B263EDB0098149D /* CGFloatExtension.swift */; };
+		325BDD952B263F060098149D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD942B263F060098149D /* Constants.swift */; };
+		325BDD972B2662A10098149D /* AnalogJoystickEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD962B2662A10098149D /* AnalogJoystickEntity.swift */; };
 		9B033BEF2B238D2D008BC0E6 /* GameTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B033BEE2B238D2D008BC0E6 /* GameTimerView.swift */; };
 		9B033BF12B239E58008BC0E6 /* GamePointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B033BF02B239E58008BC0E6 /* GamePointsView.swift */; };
 /* End PBXBuildFile section */
@@ -28,13 +40,25 @@
 		32031CAB2B21E59800F7AE47 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		32031CAD2B21E59B00F7AE47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		32031CB02B21E59B00F7AE47 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		32528A6A2B2776300042BBF9 /* AnalogJoystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogJoystick.swift; sourceTree = "<group>"; };
 		325BDD6C2B2207770098149D /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		325BDD6F2B2207F40098149D /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		325BDD712B22081E0098149D /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		325BDD732B2208320098149D /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
 		325BDD792B2209890098149D /* GameResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResultsView.swift; sourceTree = "<group>"; };
 		325BDD7C2B229C000098149D /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
-		3C3F13F52B23492300AD3D62 /* AnalogJoystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogJoystick.swift; sourceTree = "<group>"; };
+		325BDD802B250F9F0098149D /* SpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
+		325BDD822B25105D0098149D /* EntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
+		325BDD842B2511910098149D /* Granny.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Granny.swift; sourceTree = "<group>"; };
+		325BDD862B2512150098149D /* MoveComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveComponent.swift; sourceTree = "<group>"; };
+		325BDD882B251EA70098149D /* Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
+		325BDD8A2B2545650098149D /* EntityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityType.swift; sourceTree = "<group>"; };
+		325BDD8C2B262FD40098149D /* Candy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Candy.swift; sourceTree = "<group>"; };
+		325BDD8E2B262FDE0098149D /* Carrot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carrot.swift; sourceTree = "<group>"; };
+		325BDD902B2635E20098149D /* BonusComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusComponent.swift; sourceTree = "<group>"; };
+		325BDD922B263EDB0098149D /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
+		325BDD942B263F060098149D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		325BDD962B2662A10098149D /* AnalogJoystickEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogJoystickEntity.swift; sourceTree = "<group>"; };
 		9B033BEE2B238D2D008BC0E6 /* GameTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimerView.swift; sourceTree = "<group>"; };
 		9B033BF02B239E58008BC0E6 /* GamePointsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePointsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,6 +94,8 @@
 			isa = PBXGroup;
 			children = (
 				325BDD7B2B2209BB0098149D /* App */,
+				325BDD7F2B250F690098149D /* Components */,
+				325BDD7E2B250F500098149D /* Entities */,
 				325BDD6B2B2207630098149D /* Menu */,
 				325BDD6E2B22078E0098149D /* Game */,
 				325BDD782B2209680098149D /* Results */,
@@ -104,7 +130,6 @@
 				325BDD732B2208320098149D /* GameLogic.swift */,
 				9B033BEE2B238D2D008BC0E6 /* GameTimerView.swift */,
 				9B033BF02B239E58008BC0E6 /* GamePointsView.swift */,
-				3C3F13F72B23492C00AD3D62 /* Controller */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -113,6 +138,8 @@
 			isa = PBXGroup;
 			children = (
 				325BDD7C2B229C000098149D /* GameState.swift */,
+				325BDD922B263EDB0098149D /* CGFloatExtension.swift */,
+				325BDD942B263F060098149D /* Constants.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -134,12 +161,29 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		3C3F13F72B23492C00AD3D62 /* Controller */ = {
+		325BDD7E2B250F500098149D /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				3C3F13F52B23492300AD3D62 /* AnalogJoystick.swift */,
+				325BDD8A2B2545650098149D /* EntityType.swift */,
+				325BDD822B25105D0098149D /* EntityManager.swift */,
+				325BDD842B2511910098149D /* Granny.swift */,
+				325BDD882B251EA70098149D /* Child.swift */,
+				325BDD8C2B262FD40098149D /* Candy.swift */,
+				325BDD8E2B262FDE0098149D /* Carrot.swift */,
+				325BDD962B2662A10098149D /* AnalogJoystickEntity.swift */,
+				32528A6A2B2776300042BBF9 /* AnalogJoystick.swift */,
 			);
-			path = Controller;
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		325BDD7F2B250F690098149D /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				325BDD802B250F9F0098149D /* SpriteComponent.swift */,
+				325BDD862B2512150098149D /* MoveComponent.swift */,
+				325BDD902B2635E20098149D /* BonusComponent.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,17 +256,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				325BDD8B2B2545650098149D /* EntityType.swift in Sources */,
+				32528A6B2B2776300042BBF9 /* AnalogJoystick.swift in Sources */,
+				325BDD952B263F060098149D /* Constants.swift in Sources */,
+				325BDD832B25105D0098149D /* EntityManager.swift in Sources */,
 				9B033BEF2B238D2D008BC0E6 /* GameTimerView.swift in Sources */,
 				325BDD742B2208320098149D /* GameLogic.swift in Sources */,
-				3C3F13F62B23492300AD3D62 /* AnalogJoystick.swift in Sources */,
 				325BDD7D2B229C000098149D /* GameState.swift in Sources */,
 				325BDD722B22081E0098149D /* GameScene.swift in Sources */,
 				32031CAC2B21E59800F7AE47 /* ContentView.swift in Sources */,
+				325BDD852B2511910098149D /* Granny.swift in Sources */,
 				325BDD6D2B2207770098149D /* MenuView.swift in Sources */,
+				325BDD932B263EDB0098149D /* CGFloatExtension.swift in Sources */,
+				325BDD812B250F9F0098149D /* SpriteComponent.swift in Sources */,
+				325BDD872B2512150098149D /* MoveComponent.swift in Sources */,
 				9B033BF12B239E58008BC0E6 /* GamePointsView.swift in Sources */,
+				325BDD8D2B262FD40098149D /* Candy.swift in Sources */,
+				325BDD8F2B262FDE0098149D /* Carrot.swift in Sources */,
 				325BDD702B2207F40098149D /* GameView.swift in Sources */,
 				32031CAA2B21E59800F7AE47 /* MadGrannyApp.swift in Sources */,
+				325BDD912B2635E20098149D /* BonusComponent.swift in Sources */,
+				325BDD892B251EA70098149D /* Child.swift in Sources */,
 				325BDD7A2B2209890098149D /* GameResultsView.swift in Sources */,
+				325BDD972B2662A10098149D /* AnalogJoystickEntity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,7 +412,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MadGranny/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = L6W3DL7P44;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -369,7 +425,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.devacademy.MadGranny;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devacademy.MadGrannyy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -385,7 +441,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MadGranny/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = L6W3DL7P44;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -398,7 +454,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.devacademy.MadGranny;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devacademy.MadGrannyy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
