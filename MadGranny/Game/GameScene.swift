@@ -19,8 +19,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var entityManager: EntityManager!
     
     // this will be used to accelerate the child
-    let velocityMultiplier: CGFloat = 0.13
-    
+    var velocityMultiplier: CGFloat = 0.13
     
     // Keeps track of when the last update happend.
     // Used to calculate how much time has passed between updates.
@@ -89,6 +88,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             grannyDidCollideWithChild(granny: granny, child: child)
         }
       }
+        
+        if ((firstBody.categoryBitMask & PhysicsCategory.child != 0) &&
+            (secondBody.categoryBitMask & PhysicsCategory.carrot != 0)) {
+          if let child = firstBody.node as? SKSpriteNode,
+            let carrot = secondBody.node as? SKSpriteNode {
+              childDidCollideWithCarrot(carrot: carrot, child: child)
+          }
+        }
+        
+        if ((firstBody.categoryBitMask & PhysicsCategory.child != 0) &&
+            (secondBody.categoryBitMask & PhysicsCategory.candy != 0)) {
+          if let child = firstBody.node as? SKSpriteNode,
+            let candy = secondBody.node as? SKSpriteNode {
+              childDidCollideWithCandy(candy: candy, child: child)
+          }
+        }
     }
 
     
@@ -252,6 +267,25 @@ extension GameScene {
     func grannyDidCollideWithChild(granny: SKSpriteNode, child: SKSpriteNode) {
         print("Hit")
         gameLogic.isGameOver = true
+    }
+    
+    func childDidCollideWithCarrot(carrot: SKSpriteNode, child: SKSpriteNode) {
+        print("i ate \(carrot.name!)")
+//        self.velocityMultiplier -= 0.01
+        if self.velocityMultiplier > 0.05 {
+            self.velocityMultiplier -= 0.01
+        }
+      carrot.removeFromParent()
+      carrot.removeFromParent()
+    }
+    
+    func childDidCollideWithCandy(candy: SKSpriteNode, child: SKSpriteNode) {
+        print("i ate \(candy.name!)")
+        if self.velocityMultiplier > 0.05 {
+            self.velocityMultiplier = 0
+        }
+      candy.removeFromParent()
+      candy.removeFromParent()
     }
     
 }
