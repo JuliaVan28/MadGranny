@@ -19,7 +19,7 @@ let type: EntityType = .granny
       let spriteComponent = SpriteComponent(entity: self, texture: texture, size: CGSize(width: texture.size().width * 2, height: texture.size().height * 2), entityType: type)
       
     addComponent(spriteComponent)
-    addComponent(MoveComponent(maxSpeed: 10, maxAcceleration: 100, radius: Float(texture.size().width * 0.3), entityManager: entityManager))
+    addComponent(MoveComponent(maxSpeed: 50, maxAcceleration: 80, radius: Float(texture.size().width * 0.3), entityManager: entityManager))
     
   }
 

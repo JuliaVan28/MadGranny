@@ -71,7 +71,7 @@ class EntityManager {
     func spawnCandy() {
         let candy = Candy(entityManager: self)
         if let spriteComponent = candy.component(ofType: SpriteComponent.self) {
-           spriteComponent.node.position = CGPoint(x: CGFloat.randomNumber(min: -150, max: 150), y: CGFloat.randomNumber(min: -350, max: 280))
+            spriteComponent.node.position = CGPoint(x: CGFloat.randomNumber(min: 10, max: ScreenSize.width-10), y: CGFloat.randomNumber(min: ScreenSize.height/8+20, max: ScreenSize.height-ScreenSize.height/8))
             spriteComponent.node.setScale(0)
             spriteComponent.node.size = CGSize(width: 120, height: 120)
             spriteComponent.node.name = "candy"
@@ -92,8 +92,7 @@ class EntityManager {
     func spawnCarrot() {
         let carrot = Carrot(entityManager: self)
         if let spriteComponent = carrot.component(ofType: SpriteComponent.self) {
-            spriteComponent.node.position = CGPoint(x: CGFloat.randomNumber(min: -150, max: 150), y: CGFloat.randomNumber(min: -350, max: 280))
-          //  spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2, y: ScreenSize.height / 2)
+            spriteComponent.node.position = CGPoint(x: CGFloat.randomNumber(min: 10, max: ScreenSize.width-10), y: CGFloat.randomNumber(min: ScreenSize.height/8+20, max: ScreenSize.height-ScreenSize.height/8))
             spriteComponent.node.setScale(0)
             spriteComponent.node.size = CGSize(width: 120, height: 120)
             spriteComponent.node.name = "carrot"
