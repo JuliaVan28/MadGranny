@@ -19,7 +19,9 @@ struct GameView: View {
     
     var gameScene: GameScene {
         let scene = GameScene()
-        
+        print("Game scene is created")
+        print("game state is \(self.currentGameState)")
+
         scene.size = CGSize(width: screenWidth, height: screenHeight)
         scene.scaleMode = .fill
         
@@ -57,6 +59,8 @@ struct GameView: View {
             .padding()
         }
         .onChange(of: gameLogic.isGameOver) {
+            print("gameLogic.isGameOver is changed to \(gameLogic.isGameOver)")
+            print("game state is \(self.currentGameState)")
             if gameLogic.isGameOver {
                 withAnimation {
                     self.presentGameResultsScreen()
@@ -64,7 +68,8 @@ struct GameView: View {
             }
         }
         .onAppear {
-            gameLogic.restartGame()
+            gameLogic.isGameOver = false
+           // gameLogic.restartGame()
         }
     }
     

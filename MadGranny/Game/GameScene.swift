@@ -65,6 +65,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Adding the AnalogJoystick to the gameScene
         self.setupJoystick()
         
+        //Spawning of bonus items every 5 sec
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run(entityManager.spawnCandy), SKAction.wait(forDuration: 5.0)])))
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run(entityManager.spawnCarrot), SKAction.wait(forDuration: 5.0)])))
         
@@ -111,7 +112,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval) {
         
         // If the game over condition is met, the game will finish
-        if self.isGameOver { self.finishGame() }
+        
+// !!        if self.isGameOver { self.finishGame() }
         
         // The first time the update function is called we must initialize the
         // lastUpdate variable
@@ -232,24 +234,13 @@ extension GameScene {
     }
     
     private func restartGame() {
-        self.gameLogic.restartGame()
+        gameLogic.isGameOver = false
     }
 }
 
 
 // MARK: - Game Over Condition
 extension GameScene {
-    
-    /**
-     * Implement the Game Over condition.
-     * Remember that an arcade game always ends! How will the player eventually lose?
-     *
-     * Some examples of game over conditions are:
-     * - The time is over!
-     * - The player health is depleated!
-     * - The enemies have completed their goal!
-     * - The screen is full!
-     **/
     
     var isGameOver: Bool {
         // TODO: Customize!
@@ -260,14 +251,13 @@ extension GameScene {
         
         return gameLogic.isGameOver
     }
-    
     private func finishGame() {
         gameLogic.isGameOver = true
     }
     
     func grannyDidCollideWithChild(granny: SKSpriteNode, child: SKSpriteNode) {
         print("Hit")
-        gameLogic.isGameOver = true
+        finishGame()
     }
     
     func childDidCollideWithCarrot(carrot: SKSpriteNode, child: SKSpriteNode) {

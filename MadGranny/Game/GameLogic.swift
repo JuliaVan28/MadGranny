@@ -19,7 +19,6 @@ class GameLogic: ObservableObject {
     
     // Game Over Boolean
     @Published var isGameOver: Bool = false
-    
     // Keeps track of the current score of the player
     @Published var currentScore: Int = 0
     

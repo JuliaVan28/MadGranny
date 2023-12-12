@@ -12,6 +12,8 @@ struct GameResultsView: View {
     // The game state is used to transition between the different states of the game
     @Binding var currentGameState: GameState
     
+    @StateObject var gameLogic: GameLogic =  GameLogic.shared
+
     var body: some View {
         ZStack {
             Color.white
@@ -51,10 +53,8 @@ struct GameResultsView: View {
     }
     
     private func restartGame() {
-        
-        
-        
         self.currentGameState = .playing
+        gameLogic.isGameOver = false
     }
 }
 
