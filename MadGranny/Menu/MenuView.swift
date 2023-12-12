@@ -14,21 +14,35 @@ struct MenuView: View {
     @Binding var currentGameState: GameState
     
     var body: some View {
-        VStack(alignment: .center, spacing: 16.0) {
+        
+        ZStack{
             
-            Button {
-                withAnimation { self.startGame() }
-            } label: {
-                Text("PLAY")
-                    .padding()
+            Image("brown_background")
+                .resizable()
+                .frame(width: 800, height: 900)
+            
+            
+            Image("big_granny")
+                .resizable()
+                .frame(width: 350, height: 500)
+            VStack(alignment: .center, spacing: 16.0) {
+                
+                Button {
+                    withAnimation { self.startGame() }
+                } label: {
+                    Image("play_button1")
+                    
+                }
+                .padding(.top, 650)
+                .foregroundColor(.white)
             }
-            .foregroundColor(.white)
-            .background(Color.accentColor)
-            .cornerRadius(10.0)
+            .padding()
+            .statusBar(hidden: true)
+            
         }
-        .padding()
-        .statusBar(hidden: true)
     }
+    
+    
     /**
      * Function responsible to start the game.
      * It changes the current game state to present the view which houses the game scene.
