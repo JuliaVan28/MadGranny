@@ -29,7 +29,7 @@ class GameLogic: ObservableObject {
     func setUpGame() {
         self.currentScore = 0
         self.timerDuration = 0
-        
+        print("setUpGame is called")
         self.isGameOver = false
     }
 
@@ -41,7 +41,9 @@ class GameLogic: ObservableObject {
     func finishTheGame() {
         if self.isGameOver == false {
             self.isGameOver = true
+            print("Game over was false now true")
         }
+        print("Game over is true")
     }
     
     //Increment Timer of the game session

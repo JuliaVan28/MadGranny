@@ -46,6 +46,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // When the view is presented
     override func didMove(to view: SKView) {
+        print("DidMove is called")
         // Create entity manager
         entityManager = EntityManager(scene: self)
         
@@ -64,8 +65,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Adding the AnalogJoystick to the gameScene
         self.setupJoystick()
         
-        run(SKAction.repeatForever(SKAction.sequence([SKAction.run(entityManager.spawnCandy), SKAction.wait(forDuration: 1.0)])))
-        run(SKAction.repeatForever(SKAction.sequence([SKAction.run(entityManager.spawnCarrot), SKAction.wait(forDuration: 1.0)])))
+        run(SKAction.repeatForever(SKAction.sequence([SKAction.run(entityManager.spawnCandy), SKAction.wait(forDuration: 5.0)])))
+        run(SKAction.repeatForever(SKAction.sequence([SKAction.run(entityManager.spawnCarrot), SKAction.wait(forDuration: 5.0)])))
         
     }
     

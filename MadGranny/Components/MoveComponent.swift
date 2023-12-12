@@ -20,7 +20,7 @@ class MoveComponent : GKAgent2D, GKAgentDelegate {
         self.maxSpeed = maxSpeed
         self.maxAcceleration = maxAcceleration
         self.radius = radius
-        print("mass: \(self.mass)")
+       // print("mass: \(self.mass)")
         self.mass = 0.01
     }
     
