@@ -16,16 +16,30 @@ struct MenuView: View {
     var body: some View {
         
         ZStack{
-            Image("menu_background")
+            Image("menu_background_parket")
                 .resizable()
-                .scaledToFill()
                 .ignoresSafeArea()
-            VStack(spacing: 10.0) {
+            VStack(spacing: 20.0) {
                 Spacer()
-                Image("big_granny")
-                    .resizable()
-                    .frame(width: 350, height: 500)
-                Spacer()
+                ZStack {
+                    HStack() {
+                        Image("big_granny")
+                            .resizable()
+                            .frame(width: 200, height: 350)
+                            .padding(.leading, 5)
+                            .padding(.top, 40)
+                        Spacer()
+                    }
+                    VStack(alignment: .trailing) {
+                        HStack {
+                            Spacer()
+                            Image("dinner_ready")
+                                .resizable()
+                                .frame(width: 280, height: 180)
+                        }
+                        Spacer()
+                    }
+                }.frame(height: 450)
 
                 Button {
                     withAnimation { self.startGame() }

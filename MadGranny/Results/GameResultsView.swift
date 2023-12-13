@@ -32,7 +32,7 @@ struct GameResultsView: View {
                 
                   Spacer()//.frame(height: 0)
                 
-                Image("big_granny_1")
+                Image("big_granny")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 300, height: 250)

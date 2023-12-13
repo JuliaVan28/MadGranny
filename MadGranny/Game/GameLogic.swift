@@ -15,8 +15,9 @@ class GameLogic: ObservableObject {
     //MARK: - Properties
     
     // Keep tracks of the duration of the current session in number of seconds
-    @Published var timerDuration: TimeInterval = 0
-    
+    @Published var timerDuration: Int = 0
+    @Published var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
     // Game Over Boolean
     @Published var isGameOver: Bool = false
     // Keeps track of the current score of the player
@@ -45,13 +46,22 @@ class GameLogic: ObservableObject {
         print("Game over is true")
     }
     
-    //Increment Timer of the game session
-    func increaseSessionTime(by timeIncrement: TimeInterval) {
-        self.timerDuration = self.timerDuration + timeIncrement
-    }
-    
     // Increases the score by a certain amount of points
     func score(points: Int) {
         self.currentScore = self.currentScore + points
+    }
+    
+    //MARK: - Timer functions
+    func stopTimer() {
+        self.timer.upstream.connect().cancel()
+    }
+    
+    func startTimer() {
+        self.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    }
+    
+    func cancelTimer() {
+        timerDuration = 0
+        self.timer.upstream.connect().cancel()
     }
 }

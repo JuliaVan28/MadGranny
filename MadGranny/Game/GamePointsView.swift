@@ -20,17 +20,17 @@ struct GamePointsView: View {
     var body: some View {
         
         HStack {
-            Image(systemName: "target")
-                .font(.headline)
-            Spacer()
-            Text("\(score)")
-                .font(.headline)
+            Image("dish")
+                .resizable()
+                .frame(width: 130, height: 80)
+           // Text("\(score)")
+             //   .font(.headline)
         }
         .frame(minWidth: 60)
-        .padding(24)
-        .foregroundColor(.white)
-        .background(Color(UIColor.systemGray))
-        .cornerRadius(10)
+        //.padding(24)
+       // .foregroundColor(.white)
+       // .background(Color(UIColor.systemGray))
+       // .cornerRadius(10)
     }
 }
 

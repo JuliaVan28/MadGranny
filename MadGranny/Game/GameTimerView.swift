@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 /**
  * # GameDurationView
@@ -15,25 +16,28 @@ import SwiftUI
  */
 
 struct GameTimerView: View {
-    @Binding var time: TimeInterval
+    @StateObject var gameLogic: GameLogic =  GameLogic.shared
     
     var body: some View {
         HStack {
-            Image(systemName: "clock")
-                .font(.headline)
-            Spacer()
-            Text("\(Int(time))")
-                .font(.headline)
+            Text("\(gameLogic.timerDuration.asTimestamp)")
+                .font(.system(size: 22, weight: .bold))
+                .onReceive(gameLogic.timer) { input in
+                    gameLogic.timerDuration += 1
+                }
+            
         }
-        .frame(minWidth: 60)
-        .padding(24)
-        .foregroundColor(.white)
-        .background(Color(UIColor.systemGray))
+        .frame(width: 90)
+        .padding(10)
+        .foregroundColor(.black)
+        .background(Material.ultraThin)
         .cornerRadius(10)
     }
+    
 }
 
 #Preview {
-    GameTimerView(time: .constant(1000))
+    GameTimerView()
         .previewLayout(.fixed(width: 300, height: 100))
 }
+

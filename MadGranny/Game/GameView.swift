@@ -14,6 +14,8 @@ struct GameView: View {
 
     @Binding var currentGameState: GameState
     
+    @State var isPaused: Bool = false
+    
     private var screenWidth: CGFloat { UIScreen.main.bounds.size.width }
     private var screenHeight: CGFloat { UIScreen.main.bounds.size.height }
     
@@ -37,25 +39,31 @@ struct GameView: View {
                 .ignoresSafeArea()
                 
             HStack {
-                GameTimerView(time: $gameLogic.timerDuration)
-                    //.padding()
-                
+                GameTimerView().environmentObject(gameLogic)
                 GamePointsView(score: $gameLogic.currentScore)
-                    //.padding()
-                
-                Button(action: {print("")}) {
-                    Image(systemName: "pause")
-                        .font(.headline)
+                Spacer()
+                Button(action: {
+                    if isPaused {
+                        isPaused.toggle()
+                        gameLogic.startTimer()
+                    } else {
+                        isPaused.toggle()
+                        gameLogic.stopTimer()
+
+                    }
+                }) {
+                    Image(systemName: isPaused ? "play.fill" : "pause")
+                        .font(.system(size: 26))
+                        .fontWeight(.black)
                 }
-                    .frame(minWidth: 60)
-                    .padding(24)
-                    .foregroundColor(.white)
-                    .background(Color(UIColor.systemGray))
+                    .frame(width: 30)
+                    .padding(10)
+                    .foregroundColor(.black)
+                    .background(Material.ultraThin)
                     .cornerRadius(10)
-                    //.padding()
+                    .padding(.trailing, 10)
             }
-            
-            .padding(.top, 20)
+            .padding(.top, 30)
             .padding()
         }
         .onChange(of: gameLogic.isGameOver) {
