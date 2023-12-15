@@ -16,5 +16,8 @@ enum EntityType {
     case granny
     case candy
     case carrot
+    case table
+    case plant
+    case chair
     case unknown
 }

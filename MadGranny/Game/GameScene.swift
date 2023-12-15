@@ -7,6 +7,9 @@
 
 import SpriteKit
 import SwiftUI
+import UIKit
+
+let generator = UIImpactFeedbackGenerator(style: .heavy)
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     /**
@@ -64,6 +67,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Adding the AnalogJoystick to the gameScene
         self.setupJoystick()
+        
+        // Adding Obstacles to the Scene
+        entityManager.spawnObstacle()
         
         //Spawning of bonus items every 5 sec
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run(entityManager.spawnCandy), SKAction.wait(forDuration: 5.0)])))
@@ -152,17 +158,23 @@ extension GameScene {
             let yConstraint = SKConstraint.positionY(yRange)
             
             spriteComponent.node.name = "child"
-            spriteComponent.node.position = CGPoint.zero
+            spriteComponent.node.size = CGSize(width: 35, height: 45)
+//            spriteComponent.node.position = CGPoint.zero
             spriteComponent.node.position =  CGPoint(x: ScreenSize.width/2, y: ScreenSize.height/2)
             spriteComponent.node.zPosition = NodesZPosition.child.rawValue
+            
+            
+            
+            
             spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.child
             
             // Creating Physics body and binding its contact
-            spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 30, height: 30))
+            spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.size)
             spriteComponent.node.physicsBody?.isDynamic = true
             spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.child
-            spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.granny
-            spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.none
+            spriteComponent.node.physicsBody?.allowsRotation = false
+            spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.granny | PhysicsCategory.table | PhysicsCategory.chair
+            spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.table | PhysicsCategory.plant | PhysicsCategory.chair
             
             spriteComponent.node.constraints = [xConstraint, yConstraint]
             
@@ -183,15 +195,20 @@ extension GameScene {
             
             spriteComponent.node.name = "granny"
             spriteComponent.node.zPosition = NodesZPosition.granny.rawValue
+            
+            
+            
             spriteComponent.node.position = CGPoint(x: ScreenSize.width - ScreenSize.width/4, y: ScreenSize.height - ScreenSize.height/4)
             spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.granny
             
             // Creating Physics body and binding its contact
             spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.size)
             spriteComponent.node.physicsBody?.isDynamic = true
+            spriteComponent.node.physicsBody?.allowsRotation = false
             spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.granny
-            spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.child
-            spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.none
+            spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.child | PhysicsCategory.table | PhysicsCategory.chair
+            spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.table | PhysicsCategory.plant
+            | PhysicsCategory.chair
             spriteComponent.node.physicsBody?.usesPreciseCollisionDetection = true
             
             spriteComponent.node.constraints = [xConstraint, yConstraint]
@@ -256,6 +273,7 @@ extension GameScene {
     }
     
     func grannyDidCollideWithChild(granny: SKSpriteNode, child: SKSpriteNode) {
+        generator.impactOccurred()
         print("Hit")
         finishGame()
     }
