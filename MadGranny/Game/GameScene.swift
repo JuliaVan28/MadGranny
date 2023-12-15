@@ -8,7 +8,7 @@
 import SpriteKit
 import SwiftUI
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     /**
      * # The Game Logic
      *     The game logic keeps track of the game variables
@@ -130,6 +130,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //Update Components in entityManager
         entityManager.update(timeElapsedSinceLastUpdate)
         
+        if gameLogic.isPaused {
+            scene?.isPaused = true
+            entityManager.pauseEntities()
+            print("paused scene")
+        }
     }
 }
 
@@ -227,8 +232,12 @@ extension GameScene {
         }
     }
     
+    func resumeGame() {
+        entityManager.resumeEntities()
+        scene?.isPaused = false
+    }
+    
     private func setUpPhysicsWorld() {
-//        physicsWorld.gravity = CGVector(dx: 0, dy: -0.9)
         physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self
     }

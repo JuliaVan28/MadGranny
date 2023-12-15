@@ -110,4 +110,38 @@ class EntityManager {
        // print("Scene node \(scene.childNode(withName: "carrot")?.description)")
 
     }
+    
+    func pauseEntities() {
+        // removes moveComponent from entities of type Granny
+        for entity in entities {
+            if let spriteNode = entity.component(ofType: SpriteComponent.self) {
+                if spriteNode.entityType == .granny {
+                    print("found granny")
+                    if let moveComponent = entity.component(ofType: MoveComponent.self) {
+                        entity.removeComponent(ofType: MoveComponent.self)
+                        componentSystems.removeAll()
+                        print("removed moveComponent")
+                    }
+                }
+            }
+        }
+    }
+    
+    func resumeEntities() {
+        // adds moveComponent from entities of type Granny
+        for entity in entities {
+            if let spriteNode = entity.component(ofType: SpriteComponent.self) {
+                if spriteNode.entityType == .granny {
+                    print("found granny")
+                    let movementComponent = MoveComponent(maxSpeed: 50, maxAcceleration: 80, radius: Float((spriteNode.node.texture?.size().width)! * 0.3), entityManager: self)
+                    entity.addComponent(movementComponent)
+                    componentSystems.append(GKComponentSystem(componentClass: MoveComponent.self))
+                    for componentSystem in componentSystems {
+                        componentSystem.addComponent(foundIn: entity)
+                    }
+                    print("move Component is added")
+                }
+            }
+        }
+    }
 }

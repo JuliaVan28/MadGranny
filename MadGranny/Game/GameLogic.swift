@@ -17,6 +17,9 @@ class GameLogic: ObservableObject {
     // Keep tracks of the duration of the current session in number of seconds
     @Published var timerDuration: Int = 0
     @Published var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    // Pause of game Boolean
+    @Published var isPaused: Bool = false
 
     // Game Over Boolean
     @Published var isGameOver: Bool = false
@@ -53,15 +56,18 @@ class GameLogic: ObservableObject {
     
     //MARK: - Timer functions
     func stopTimer() {
+        isPaused = true
         self.timer.upstream.connect().cancel()
     }
     
     func startTimer() {
+        isPaused = false
         self.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     }
     
     func cancelTimer() {
         timerDuration = 0
+        isPaused = true
         self.timer.upstream.connect().cancel()
     }
 }

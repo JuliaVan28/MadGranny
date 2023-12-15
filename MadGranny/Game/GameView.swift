@@ -14,27 +14,21 @@ struct GameView: View {
 
     @Binding var currentGameState: GameState
     
-    @State var isPaused: Bool = false
-    
-    private var screenWidth: CGFloat { UIScreen.main.bounds.size.width }
-    private var screenHeight: CGFloat { UIScreen.main.bounds.size.height }
-    
-    var gameScene: GameScene {
+    @StateObject var gameScene: GameScene = {
         let scene = GameScene()
         print("Game scene is created")
-        print("game state is \(self.currentGameState)")
 
-        scene.size = CGSize(width: screenWidth, height: screenHeight)
+        scene.size = CGSize(width: ScreenSize.width, height: ScreenSize.height)
         scene.scaleMode = .fill
         
         return scene
-    }
+    }()
     
     var body: some View {
         ZStack(alignment: .top) {
             // View that presents the game scene
             SpriteView(scene: self.gameScene)
-                .frame(width: screenWidth, height: screenHeight)
+                .frame(width: ScreenSize.width, height: ScreenSize.height)
                 .statusBar(hidden: true)
                 .ignoresSafeArea()
                 
@@ -43,16 +37,15 @@ struct GameView: View {
                 GamePointsView(score: $gameLogic.currentScore)
                 Spacer()
                 Button(action: {
-                    if isPaused {
-                        isPaused.toggle()
+                    if gameLogic.isPaused {
+                        gameScene.resumeGame()
                         gameLogic.startTimer()
                     } else {
-                        isPaused.toggle()
                         gameLogic.stopTimer()
 
                     }
                 }) {
-                    Image(systemName: isPaused ? "play.fill" : "pause")
+                    Image(systemName: gameLogic.isPaused ? "play.fill" : "pause")
                         .font(.system(size: 26))
                         .fontWeight(.black)
                 }
@@ -77,7 +70,6 @@ struct GameView: View {
         }
         .onAppear {
             gameLogic.isGameOver = false
-           // gameLogic.restartGame()
         }
     }
     
