@@ -59,10 +59,10 @@ class MoveComponent : GKAgent2D, GKAgentDelegate {
       let targetMoveComponent: GKAgent2D = childMoveComponent
         
       // Find obstacles to avoid
-/*      let obstaclesMoveComponents = entityManager.moveComponentsForObstacles()    */
+//      let obstaclesMoveComponents = entityManager.moveComponentsForObstacles()
       
       // Set behavior
-        behavior = GKBehavior(goals: [GKGoal(toSeekAgent: targetMoveComponent), /*GKGoal(toAvoid: [obstacleMoveCompoments], maxPredictionTime: 1.0), */ GKGoal(toReachTargetSpeed: maxSpeed)])
+        behavior = GKBehavior(goals: [GKGoal(toSeekAgent: targetMoveComponent), /*GKGoal(toAvoid: [obstacleMoveCompoments], maxPredictionTime: 1.0),*/ GKGoal(toReachTargetSpeed: maxSpeed)])
 
     }
 }
