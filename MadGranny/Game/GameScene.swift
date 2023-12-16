@@ -249,11 +249,6 @@ extension GameScene {
         }
     }
     
-    func resumeGame() {
-        entityManager.resumeEntities()
-        scene?.isPaused = false
-    }
-    
     private func setUpPhysicsWorld() {
         physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self
@@ -262,6 +257,11 @@ extension GameScene {
     private func restartGame() {
         gameLogic.isGameOver = false
     }
+    
+    func resumeGame() {
+        entityManager.resumeEntities()
+        scene?.isPaused = false
+    }
 }
 
 
@@ -269,17 +269,15 @@ extension GameScene {
 extension GameScene {
     
     var isGameOver: Bool {
-        // TODO: Customize!
-        
-        // Did you reach the time limit?
-        // Are the health points depleted?
-        // Did an enemy cross a position it should not have crossed?
-        
         return gameLogic.isGameOver
     }
     private func finishGame() {
         gameLogic.isGameOver = true
     }
+}
+
+//MARK: - Collisions
+extension GameScene {
     
     func grannyDidCollideWithChild(granny: SKSpriteNode, child: SKSpriteNode) {
         generator.impactOccurred()
@@ -289,12 +287,14 @@ extension GameScene {
     
     func childDidCollideWithCarrot(carrot: SKSpriteNode, child: SKSpriteNode) {
         print("i ate \(carrot.name!)")
-//        self.velocityMultiplier -= 0.01
-        if self.velocityMultiplier > 0.05 {
-            self.velocityMultiplier -= 0.01
+        if self.velocityMultiplier < 0.4 {
+            self.velocityMultiplier += 0.01
         }
+        print("velocity \(self.velocityMultiplier)")
       carrot.removeFromParent()
       carrot.removeFromParent()
+        gameLogic.score(points: 15)
+
     }
     
     func childDidCollideWithCandy(candy: SKSpriteNode, child: SKSpriteNode) {
@@ -302,8 +302,10 @@ extension GameScene {
         if self.velocityMultiplier > 0.05 {
             self.velocityMultiplier = 0
         }
-      candy.removeFromParent()
-      candy.removeFromParent()
+        print("velocity \(self.velocityMultiplier)")
+       candy.removeFromParent()
+       candy.removeFromParent()
+        gameLogic.score(points: 30)
     }
     
 }

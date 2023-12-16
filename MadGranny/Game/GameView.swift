@@ -9,8 +9,10 @@ import SwiftUI
 import SpriteKit
 
 struct GameView: View {
-    
+
     @StateObject var gameLogic: GameLogic =  GameLogic.shared
+    
+    @Binding var highScore: Int
 
     @Binding var currentGameState: GameState
     
@@ -33,8 +35,7 @@ struct GameView: View {
                 .ignoresSafeArea()
                 
             HStack {
-                GameTimerView().environmentObject(gameLogic)
-                GamePointsView(score: $gameLogic.currentScore)
+                GameScoreView().environmentObject(gameLogic)
                 Spacer()
                 Button(action: {
                     if gameLogic.isPaused {
@@ -45,16 +46,12 @@ struct GameView: View {
 
                     }
                 }) {
-                    Image(systemName: gameLogic.isPaused ? "play.fill" : "pause")
-                        .font(.system(size: 26))
-                        .fontWeight(.black)
+                    Image("pause-btn")
+                        .resizable()
+                        .frame(width: 56, height: 56)
+                        .padding(.top, 3)
+                    
                 }
-                    .frame(width: 30)
-                    .padding(10)
-                    .foregroundColor(.black)
-                    .background(Material.ultraThin)
-                    .cornerRadius(10)
-                    .padding(.trailing, 10)
             }
             .padding(.top, 30)
             .padding()
@@ -63,6 +60,8 @@ struct GameView: View {
             print("gameLogic.isGameOver is changed to \(gameLogic.isGameOver)")
             print("game state is \(self.currentGameState)")
             if gameLogic.isGameOver {
+                print("in gameView highScore is \(highScore), curScore is \(gameLogic.currentScore)")
+                setHighScore()
                 withAnimation {
                     self.presentGameResultsScreen()
                 }
@@ -86,8 +85,15 @@ struct GameView: View {
     private func presentGameResultsScreen() {
         self.currentGameState = .gameResults
     }
+    
+    private func setHighScore() {
+        if highScore < gameLogic.currentScore {
+            highScore = gameLogic.currentScore
+            print("new highScore \(highScore)")
+        }
+    }
 }
 
 #Preview {
-    GameView(currentGameState: .constant(GameState.playing))
+    GameView(highScore: .constant(234), currentGameState: .constant(GameState.playing))
 }

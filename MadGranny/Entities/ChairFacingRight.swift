@@ -10,7 +10,7 @@ import GameplayKit
 
 class ChairFacingRight: GKEntity {
     
-    let type: EntityType = .chair
+    let type: EntityType = .obstacle
 
   init( entityManager: EntityManager) {
     

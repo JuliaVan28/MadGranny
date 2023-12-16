@@ -51,7 +51,7 @@ class MoveComponent : GKAgent2D, GKAgentDelegate {
         
       // Find child
         guard let child = entityManager.entities.first(where: {$0.component(ofType: SpriteComponent.self)?.entityType == .child}),
-        let childMoveComponent = child.component(ofType: MoveComponent.self) else {
+        let childMoveComponent = child.component(ofType: MoveComponent.self), let granny = entityManager.entities.first(where: {$0.component(ofType: SpriteComponent.self)?.entityType == .granny}), let grannyMoveComponent = granny.component(ofType: MoveComponent.self) else {
         print("couldn't find child")
             return
       }
@@ -59,10 +59,13 @@ class MoveComponent : GKAgent2D, GKAgentDelegate {
       let targetMoveComponent: GKAgent2D = childMoveComponent
         
       // Find obstacles to avoid
-//      let obstaclesMoveComponents = entityManager.moveComponentsForObstacles()
+      let obstaclesMoveComponents = entityManager.moveComponentsForObstacles()
+       // print(obstaclesMoveComponents)
+        let avoidGoal = GKGoal(toAvoid: obstaclesMoveComponents, maxPredictionTime: 10)
       
       // Set behavior
-        behavior = GKBehavior(goals: [GKGoal(toSeekAgent: targetMoveComponent), /*GKGoal(toAvoid: [obstacleMoveCompoments], maxPredictionTime: 1.0),*/ GKGoal(toReachTargetSpeed: maxSpeed)])
+        grannyMoveComponent.behavior = GKBehavior(goals: [GKGoal(toSeekAgent: targetMoveComponent), GKGoal(toReachTargetSpeed: maxSpeed)])
+       // behavior?.setWeight(200, for: avoidGoal)
 
     }
 }

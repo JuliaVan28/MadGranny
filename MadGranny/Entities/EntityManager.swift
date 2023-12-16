@@ -119,6 +119,7 @@ class EntityManager {
             spriteComponent.node.name = "table"
             spriteComponent.node.zPosition = 5
             scene.addChild(spriteComponent.node)
+            entities.insert(table)
         }
         
         let plantLeaningLeft = Plant(entityManager: self)
@@ -129,7 +130,7 @@ class EntityManager {
             spriteComponent.node.zPosition = 5
             //  print("configured carrot")
             scene.addChild(spriteComponent.node)
-            
+            entities.insert(plantLeaningLeft)
         }
         
         let plantLeaningRight = Plant(entityManager: self)
@@ -141,8 +142,7 @@ class EntityManager {
             spriteComponent.node.zPosition = 5
             //  print("configured carrot")
             scene.addChild(spriteComponent.node)
-            
-            
+            entities.insert(plantLeaningRight)
         }
         
         let chairFacingDown = ChairFacingDown(entityManager: self)
@@ -153,6 +153,7 @@ class EntityManager {
             spriteComponent.node.zPosition = 5
             //  print("configured carrot")
             scene.addChild(spriteComponent.node)
+            entities.insert(chairFacingDown)
         }
         
         let chairFacingRight = ChairFacingRight(entityManager: self)
@@ -163,6 +164,7 @@ class EntityManager {
             spriteComponent.node.zPosition = 5
             //  print("configured carrot")
             scene.addChild(spriteComponent.node)
+            entities.insert(chairFacingRight)
         }
         
         let chairFacingLeft = ChairFacingRight(entityManager: self)
@@ -203,7 +205,7 @@ class EntityManager {
             spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 - 90, y: ScreenSize.height / 2 + 240)
             spriteComponent.node.size = CGSize(width: 45, height: 45)
 //            spriteComponent.node.zRotation = 1.57
-            spriteComponent.node.name = "wall"
+            spriteComponent.node.name = "tv"
             spriteComponent.node.zPosition = 5
             //  print("configured carrot")
             scene.addChild(spriteComponent.node)
@@ -213,13 +215,27 @@ class EntityManager {
 
     }
     
+    func moveComponentsForObstacles() -> [MoveComponent] {
+        var moveComponents = [MoveComponent]()
+        for entity in entities {
+            if let spriteNode = entity.component(ofType: SpriteComponent.self) {
+                if spriteNode.entityType == .obstacle {
+                    if let moveComponent = entity.component(ofType: MoveComponent.self) {
+                        moveComponents.append(moveComponent)
+                    }
+                }
+            }
+        }
+        return moveComponents
+    }
+    
     func pauseEntities() {
         // removes moveComponent from entities of type Granny
         for entity in entities {
             if let spriteNode = entity.component(ofType: SpriteComponent.self) {
                 if spriteNode.entityType == .granny {
                     print("found granny")
-                    if let moveComponent = entity.component(ofType: MoveComponent.self) {
+                    if entity.component(ofType: MoveComponent.self) != nil {
                         entity.removeComponent(ofType: MoveComponent.self)
                         componentSystems.removeAll()
                         print("removed moveComponent")
@@ -236,12 +252,26 @@ class EntityManager {
                 if spriteNode.entityType == .granny {
                     print("found granny")
                     let movementComponent = MoveComponent(maxSpeed: 50, maxAcceleration: 80, radius: Float((spriteNode.node.texture?.size().width)! * 0.3), entityManager: self)
+                   /* // Find child
+                      guard let child = entities.first(where: {$0.component(ofType: SpriteComponent.self)?.entityType == .child}),
+                      let childMoveComponent = child.component(ofType: MoveComponent.self) else {
+                      print("couldn't find child")
+                          return
+                    }
+                    
+                    let targetMoveComponent: GKAgent2D = childMoveComponent
+                      
+                    // Set behavior
+                    movementComponent.behavior = GKBehavior(goals: [GKGoal(toSeekAgent: targetMoveComponent), GKGoal(toReachTargetSpeed: 1.0)])
+                    */
+                    
                     entity.addComponent(movementComponent)
                     componentSystems.append(GKComponentSystem(componentClass: MoveComponent.self))
                     for componentSystem in componentSystems {
                         componentSystem.addComponent(foundIn: entity)
                     }
                     print("move Component is added")
+                    //self.update(0.1)
                 }
             }
         }

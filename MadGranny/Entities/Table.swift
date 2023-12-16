@@ -11,7 +11,7 @@ import GameplayKit
 // 1
 class Table: GKEntity {
     
-    let type: EntityType = .table
+    let type: EntityType = .obstacle
 
   init( entityManager: EntityManager) {
     

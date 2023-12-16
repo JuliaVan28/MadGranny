@@ -10,7 +10,7 @@ import GameplayKit
 
 class Plant: GKEntity {
     
-    let type: EntityType = .table
+    let type: EntityType = .obstacle
 
   init( entityManager: EntityManager) {
     

@@ -21,5 +21,6 @@ enum EntityType {
     case chair
     case wall
     case tv
+    case obstacle
     case unknown
 }

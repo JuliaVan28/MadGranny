@@ -11,6 +11,9 @@ import SwiftUI
  *   This view is responsible for presenting the game name, the game intro and to start the game.
  **/
 struct MenuView: View {
+    
+    @Binding var highScore: Int
+
     @Binding var currentGameState: GameState
     
     var body: some View {
@@ -66,5 +69,5 @@ struct MenuView: View {
 }
 
 #Preview {
-    MenuView(currentGameState: .constant(GameState.menuScreen))
+    MenuView(highScore: .constant(234), currentGameState: .constant(GameState.menuScreen))
 }
