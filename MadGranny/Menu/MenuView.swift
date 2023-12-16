@@ -22,27 +22,46 @@ struct MenuView: View {
             Image("menu_background_parket")
                 .resizable()
                 .ignoresSafeArea()
-            VStack(spacing: 20.0) {
+            VStack(spacing: 15.0) {
+                HStack {
+                    ZStack {
+                        Image("score_background-2")
+                            .resizable()
+                            .frame(width: 130, height: 60)
+                            .padding([.bottom, .leading, .trailing], 15)
+                        HStack {
+                            Spacer()
+                            Text("\(highScore)")
+                                .font(.system(size: 25, weight: .bold))
+                        }.frame(width: 90)
+                            .padding(.bottom, 15)
+
+                    }
+                    Spacer()
+                    Image("question-btn")
+                        .resizable()
+                        .frame(width: 56, height: 56)
+                        .padding(.top, 3)
+                        .padding([.bottom, .leading, .trailing], 15)
+                }
                 Spacer()
                 ZStack {
-                    HStack() {
+                    VStack() {
+                        Spacer()
                         Image("big_granny")
                             .resizable()
                             .frame(width: 200, height: 350)
-                            .padding(.leading, 5)
-                            .padding(.top, 40)
-                        Spacer()
+                            .padding(.bottom, 30)
                     }
                     VStack(alignment: .trailing) {
-                        HStack {
-                            Spacer()
                             Image("dinner_ready")
                                 .resizable()
-                                .frame(width: 280, height: 180)
-                        }
+                                .frame(width: 340, height: 180)
+                                .padding(.top, 10)
                         Spacer()
+
                     }
-                }.frame(height: 450)
+                }
 
                 Button {
                     withAnimation { self.startGame() }

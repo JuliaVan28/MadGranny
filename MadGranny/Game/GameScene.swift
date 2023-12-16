@@ -300,7 +300,7 @@ extension GameScene {
     func childDidCollideWithCandy(candy: SKSpriteNode, child: SKSpriteNode) {
         print("i ate \(candy.name!)")
         if self.velocityMultiplier > 0.05 {
-            self.velocityMultiplier = 0
+            self.velocityMultiplier -= 0.01
         }
         print("velocity \(self.velocityMultiplier)")
        candy.removeFromParent()

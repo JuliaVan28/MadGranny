@@ -144,16 +144,15 @@ class EntityManager {
             scene.addChild(spriteComponent.node)
             entities.insert(plantLeaningRight)
         }
-        
+        // chair is not added
         let chairFacingDown = ChairFacingDown(entityManager: self)
         if let spriteComponent = chairFacingDown.component(ofType: SpriteComponent.self) {
             spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 + 100, y: ScreenSize.height / 2 + 170)
             spriteComponent.node.size = CGSize(width: 30, height: 45)
             spriteComponent.node.name = "chair"
             spriteComponent.node.zPosition = 5
-            //  print("configured carrot")
-            scene.addChild(spriteComponent.node)
-            entities.insert(chairFacingDown)
+           // scene.addChild(spriteComponent.node)
+           // entities.insert(chairFacingDown)
         }
         
         let chairFacingRight = ChairFacingRight(entityManager: self)
