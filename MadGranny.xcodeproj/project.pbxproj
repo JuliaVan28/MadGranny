@@ -35,6 +35,8 @@
 		3C46925C2B2B0AB200A48490 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C46925B2B2B0AB200A48490 /* Plant.swift */; };
 		3C8BFD3A2B2C5E75007A87D1 /* ChairFacingDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8BFD392B2C5E75007A87D1 /* ChairFacingDown.swift */; };
 		3C8BFD3C2B2C63C7007A87D1 /* ChairFacingRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8BFD3B2B2C63C7007A87D1 /* ChairFacingRight.swift */; };
+		3CAC0F2F2B2DE24A004A7F14 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC0F2E2B2DE24A004A7F14 /* Wall.swift */; };
+		3CAC0F312B2E01A3004A7F14 /* Tv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC0F302B2E01A3004A7F14 /* Tv.swift */; };
 		9B033BEF2B238D2D008BC0E6 /* GameTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B033BEE2B238D2D008BC0E6 /* GameTimerView.swift */; };
 		9B033BF12B239E58008BC0E6 /* GamePointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B033BF02B239E58008BC0E6 /* GamePointsView.swift */; };
 /* End PBXBuildFile section */
@@ -69,6 +71,8 @@
 		3C46925B2B2B0AB200A48490 /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
 		3C8BFD392B2C5E75007A87D1 /* ChairFacingDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChairFacingDown.swift; sourceTree = "<group>"; };
 		3C8BFD3B2B2C63C7007A87D1 /* ChairFacingRight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChairFacingRight.swift; sourceTree = "<group>"; };
+		3CAC0F2E2B2DE24A004A7F14 /* Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
+		3CAC0F302B2E01A3004A7F14 /* Tv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tv.swift; sourceTree = "<group>"; };
 		9B033BEE2B238D2D008BC0E6 /* GameTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimerView.swift; sourceTree = "<group>"; };
 		9B033BF02B239E58008BC0E6 /* GamePointsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePointsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -187,6 +191,8 @@
 				3C46925B2B2B0AB200A48490 /* Plant.swift */,
 				3C8BFD392B2C5E75007A87D1 /* ChairFacingDown.swift */,
 				3C8BFD3B2B2C63C7007A87D1 /* ChairFacingRight.swift */,
+				3CAC0F2E2B2DE24A004A7F14 /* Wall.swift */,
+				3CAC0F302B2E01A3004A7F14 /* Tv.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -286,6 +292,7 @@
 				325BDD6D2B2207770098149D /* MenuView.swift in Sources */,
 				325BDD932B263EDB0098149D /* CGFloatExtension.swift in Sources */,
 				325BDD812B250F9F0098149D /* SpriteComponent.swift in Sources */,
+				3CAC0F2F2B2DE24A004A7F14 /* Wall.swift in Sources */,
 				325BDD872B2512150098149D /* MoveComponent.swift in Sources */,
 				9B033BF12B239E58008BC0E6 /* GamePointsView.swift in Sources */,
 				3C46925A2B2AF7D200A48490 /* Table.swift in Sources */,
@@ -293,6 +300,7 @@
 				325BDD8F2B262FDE0098149D /* Carrot.swift in Sources */,
 				3C46925C2B2B0AB200A48490 /* Plant.swift in Sources */,
 				325BDD702B2207F40098149D /* GameView.swift in Sources */,
+				3CAC0F312B2E01A3004A7F14 /* Tv.swift in Sources */,
 				32031CAA2B21E59800F7AE47 /* MadGrannyApp.swift in Sources */,
 				325BDD912B2635E20098149D /* BonusComponent.swift in Sources */,
 				325BDD892B251EA70098149D /* Child.swift in Sources */,

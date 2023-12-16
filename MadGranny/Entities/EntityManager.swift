@@ -114,8 +114,8 @@ class EntityManager {
     func spawnObstacle() {
         let table = Table(entityManager: self)
         if let spriteComponent = table.component(ofType: SpriteComponent.self) {
-            spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 - 15, y: ScreenSize.height / 2 - 207)
-            spriteComponent.node.size = CGSize(width: 50, height: 40)
+            spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 , y: ScreenSize.height / 2 - 160)
+            spriteComponent.node.size = CGSize(width: 85, height: 60)
             spriteComponent.node.name = "table"
             spriteComponent.node.zPosition = 5
             scene.addChild(spriteComponent.node)
@@ -123,7 +123,7 @@ class EntityManager {
         
         let plantLeaningLeft = Plant(entityManager: self)
         if let spriteComponent = plantLeaningLeft.component(ofType: SpriteComponent.self) {
-            spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 - 50, y: ScreenSize.height / 2 - 90)
+            spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 - 160, y: ScreenSize.height / 2 + 240)
             spriteComponent.node.size = CGSize(width: 40, height: 50)
             spriteComponent.node.name = "plant"
             spriteComponent.node.zPosition = 5
@@ -134,7 +134,7 @@ class EntityManager {
         
         let plantLeaningRight = Plant(entityManager: self)
         if let spriteComponent = plantLeaningRight.component(ofType: SpriteComponent.self) {
-            spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 + 130, y: ScreenSize.height / 2 - 210)
+            spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 - 20, y: ScreenSize.height / 2 + 240)
             spriteComponent.node.size = CGSize(width: 40, height: 50)
             spriteComponent.node.name = "plant"
             spriteComponent.node.xScale = -1
@@ -147,7 +147,7 @@ class EntityManager {
         
         let chairFacingDown = ChairFacingDown(entityManager: self)
         if let spriteComponent = chairFacingDown.component(ofType: SpriteComponent.self) {
-            spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 - 20, y: ScreenSize.height / 2 - 170)
+            spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 + 100, y: ScreenSize.height / 2 + 170)
             spriteComponent.node.size = CGSize(width: 30, height: 45)
             spriteComponent.node.name = "chair"
             spriteComponent.node.zPosition = 5
@@ -157,13 +157,59 @@ class EntityManager {
         
         let chairFacingRight = ChairFacingRight(entityManager: self)
         if let spriteComponent = chairFacingRight.component(ofType: SpriteComponent.self) {
-            spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 - 40, y: ScreenSize.height / 2 + 100)
+            spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 - 95, y: ScreenSize.height / 2 - 160)
             spriteComponent.node.size = CGSize(width: 30, height: 45)
             spriteComponent.node.name = "chair"
             spriteComponent.node.zPosition = 5
             //  print("configured carrot")
             scene.addChild(spriteComponent.node)
         }
+        
+        let chairFacingLeft = ChairFacingRight(entityManager: self)
+        if let spriteComponent = chairFacingLeft.component(ofType: SpriteComponent.self) {
+            spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 + 95, y: ScreenSize.height / 2 - 160)
+            spriteComponent.node.size = CGSize(width: 30, height: 45)
+            spriteComponent.node.xScale = -1
+            spriteComponent.node.name = "chair"
+            spriteComponent.node.zPosition = 5
+            //  print("configured carrot")
+            scene.addChild(spriteComponent.node)
+        }
+
+        
+        let verticalwall = Wall(entityManager: self)
+        if let spriteComponent = verticalwall.component(ofType: SpriteComponent.self) {
+            spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 + 20 , y: ScreenSize.height / 2 + 235)
+            spriteComponent.node.size = CGSize(width: 450, height: 10)
+            spriteComponent.node.zRotation = 1.57
+            spriteComponent.node.name = "wall"
+            spriteComponent.node.zPosition = 5
+            //  print("configured carrot")
+            scene.addChild(spriteComponent.node)
+        }
+        
+        let horizontalwall = Wall(entityManager: self)
+        if let spriteComponent = horizontalwall.component(ofType: SpriteComponent.self) {
+            spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 - 280 , y: ScreenSize.height / 2 + 15)
+            spriteComponent.node.size = CGSize(width: 450, height: 10)
+            spriteComponent.node.name = "wall"
+            spriteComponent.node.zPosition = 5
+            //  print("configured carrot")
+            scene.addChild(spriteComponent.node)
+        }
+
+        let tv = Tv(entityManager: self)
+        if let spriteComponent = tv.component(ofType: SpriteComponent.self) {
+            spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 - 90, y: ScreenSize.height / 2 + 240)
+            spriteComponent.node.size = CGSize(width: 45, height: 45)
+//            spriteComponent.node.zRotation = 1.57
+            spriteComponent.node.name = "wall"
+            spriteComponent.node.zPosition = 5
+            //  print("configured carrot")
+            scene.addChild(spriteComponent.node)
+        }
+
+        
 
     }
     

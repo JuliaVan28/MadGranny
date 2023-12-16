@@ -19,5 +19,7 @@ enum EntityType {
     case table
     case plant
     case chair
+    case wall
+    case tv
     case unknown
 }

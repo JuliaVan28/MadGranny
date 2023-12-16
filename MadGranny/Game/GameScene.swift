@@ -159,7 +159,7 @@ extension GameScene {
             let xRange = SKRange(lowerLimit: 0, upperLimit: frame.width)
             let xConstraint = SKConstraint.positionX(xRange)
             
-            let yRange = SKRange(lowerLimit: 0, upperLimit: frame.height)
+            let yRange = SKRange(lowerLimit: 0, upperLimit: frame.height - 150)
             let yConstraint = SKConstraint.positionY(yRange)
             
             spriteComponent.node.name = "child"
@@ -195,7 +195,7 @@ extension GameScene {
             let xRange = SKRange(lowerLimit: 0, upperLimit: frame.width)
             let xConstraint = SKConstraint.positionX(xRange)
             
-            let yRange = SKRange(lowerLimit: 0, upperLimit: frame.height)
+            let yRange = SKRange(lowerLimit: 0, upperLimit: frame.height - 150)
             let yConstraint = SKConstraint.positionY(yRange)
             
             spriteComponent.node.name = "granny"

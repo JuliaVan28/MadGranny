@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "MapBackground-empty2.png",
+      "filename" : "mapBackground.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
