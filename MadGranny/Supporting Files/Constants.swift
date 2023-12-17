@@ -17,6 +17,18 @@ struct ScreenSize {
     static let size         = CGSize(width: ScreenSize.width, height: ScreenSize.height)
 }
 
+typealias Instruction = (icon: String, title: String, description: String)
+struct MainScreenProperties {
+    static let gameTitle: String = "app-logo"
+    
+    static let gameInstructions: [Instruction] = [
+        (icon: "controller-instruction", title: "lorem", description: "lorem."),
+        (icon: "granny-instruction", title: "lorem", description: "loremmm."),
+        (icon: "candy-instruction", title: "lorem", description: "loremmmmmmm."),
+        (icon: "table", title: "lorem", description: "loremmmmmmmmm."),
+    ]
+}
+
 // Identifies SKSpriteNodes
 struct PhysicsCategory {
     static let none: UInt32    = 0

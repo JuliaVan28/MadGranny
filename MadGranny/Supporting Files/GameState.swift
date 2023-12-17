@@ -17,4 +17,5 @@ enum GameState {
     case menuScreen
     case playing
     case gameResults
+    case instruction
 }
