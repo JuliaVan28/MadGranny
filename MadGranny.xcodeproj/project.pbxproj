@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13778BB62B2E748700C3F7A5 /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 13778BB52B2E748700C3F7A5 /* Explosion.sks */; };
 		32031CAA2B21E59800F7AE47 /* MadGrannyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32031CA92B21E59800F7AE47 /* MadGrannyApp.swift */; };
 		32031CAC2B21E59800F7AE47 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32031CAB2B21E59800F7AE47 /* ContentView.swift */; };
 		32031CAE2B21E59B00F7AE47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32031CAD2B21E59B00F7AE47 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		13778BB52B2E748700C3F7A5 /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
 		32031CA62B21E59800F7AE47 /* MadGranny.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MadGranny.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32031CA92B21E59800F7AE47 /* MadGrannyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MadGrannyApp.swift; sourceTree = "<group>"; };
 		32031CAB2B21E59800F7AE47 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				325BDD752B2208D50098149D /* Supporting Files */,
 				32031CAD2B21E59B00F7AE47 /* Assets.xcassets */,
 				32031CAF2B21E59B00F7AE47 /* Preview Content */,
+				13778BB52B2E748700C3F7A5 /* Explosion.sks */,
 			);
 			path = MadGranny;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 			files = (
 				32031CB12B21E59B00F7AE47 /* Preview Assets.xcassets in Resources */,
 				32031CAE2B21E59B00F7AE47 /* Assets.xcassets in Resources */,
+				13778BB62B2E748700C3F7A5 /* Explosion.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

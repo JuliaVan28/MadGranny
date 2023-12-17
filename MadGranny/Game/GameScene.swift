@@ -88,6 +88,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let child = firstBody.node as? SKSpriteNode,
           let granny = secondBody.node as? SKSpriteNode {
             grannyDidCollideWithChild(granny: granny, child: child)
+            
         }
       }
         
@@ -257,17 +258,31 @@ extension GameScene {
     
     func grannyDidCollideWithChild(granny: SKSpriteNode, child: SKSpriteNode) {
         print("Hit")
-        finishGame()
+        
+        // create the shape explosion
+        let explosion = SKEmitterNode(fileNamed: "Explosion")
+        explosion?.position = child.position
+        
+        let explodeAction = SKAction.run({
+            self.addChild(explosion!)
+            child.removeFromParent()
+        })
+        let wait = SKAction.wait(forDuration: 0.5)
+        let removeExplodeAction = SKAction.run({explosion?.removeFromParent()})
+        let explodeSequence = SKAction.sequence([explodeAction, wait, removeExplodeAction])
+        
+        self.run(explodeSequence)
+        // finishGame()
     }
     
     func childDidCollideWithCarrot(carrot: SKSpriteNode, child: SKSpriteNode) {
         print("i ate \(carrot.name!)")
-//        self.velocityMultiplier -= 0.01
+        //        self.velocityMultiplier -= 0.01
         if self.velocityMultiplier > 0.05 {
             self.velocityMultiplier -= 0.01
         }
-      carrot.removeFromParent()
-      carrot.removeFromParent()
+        carrot.removeFromParent()
+        carrot.removeFromParent()
     }
     
     func childDidCollideWithCandy(candy: SKSpriteNode, child: SKSpriteNode) {
@@ -275,8 +290,7 @@ extension GameScene {
         if self.velocityMultiplier > 0.05 {
             self.velocityMultiplier = 0
         }
-      candy.removeFromParent()
-      candy.removeFromParent()
+        candy.removeFromParent()
+        candy.removeFromParent()
     }
-    
 }

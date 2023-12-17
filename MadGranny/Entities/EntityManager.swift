@@ -14,6 +14,7 @@ class EntityManager {
     var entities = Set<GKEntity>()
     var toRemove = Set<GKEntity>()
     let scene: SKScene
+    var isExploded = false
     
     lazy var componentSystems: [GKComponentSystem] = {
         let moveSystem = GKComponentSystem(componentClass: MoveComponent.self)
@@ -25,7 +26,6 @@ class EntityManager {
         self.scene = scene
     }
     
-    
     func add(_ entity: GKEntity) {
         entities.insert(entity)
         
@@ -34,7 +34,7 @@ class EntityManager {
         }
         
         if let spriteNode = entity.component(ofType: SpriteComponent.self)?.node {
-           // print("added to the scene \(spriteNode.name)")
+            // print("added to the scene \(spriteNode.name)")
             scene.addChild(spriteNode)
         }
         
@@ -76,7 +76,7 @@ class EntityManager {
             spriteComponent.node.size = CGSize(width: 120, height: 120)
             spriteComponent.node.name = "candy"
             spriteComponent.node.zPosition = 4
-           // print("configured candy")
+            // print("configured candy")
             scene.addChild(spriteComponent.node)
         }
         entities.insert(candy)
@@ -84,9 +84,9 @@ class EntityManager {
         if let spriteComponent = candy.component(ofType: SpriteComponent.self), let bonusComponentAction = candy.component(ofType: BonusComponent.self)?.twinkleActions {
             spriteComponent.node.run(SKAction.sequence(bonusComponentAction))
         }
-       // print(entities)
+        // print(entities)
         //print("Scene node \(scene.childNode(withName: "candy")?.description)")
-
+        
     }
     
     func spawnCarrot() {
@@ -97,17 +97,17 @@ class EntityManager {
             spriteComponent.node.size = CGSize(width: 120, height: 120)
             spriteComponent.node.name = "carrot"
             spriteComponent.node.zPosition = 4
-          //  print("configured carrot")
+            //  print("configured carrot")
             scene.addChild(spriteComponent.node)
-
+            
         }
         entities.insert(carrot)
-
+        
         if let spriteComponent = carrot.component(ofType: SpriteComponent.self), let bonusComponentAction = carrot.component(ofType: BonusComponent.self)?.twinkleActions {
             spriteComponent.node.run(SKAction.sequence(bonusComponentAction))
         }
-       // print(entities)
-       // print("Scene node \(scene.childNode(withName: "carrot")?.description)")
-
+        // print(entities)
+        // print("Scene node \(scene.childNode(withName: "carrot")?.description)")
+        
     }
 }
