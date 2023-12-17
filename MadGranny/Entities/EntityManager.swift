@@ -125,7 +125,7 @@ class EntityManager {
         let plantLeaningLeft = Plant(entityManager: self)
         if let spriteComponent = plantLeaningLeft.component(ofType: SpriteComponent.self) {
             spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 - 160, y: ScreenSize.height / 2 + 240)
-            spriteComponent.node.size = CGSize(width: 40, height: 50)
+            spriteComponent.node.size = CGSize(width: 35, height: 40)
             spriteComponent.node.name = "plant"
             spriteComponent.node.zPosition = 5
             //  print("configured carrot")
@@ -136,7 +136,7 @@ class EntityManager {
         let plantLeaningRight = Plant(entityManager: self)
         if let spriteComponent = plantLeaningRight.component(ofType: SpriteComponent.self) {
             spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 - 20, y: ScreenSize.height / 2 + 240)
-            spriteComponent.node.size = CGSize(width: 40, height: 50)
+            spriteComponent.node.size = CGSize(width: 35, height: 40)
             spriteComponent.node.name = "plant"
             spriteComponent.node.xScale = -1
             spriteComponent.node.zPosition = 5
@@ -157,7 +157,7 @@ class EntityManager {
         
         let chairFacingRight = ChairFacingRight(entityManager: self)
         if let spriteComponent = chairFacingRight.component(ofType: SpriteComponent.self) {
-            spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 - 95, y: ScreenSize.height / 2 - 160)
+            spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 - 100, y: ScreenSize.height / 2 - 160)
             spriteComponent.node.size = CGSize(width: 30, height: 45)
             spriteComponent.node.name = "chair"
             spriteComponent.node.zPosition = 5
@@ -168,7 +168,7 @@ class EntityManager {
         
         let chairFacingLeft = ChairFacingRight(entityManager: self)
         if let spriteComponent = chairFacingLeft.component(ofType: SpriteComponent.self) {
-            spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 + 95, y: ScreenSize.height / 2 - 160)
+            spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 + 100, y: ScreenSize.height / 2 - 160)
             spriteComponent.node.size = CGSize(width: 30, height: 45)
             spriteComponent.node.xScale = -1
             spriteComponent.node.name = "chair"
@@ -202,7 +202,7 @@ class EntityManager {
         let tv = Tv(entityManager: self)
         if let spriteComponent = tv.component(ofType: SpriteComponent.self) {
             spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 - 90, y: ScreenSize.height / 2 + 240)
-            spriteComponent.node.size = CGSize(width: 45, height: 45)
+            spriteComponent.node.size = CGSize(width: 35, height: 35)
 //            spriteComponent.node.zRotation = 1.57
             spriteComponent.node.name = "tv"
             spriteComponent.node.zPosition = 5

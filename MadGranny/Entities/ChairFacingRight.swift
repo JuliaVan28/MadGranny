@@ -19,7 +19,7 @@ class ChairFacingRight: GKEntity {
       let spriteComponent = SpriteComponent(entity: self, texture: texture, size: texture.size(), entityType: type)
       
       // Creating a Physical body for it
-      spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 50, height: 50))
+      spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 30, height: 40))
       spriteComponent.node.physicsBody?.isDynamic = false
       spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.chair
       spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.child
