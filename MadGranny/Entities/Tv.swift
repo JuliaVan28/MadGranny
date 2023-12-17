@@ -16,7 +16,7 @@ class Tv: GKEntity {
   init( entityManager: EntityManager) {
     
     super.init()
-    let texture = SKTexture(imageNamed: "tv")
+    let texture = SKTexture(imageNamed: "TV")
       let spriteComponent = SpriteComponent(entity: self, texture: texture, size: texture.size(), entityType: type)
       
       // Creating a Physical body for it

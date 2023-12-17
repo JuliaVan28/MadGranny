@@ -68,6 +68,41 @@ class EntityManager {
         toRemove.removeAll()
     }
     
+    func spawnGrany(position: CGPoint) {
+        let granny = Granny(entityManager: self)
+        if let spriteComponent = granny.component(ofType: SpriteComponent.self) {
+            let xRange = SKRange(lowerLimit: 0, upperLimit: scene.frame.width)
+            let xConstraint = SKConstraint.positionX(xRange)
+            
+            let yRange = SKRange(lowerLimit: 0, upperLimit: scene.frame.height - 150)
+            let yConstraint = SKConstraint.positionY(yRange)
+            
+            spriteComponent.node.name = "granny"
+            spriteComponent.node.zPosition = 1
+            
+            spriteComponent.node.position = position
+            spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.granny
+            
+            // Creating Physics body and binding its contact
+            spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.size)
+            spriteComponent.node.physicsBody?.isDynamic = true
+            spriteComponent.node.physicsBody?.allowsRotation = false
+            spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.granny
+            spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.child | PhysicsCategory.table | PhysicsCategory.chair
+            spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.table | PhysicsCategory.plant
+            | PhysicsCategory.chair
+            spriteComponent.node.physicsBody?.usesPreciseCollisionDetection = true
+            
+            spriteComponent.node.constraints = [xConstraint, yConstraint]
+            
+            print("configured granny")
+            
+        }
+            print("added granny")
+            add(granny)
+        print("Entities: \(self.entities)")
+    }
+    
     func spawnCandy() {
         let candy = Candy(entityManager: self)
         if let spriteComponent = candy.component(ofType: SpriteComponent.self) {
