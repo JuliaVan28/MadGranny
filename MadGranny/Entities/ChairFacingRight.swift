@@ -20,10 +20,11 @@ class ChairFacingRight: GKEntity {
       
       // Creating a Physical body for it
       spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 30, height: 40))
-      spriteComponent.node.physicsBody?.isDynamic = false
+      spriteComponent.node.physicsBody?.isDynamic = true
       spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.chair
-      spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.child
-      spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.child
+      spriteComponent.node.physicsBody?.allowsRotation = false
+      spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.child | PhysicsCategory.table
+      spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.child | PhysicsCategory.table
       spriteComponent.node.physicsBody?.usesPreciseCollisionDetection = true
 
       
