@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		13778BB62B2E748700C3F7A5 /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 13778BB52B2E748700C3F7A5 /* Explosion.sks */; };
 		32031CAA2B21E59800F7AE47 /* MadGrannyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32031CA92B21E59800F7AE47 /* MadGrannyApp.swift */; };
 		32031CAC2B21E59800F7AE47 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32031CAB2B21E59800F7AE47 /* ContentView.swift */; };
 		32031CAE2B21E59B00F7AE47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32031CAD2B21E59B00F7AE47 /* Assets.xcassets */; };
@@ -43,7 +42,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		13778BB52B2E748700C3F7A5 /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
 		32031CA62B21E59800F7AE47 /* MadGranny.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MadGranny.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32031CA92B21E59800F7AE47 /* MadGrannyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MadGrannyApp.swift; sourceTree = "<group>"; };
 		32031CAB2B21E59800F7AE47 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -69,7 +67,6 @@
 		325BDD922B263EDB0098149D /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
 		325BDD942B263F060098149D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		325BDD962B2662A10098149D /* AnalogJoystickEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogJoystickEntity.swift; sourceTree = "<group>"; };
-		327202632B2E578B00AA8876 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3C4692592B2AF7D200A48490 /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
 		3C46925B2B2B0AB200A48490 /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
 		3C8BFD392B2C5E75007A87D1 /* ChairFacingDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChairFacingDown.swift; sourceTree = "<group>"; };
@@ -110,7 +107,6 @@
 		32031CA82B21E59800F7AE47 /* MadGranny */ = {
 			isa = PBXGroup;
 			children = (
-				327202632B2E578B00AA8876 /* Info.plist */,
 				325BDD7B2B2209BB0098149D /* App */,
 				325BDD7F2B250F690098149D /* Components */,
 				325BDD7E2B250F500098149D /* Entities */,
@@ -120,7 +116,6 @@
 				325BDD752B2208D50098149D /* Supporting Files */,
 				32031CAD2B21E59B00F7AE47 /* Assets.xcassets */,
 				32031CAF2B21E59B00F7AE47 /* Preview Content */,
-				13778BB52B2E748700C3F7A5 /* Explosion.sks */,
 			);
 			path = MadGranny;
 			sourceTree = "<group>";
@@ -272,7 +267,6 @@
 			files = (
 				32031CB12B21E59B00F7AE47 /* Preview Assets.xcassets in Resources */,
 				32031CAE2B21E59B00F7AE47 /* Assets.xcassets in Resources */,
-				13778BB62B2E748700C3F7A5 /* Explosion.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,9 +443,9 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MadGranny/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -459,7 +453,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.devacademy.MadGrany;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devacademy.MadGranny;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -478,9 +472,9 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MadGranny/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -488,7 +482,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.devacademy.MadGrany;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devacademy.MadGranny;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

@@ -9,59 +9,59 @@ import SwiftUI
 import SpriteKit
 
 struct GameView: View {
-    
+
     @StateObject var gameLogic: GameLogic =  GameLogic.shared
+    
+    @Binding var highScore: Int
 
     @Binding var currentGameState: GameState
     
-    private var screenWidth: CGFloat { UIScreen.main.bounds.size.width }
-    private var screenHeight: CGFloat { UIScreen.main.bounds.size.height }
-    
-    var gameScene: GameScene {
+    @StateObject var gameScene: GameScene = {
         let scene = GameScene()
         print("Game scene is created")
-        print("game state is \(self.currentGameState)")
 
-        scene.size = CGSize(width: screenWidth, height: screenHeight)
+        scene.size = CGSize(width: ScreenSize.width, height: ScreenSize.height)
         scene.scaleMode = .fill
         
         return scene
-    }
+    }()
     
     var body: some View {
         ZStack(alignment: .top) {
             // View that presents the game scene
             SpriteView(scene: self.gameScene)
-                .frame(width: screenWidth, height: screenHeight)
+                .frame(width: ScreenSize.width, height: ScreenSize.height)
                 .statusBar(hidden: true)
                 .ignoresSafeArea()
                 
             HStack {
-                GameTimerView(time: $gameLogic.timerDuration)
-                    //.padding()
-                
-                GamePointsView(score: $gameLogic.currentScore)
-                    //.padding()
-                
-                Button(action: {print("")}) {
-                    Image(systemName: "pause")
-                        .font(.headline)
+                GameScoreView().environmentObject(gameLogic)
+                Spacer()
+                Button(action: {
+                    if gameLogic.isPaused {
+                        gameScene.resumeGame()
+                        gameLogic.startTimer()
+                    } else {
+                        gameLogic.stopTimer()
+
+                    }
+                }) {
+                    Image("pause-btn")
+                        .resizable()
+                        .frame(width: 56, height: 56)
+                        .padding(.top, 3)
+                    
                 }
-                    .frame(minWidth: 60)
-                    .padding(24)
-                    .foregroundColor(.white)
-                    .background(Color(UIColor.systemGray))
-                    .cornerRadius(10)
-                    //.padding()
             }
-            
-            .padding(.top, 20)
+            .padding(.top, 30)
             .padding()
         }
         .onChange(of: gameLogic.isGameOver) {
             print("gameLogic.isGameOver is changed to \(gameLogic.isGameOver)")
             print("game state is \(self.currentGameState)")
             if gameLogic.isGameOver {
+                print("in gameView highScore is \(highScore), curScore is \(gameLogic.currentScore)")
+                setHighScore()
                 withAnimation {
                     self.presentGameResultsScreen()
                 }
@@ -69,7 +69,6 @@ struct GameView: View {
         }
         .onAppear {
             gameLogic.isGameOver = false
-           // gameLogic.restartGame()
         }
     }
     
@@ -86,8 +85,15 @@ struct GameView: View {
     private func presentGameResultsScreen() {
         self.currentGameState = .gameResults
     }
+    
+    private func setHighScore() {
+        if highScore < gameLogic.currentScore {
+            highScore = gameLogic.currentScore
+            print("new highScore \(highScore)")
+        }
+    }
 }
 
 #Preview {
-    GameView(currentGameState: .constant(GameState.playing))
+    GameView(highScore: .constant(234), currentGameState: .constant(GameState.playing))
 }

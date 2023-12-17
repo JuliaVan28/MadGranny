@@ -11,21 +11,57 @@ import SwiftUI
  *   This view is responsible for presenting the game name, the game intro and to start the game.
  **/
 struct MenuView: View {
+    
+    @Binding var highScore: Int
+
     @Binding var currentGameState: GameState
     
     var body: some View {
         
         ZStack{
-            Image("menu_background")
+            Image("menu_background_parket")
                 .resizable()
-                .scaledToFill()
                 .ignoresSafeArea()
-            VStack(spacing: 10.0) {
+            VStack(spacing: 15.0) {
+                HStack {
+                    ZStack {
+                        Image("score_background-2")
+                            .resizable()
+                            .frame(width: 130, height: 60)
+                            .padding([.bottom, .leading, .trailing], 15)
+                        HStack {
+                            Spacer()
+                            Text("\(highScore)")
+                                .font(.system(size: 25, weight: .bold))
+                        }.frame(width: 90)
+                            .padding(.bottom, 15)
+
+                    }
+                    Spacer()
+                    Image("question-btn")
+                        .resizable()
+                        .frame(width: 56, height: 56)
+                        .padding(.top, 3)
+                        .padding([.bottom, .leading, .trailing], 15)
+                }
                 Spacer()
-                Image("big_granny")
-                    .resizable()
-                    .frame(width: 350, height: 500)
-                Spacer()
+                ZStack {
+                    VStack() {
+                        Spacer()
+                        Image("big_granny")
+                            .resizable()
+                            .frame(width: 200, height: 350)
+                            .padding(.bottom, 30)
+                    }
+                    VStack(alignment: .trailing) {
+                            Image("dinner_ready")
+                                .resizable()
+                                .frame(width: 340, height: 180)
+                                .padding(.top, 10)
+                        Spacer()
+
+                    }
+                }
 
                 Button {
                     withAnimation { self.startGame() }
@@ -52,5 +88,5 @@ struct MenuView: View {
 }
 
 #Preview {
-    MenuView(currentGameState: .constant(GameState.menuScreen))
+    MenuView(highScore: .constant(234), currentGameState: .constant(GameState.menuScreen))
 }

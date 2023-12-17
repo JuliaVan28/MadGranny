@@ -13,6 +13,8 @@ struct GameResultsView: View {
     @Binding var currentGameState: GameState
     
     @StateObject var gameLogic: GameLogic =  GameLogic.shared
+    
+    @Binding var highScore: Int
 
     var body: some View {
         ZStack {
@@ -32,7 +34,7 @@ struct GameResultsView: View {
                 
                   Spacer()//.frame(height: 0)
                 
-                Image("big_granny_1")
+                Image("big_granny")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 300, height: 250)
@@ -75,6 +77,9 @@ struct GameResultsView: View {
             }
         }
         .statusBar(hidden: true)
+        .onAppear() {
+            print("in gameResultView highScore is \(highScore)")
+        }
     }
     
     private func backToMainScreen() {
@@ -88,5 +93,5 @@ struct GameResultsView: View {
 }
 
 #Preview {
-    GameResultsView(currentGameState: .constant(GameState.gameResults))
+    GameResultsView(currentGameState: .constant(GameState.gameResults), highScore: .constant(234))
 }

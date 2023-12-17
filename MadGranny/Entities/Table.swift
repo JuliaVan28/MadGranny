@@ -1,35 +1,35 @@
 //
-//  Candy.swift
+//  Table.swift
 //  MadGranny
 //
-//  Created by Yuliia on 10/12/23.
+//  Created by Ali on 14/12/23.
 //
 
-import Foundation
 import SpriteKit
 import GameplayKit
 
-class Candy: GKEntity {
+// 1
+class Table: GKEntity {
     
-    let type: EntityType = .candy
+    let type: EntityType = .obstacle
 
   init( entityManager: EntityManager) {
     
     super.init()
-    let texture = SKTexture(imageNamed: "candy")
+    let texture = SKTexture(imageNamed: "table")
       let spriteComponent = SpriteComponent(entity: self, texture: texture, size: texture.size(), entityType: type)
       
       // Creating a Physical body for it
-      spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: spriteComponent.node.size.width/2, height: spriteComponent.node.size.height/2))
-      spriteComponent.node.physicsBody?.isDynamic = true
-      spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.candy
+      spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 70, height: 85))
+      spriteComponent.node.physicsBody?.isDynamic = false
+      spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.table
       spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.child
-      spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.none
+      spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.child
       spriteComponent.node.physicsBody?.usesPreciseCollisionDetection = true
+
       
     addComponent(spriteComponent)
     addComponent(MoveComponent(maxSpeed: 0, maxAcceleration: 0, radius: Float(texture.size().width), entityManager: entityManager))
-    addComponent(BonusComponent(score: 20))
     
   }
 
@@ -38,3 +38,4 @@ class Candy: GKEntity {
   }
 
 }
+

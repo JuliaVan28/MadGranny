@@ -7,8 +7,11 @@
 
 import SpriteKit
 import SwiftUI
+import UIKit
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+let generator = UIImpactFeedbackGenerator(style: .heavy)
+
+class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     /**
      * # The Game Logic
      *     The game logic keeps track of the game variables
@@ -64,6 +67,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Adding the AnalogJoystick to the gameScene
         self.setupJoystick()
+        
+        // Adding Obstacles to the Scene
+        entityManager.spawnObstacle()
         
         //Spawning of bonus items every 5 sec
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run(entityManager.spawnCandy), SKAction.wait(forDuration: 5.0)])))
@@ -131,6 +137,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //Update Components in entityManager
         entityManager.update(timeElapsedSinceLastUpdate)
         
+        if gameLogic.isPaused {
+            scene?.isPaused = true
+            entityManager.pauseEntities()
+            print("paused scene")
+        }
     }
 }
 
@@ -149,21 +160,27 @@ extension GameScene {
             let xRange = SKRange(lowerLimit: 0, upperLimit: frame.width)
             let xConstraint = SKConstraint.positionX(xRange)
             
-            let yRange = SKRange(lowerLimit: 0, upperLimit: frame.height)
+            let yRange = SKRange(lowerLimit: 0, upperLimit: frame.height - 150)
             let yConstraint = SKConstraint.positionY(yRange)
             
             spriteComponent.node.name = "child"
-            spriteComponent.node.position = CGPoint.zero
+            spriteComponent.node.size = CGSize(width: 35, height: 45)
+//            spriteComponent.node.position = CGPoint.zero
             spriteComponent.node.position =  CGPoint(x: ScreenSize.width/2, y: ScreenSize.height/2)
             spriteComponent.node.zPosition = NodesZPosition.child.rawValue
+            
+            
+            
+            
             spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.child
             
             // Creating Physics body and binding its contact
-            spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 30, height: 30))
+            spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.size)
             spriteComponent.node.physicsBody?.isDynamic = true
             spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.child
-            spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.granny
-            spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.none
+            spriteComponent.node.physicsBody?.allowsRotation = false
+            spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.granny | PhysicsCategory.table | PhysicsCategory.chair
+            spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.table | PhysicsCategory.plant | PhysicsCategory.chair
             
             spriteComponent.node.constraints = [xConstraint, yConstraint]
             
@@ -179,20 +196,25 @@ extension GameScene {
             let xRange = SKRange(lowerLimit: 0, upperLimit: frame.width)
             let xConstraint = SKConstraint.positionX(xRange)
             
-            let yRange = SKRange(lowerLimit: 0, upperLimit: frame.height)
+            let yRange = SKRange(lowerLimit: 0, upperLimit: frame.height - 150)
             let yConstraint = SKConstraint.positionY(yRange)
             
             spriteComponent.node.name = "granny"
             spriteComponent.node.zPosition = NodesZPosition.granny.rawValue
+            
+            
+            
             spriteComponent.node.position = CGPoint(x: ScreenSize.width - ScreenSize.width/4, y: ScreenSize.height - ScreenSize.height/4)
             spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.granny
             
             // Creating Physics body and binding its contact
             spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.size)
             spriteComponent.node.physicsBody?.isDynamic = true
+            spriteComponent.node.physicsBody?.allowsRotation = false
             spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.granny
-            spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.child
-            spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.none
+            spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.child | PhysicsCategory.table | PhysicsCategory.chair
+            spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.table | PhysicsCategory.plant
+            | PhysicsCategory.chair
             spriteComponent.node.physicsBody?.usesPreciseCollisionDetection = true
             
             spriteComponent.node.constraints = [xConstraint, yConstraint]
@@ -229,13 +251,17 @@ extension GameScene {
     }
     
     private func setUpPhysicsWorld() {
-//        physicsWorld.gravity = CGVector(dx: 0, dy: -0.9)
         physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self
     }
     
     private func restartGame() {
         gameLogic.isGameOver = false
+    }
+    
+    func resumeGame() {
+        entityManager.resumeEntities()
+        scene?.isPaused = false
     }
 }
 
@@ -244,19 +270,18 @@ extension GameScene {
 extension GameScene {
     
     var isGameOver: Bool {
-        // TODO: Customize!
-        
-        // Did you reach the time limit?
-        // Are the health points depleted?
-        // Did an enemy cross a position it should not have crossed?
-        
         return gameLogic.isGameOver
     }
     private func finishGame() {
         gameLogic.isGameOver = true
     }
+}
+
+//MARK: - Collisions
+extension GameScene {
     
     func grannyDidCollideWithChild(granny: SKSpriteNode, child: SKSpriteNode) {
+        generator.impactOccurred()
         print("Hit")
         
         // create the shape explosion
@@ -277,20 +302,38 @@ extension GameScene {
     
     func childDidCollideWithCarrot(carrot: SKSpriteNode, child: SKSpriteNode) {
         print("i ate \(carrot.name!)")
+// <<<<<<< HEAD
         //        self.velocityMultiplier -= 0.01
         if self.velocityMultiplier > 0.05 {
             self.velocityMultiplier -= 0.01
         }
         carrot.removeFromParent()
         carrot.removeFromParent()
+// =======
+        if self.velocityMultiplier < 0.4 {
+            self.velocityMultiplier += 0.01
+        }
+        print("velocity \(self.velocityMultiplier)")
+      carrot.removeFromParent()
+      carrot.removeFromParent()
+        gameLogic.score(points: 15)
+
+// >>>>>>> a5e7e306489e100c334ecab980c578cdab8958f8
     }
     
     func childDidCollideWithCandy(candy: SKSpriteNode, child: SKSpriteNode) {
         print("i ate \(candy.name!)")
         if self.velocityMultiplier > 0.05 {
-            self.velocityMultiplier = 0
+            self.velocityMultiplier -= 0.01
         }
+// <<<<<<< HEAD
         candy.removeFromParent()
         candy.removeFromParent()
+// =======
+        print("velocity \(self.velocityMultiplier)")
+       candy.removeFromParent()
+       candy.removeFromParent()
+        gameLogic.score(points: 30)
+// >>>>>>> a5e7e306489e100c334ecab980c578cdab8958f8
     }
 }

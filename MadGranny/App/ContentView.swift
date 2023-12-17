@@ -21,18 +21,22 @@ struct ContentView: View {
     // The game logic is a singleton object shared among the different views of the application
     @StateObject var gameLogic: GameLogic = GameLogic()
     
+    //Persistently stores highScore of the user
+    @AppStorage("highScore") var highScore: Int = 0
+
+    
     var body: some View {
         switch currentGameState {
         case .menuScreen:
-            MenuView(currentGameState: $currentGameState)
+            MenuView(highScore: $highScore, currentGameState: $currentGameState)
                 .environmentObject(gameLogic)
         
         case .playing:
-            GameView(currentGameState: $currentGameState)
+            GameView(highScore: $highScore, currentGameState: $currentGameState)
                 .environmentObject(gameLogic)
         
         case .gameResults:
-            GameResultsView(currentGameState: $currentGameState)
+            GameResultsView(currentGameState: $currentGameState, highScore: $highScore)
                 .environmentObject(gameLogic)
         }
     }

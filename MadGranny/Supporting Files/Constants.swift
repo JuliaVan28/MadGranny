@@ -25,4 +25,9 @@ struct PhysicsCategory {
     static let granny: UInt32  = 0b10
     static let carrot : UInt32 = 0b100
     static let candy  : UInt32 = 0b1000
+    static let table: UInt32 = 0b10000
+    static let plant: UInt32 = 0b100000
+    static let chair: UInt32 = 0b1000000
+    static let wall: UInt32 = 0b10000000
+    static let tv: UInt32 = 0b100000000
 }
