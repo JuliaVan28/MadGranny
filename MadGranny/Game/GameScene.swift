@@ -7,9 +7,6 @@
 
 import SpriteKit
 import SwiftUI
-import UIKit
-
-let generator = UIImpactFeedbackGenerator(style: .heavy)
 
 class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     /**
@@ -254,12 +251,13 @@ extension GameScene {
 extension GameScene {
     
     func grannyDidCollideWithChild(granny: SKSpriteNode, child: SKSpriteNode) {
-        generator.impactOccurred()
+        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
         print("Hit")
         finishGame()
     }
     
     func childDidCollideWithCarrot(carrot: SKSpriteNode, child: SKSpriteNode) {
+        UIImpactFeedbackGenerator(style: .soft).impactOccurred()
         print("i ate \(carrot.name!)")
         if self.velocityMultiplier < 0.4 {
             self.velocityMultiplier += 0.01
@@ -272,6 +270,7 @@ extension GameScene {
     }
     
     func childDidCollideWithCandy(candy: SKSpriteNode, child: SKSpriteNode) {
+        UIImpactFeedbackGenerator(style: .soft).impactOccurred()
         print("i ate \(candy.name!)")
         if self.velocityMultiplier > 0.05 {
             self.velocityMultiplier -= 0.01
