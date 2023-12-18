@@ -18,31 +18,41 @@ struct GameResultsView: View {
 
     var body: some View {
         ZStack {
-            Color.black
+            
+            Image("menu_background_parket")
+                .resizable()
                 .ignoresSafeArea()
             
-            VStack{
-                Spacer()
+            VStack(){
                 
                 Image("gameOver")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 300, height: 250)
-                    .clipped()
+                    .frame(width: 350, height: 350)
+                    .padding(.top, 90)
                 
-                    .padding()
-                
-                  Spacer()//.frame(height: 0)
-                
-                Image("big_granny")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 300, height: 250)
-                    .clipped()
+                HStack{
+                    Image("result_child")
                     
-                    //.padding()
+                    Spacer().frame(width: 20)
+                    
+                    Image("result_granny")
+                        .padding(.bottom,20)
+                }
+                .padding(.bottom, 60)
                 
-                Spacer()//.frame(height: 100)
+                Image("your_score")
+                
+                ZStack(){
+                    Image("score_background-2")
+                        .resizable()
+                        .frame(width: 150, height: 80)
+                        .padding([.bottom, .leading, .trailing], 5)
+                    
+                    Text("\(gameLogic.currentScore)")
+                        .font(.system(size: 25, weight: .bold))
+               }
+                .padding(.bottom, 50)
                 
                 HStack() {
                     Spacer()
@@ -50,30 +60,24 @@ struct GameResultsView: View {
                     Button {
                         withAnimation { self.restartGame() }
                     } label: {
-                        Image(systemName: "arrow.clockwise")
-                            .foregroundColor(.black)
-                            .font(.title)
-                            .frame(height: 300)
+                        Image("restart-btn")
+                            .resizable()
+                            .frame(width: 70, height: 70)
                     }
-                    .background(Circle().foregroundColor(Color(uiColor: UIColor.systemGray6)).frame(width: 100, height: 100, alignment: .center))
                     
-                    Spacer().frame(width: 130)
+                    Spacer().frame(width: 100)
                     
                     Button {
                         withAnimation { self.backToMainScreen() }
                     } label: {
-                        Image(systemName: "house")
-                            .foregroundColor(.black)
-                            .font(.title)
-                            .frame(height: 300)
+                        Image("home-btn")
+                            .resizable()
+                            .frame(width: 70, height: 70)
                     }
-                    .background(Circle().foregroundColor(Color(uiColor: UIColor.systemGray6)).frame(width: 100, height: 100, alignment: .center))
-                    
                     
                     Spacer()
                 }
-                Spacer()
-                .padding()
+                .padding(.bottom, 250)
             }
         }
         .statusBar(hidden: true)
@@ -95,3 +99,4 @@ struct GameResultsView: View {
 #Preview {
     GameResultsView(currentGameState: .constant(GameState.gameResults), highScore: .constant(234))
 }
+
