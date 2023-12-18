@@ -266,22 +266,15 @@ extension GameScene {
         let wait = SKAction.wait(forDuration: 0.5)
         let removeExplodeAction = SKAction.run({explosion?.removeFromParent()})
         let explodeSequence = SKAction.sequence([explodeAction, wait, removeExplodeAction])
-        
+
         self.run(explodeSequence)
-        // finishGame()
+        
+        finishGame()
     }
     
     func childDidCollideWithCarrot(carrot: SKSpriteNode, child: SKSpriteNode) {
         UIImpactFeedbackGenerator(style: .soft).impactOccurred()
         print("i ate \(carrot.name!)")
-// <<<<<<< HEAD
-        //        self.velocityMultiplier -= 0.01
-        if self.velocityMultiplier > 0.05 {
-            self.velocityMultiplier -= 0.01
-        }
-        carrot.removeFromParent()
-        carrot.removeFromParent()
-// =======
         if self.velocityMultiplier < 0.4 {
             self.velocityMultiplier += 0.01
         }
@@ -290,7 +283,6 @@ extension GameScene {
       carrot.removeFromParent()
         gameLogic.score(points: 15)
 
-// >>>>>>> a5e7e306489e100c334ecab980c578cdab8958f8
     }
     
     func childDidCollideWithCandy(candy: SKSpriteNode, child: SKSpriteNode) {
@@ -299,14 +291,9 @@ extension GameScene {
         if self.velocityMultiplier > 0.05 {
             self.velocityMultiplier -= 0.01
         }
-// <<<<<<< HEAD
-        candy.removeFromParent()
-        candy.removeFromParent()
-// =======
         print("velocity \(self.velocityMultiplier)")
        candy.removeFromParent()
        candy.removeFromParent()
         gameLogic.score(points: 30)
-// >>>>>>> a5e7e306489e100c334ecab980c578cdab8958f8
     }
 }
