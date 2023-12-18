@@ -173,7 +173,7 @@ extension GameScene {
             let yConstraint = SKConstraint.positionY(yRange)
             
             spriteComponent.node.name = "child"
-            spriteComponent.node.size = CGSize(width: 35, height: 45)
+            spriteComponent.node.size = CGSize(width: 25, height: 45)
 //            spriteComponent.node.position = CGPoint.zero
             spriteComponent.node.position =  CGPoint(x: ScreenSize.width/2, y: ScreenSize.height/2)
             spriteComponent.node.zPosition = NodesZPosition.child.rawValue

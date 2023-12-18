@@ -25,7 +25,7 @@ struct MainScreenProperties {
         (icon: "controller-instruction", title: "lorem", description: "Use joystick to control the child."),
         (icon: "granny-instruction", title: "lorem", description: "Run from Granny."),
         (icon: "candy-instruction", title: "lorem", description: "Collect bonus items to get points."),
-        (icon: "table", title: "lorem", description: "Use obstacles to save your life, some of them are mooveable."),
+        (icon: "plant", title: "lorem", description: "Use obstacles to save your life, some of them are mooveable."),
     ]
 }
 

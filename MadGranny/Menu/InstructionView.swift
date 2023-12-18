@@ -23,6 +23,7 @@ struct CustomGroupBoxStyle: GroupBoxStyle {
 
 let myColor = Color(red: 159/255.0, green: 215/255.0, blue: 224/255.0, opacity: 1.0)
 
+
 struct InstructionView: View {
     
     @Binding var currentGameState: GameState
@@ -65,9 +66,9 @@ struct InstructionView: View {
                 Button {
                         withAnimation { self.backToMainScreen() }
                 } label: {
-                    Image("play_button1")
+                    Image("done-btn")
                 }
-                .padding(.bottom, 14.5)
+                .padding(.bottom, 6.5)
             }
             .padding()
         .statusBar(hidden: true)

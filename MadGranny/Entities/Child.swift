@@ -16,7 +16,7 @@ class Child: GKEntity {
     init( entityManager: EntityManager) {
         
         super.init()
-        let texture = SKTexture(imageNamed: "child")
+        let texture = SKTexture(imageNamed: "result_child")
         let spriteComponent = SpriteComponent(entity: self, texture: texture, size: texture.size(), entityType: type)
         
         addComponent(spriteComponent)
