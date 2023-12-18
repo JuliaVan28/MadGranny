@@ -38,6 +38,10 @@ struct ContentView: View {
         case .gameResults:
             GameResultsView(currentGameState: $currentGameState, highScore: $highScore)
                 .environmentObject(gameLogic)
+            
+        case .instruction:
+            InstructionView(currentGameState: $currentGameState)
+                .environmentObject(gameLogic)
         }
     }
 }

@@ -7,9 +7,6 @@
 
 import SpriteKit
 import SwiftUI
-import UIKit
-
-let generator = UIImpactFeedbackGenerator(style: .heavy)
 
 class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     /**
@@ -74,6 +71,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         //Spawning of bonus items every 5 sec
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run(entityManager.spawnCandy), SKAction.wait(forDuration: 5.0)])))
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run(entityManager.spawnCarrot), SKAction.wait(forDuration: 5.0)])))
+        
+        run(SKAction.sequence([SKAction.wait(forDuration: 10.0), SKAction.run {
+            let grannyPos =  CGPoint(x: ScreenSize.width/4, y: ScreenSize.height - ScreenSize.height/3)
+            self.entityManager.spawnGrany(position: grannyPos)
+            print("spawned second gran")
+        } ]))
         
     }
     
@@ -191,42 +194,10 @@ extension GameScene {
             entityManager.add(child)
         }
         
-        self.granny = Granny(entityManager: entityManager)
-        if let spriteComponent = granny?.component(ofType: SpriteComponent.self) {
-            let xRange = SKRange(lowerLimit: 0, upperLimit: frame.width)
-            let xConstraint = SKConstraint.positionX(xRange)
-            
-            let yRange = SKRange(lowerLimit: 0, upperLimit: frame.height - 150)
-            let yConstraint = SKConstraint.positionY(yRange)
-            
-            spriteComponent.node.name = "granny"
-            spriteComponent.node.zPosition = NodesZPosition.granny.rawValue
-            
-            
-            
-            spriteComponent.node.position = CGPoint(x: ScreenSize.width - ScreenSize.width/4, y: ScreenSize.height - ScreenSize.height/4)
-            spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.granny
-            
-            // Creating Physics body and binding its contact
-            spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.size)
-            spriteComponent.node.physicsBody?.isDynamic = true
-            spriteComponent.node.physicsBody?.allowsRotation = false
-            spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.granny
-            spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.child | PhysicsCategory.table | PhysicsCategory.chair
-            spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.table | PhysicsCategory.plant
-            | PhysicsCategory.chair
-            spriteComponent.node.physicsBody?.usesPreciseCollisionDetection = true
-            
-            spriteComponent.node.constraints = [xConstraint, yConstraint]
-            
-            print("configured granny")
-            
-        }
-        if let granny = granny {
-            print("added granny")
-            entityManager.add(granny)
-        }
-        print("Entities: \(entityManager.entities)")
+        //GRANNY
+       let grannyPos =  CGPoint(x: ScreenSize.width - ScreenSize.width/4, y: ScreenSize.height - ScreenSize.height/4)
+        entityManager.spawnGrany(position: grannyPos)
+        
         
     }
     
@@ -281,7 +252,7 @@ extension GameScene {
 extension GameScene {
     
     func grannyDidCollideWithChild(granny: SKSpriteNode, child: SKSpriteNode) {
-        generator.impactOccurred()
+        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
         print("Hit")
         
         // create the shape explosion
@@ -301,6 +272,7 @@ extension GameScene {
     }
     
     func childDidCollideWithCarrot(carrot: SKSpriteNode, child: SKSpriteNode) {
+        UIImpactFeedbackGenerator(style: .soft).impactOccurred()
         print("i ate \(carrot.name!)")
 // <<<<<<< HEAD
         //        self.velocityMultiplier -= 0.01
@@ -322,6 +294,7 @@ extension GameScene {
     }
     
     func childDidCollideWithCandy(candy: SKSpriteNode, child: SKSpriteNode) {
+        UIImpactFeedbackGenerator(style: .soft).impactOccurred()
         print("i ate \(candy.name!)")
         if self.velocityMultiplier > 0.05 {
             self.velocityMultiplier -= 0.01

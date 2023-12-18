@@ -19,11 +19,12 @@ class Plant: GKEntity {
       let spriteComponent = SpriteComponent(entity: self, texture: texture, size: texture.size(), entityType: type)
       
       // Creating a Physical body for it
-      spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 50, height: 50))
-      spriteComponent.node.physicsBody?.isDynamic = false
+      spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 35, height: 35))
+      spriteComponent.node.physicsBody?.isDynamic = true
+      spriteComponent.node.physicsBody?.allowsRotation = false
       spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.plant
-      spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.child
-      spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.child
+      spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.child | PhysicsCategory.table
+      spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.child | PhysicsCategory.table
       spriteComponent.node.physicsBody?.usesPreciseCollisionDetection = true
 
       

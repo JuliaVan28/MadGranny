@@ -13,7 +13,7 @@ import SwiftUI
 struct MenuView: View {
     
     @Binding var highScore: Int
-
+    
     @Binding var currentGameState: GameState
     
     var body: some View {
@@ -35,14 +35,19 @@ struct MenuView: View {
                                 .font(.system(size: 25, weight: .bold))
                         }.frame(width: 90)
                             .padding(.bottom, 15)
-
+                        
                     }
                     Spacer()
-                    Image("question-btn")
-                        .resizable()
-                        .frame(width: 56, height: 56)
-                        .padding(.top, 3)
-                        .padding([.bottom, .leading, .trailing], 15)
+                    
+                    Button {
+                        withAnimation { self.showInstruction() }
+                    } label: {
+                        Image("question-btn")
+                            .resizable()
+                            .frame(width: 56, height: 56)
+                            .padding(.top, 3)
+                            .padding([.bottom, .leading, .trailing], 15)
+                    }
                 }
                 Spacer()
                 ZStack {
@@ -54,15 +59,15 @@ struct MenuView: View {
                             .padding(.bottom, 30)
                     }
                     VStack(alignment: .trailing) {
-                            Image("dinner_ready")
-                                .resizable()
-                                .frame(width: 340, height: 180)
-                                .padding(.top, 10)
+                        Image("dinner_ready")
+                            .resizable()
+                            .frame(width: 340, height: 180)
+                            .padding(.top, 10)
                         Spacer()
-
+                        
                     }
                 }
-
+                
                 Button {
                     withAnimation { self.startGame() }
                 } label: {
@@ -84,6 +89,10 @@ struct MenuView: View {
     private func startGame() {
         print("- Starting the game...")
         self.currentGameState = .playing
+    }
+    
+    private func showInstruction() {
+        self.currentGameState = .instruction
     }
 }
 

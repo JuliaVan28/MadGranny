@@ -20,11 +20,11 @@ class Table: GKEntity {
       let spriteComponent = SpriteComponent(entity: self, texture: texture, size: texture.size(), entityType: type)
       
       // Creating a Physical body for it
-      spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 70, height: 85))
+      spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 85, height: 60))
       spriteComponent.node.physicsBody?.isDynamic = false
       spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.table
-      spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.child
-      spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.child
+      spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.child | PhysicsCategory.chair
+      spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.child | PhysicsCategory.chair
       spriteComponent.node.physicsBody?.usesPreciseCollisionDetection = true
 
       

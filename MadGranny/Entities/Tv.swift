@@ -20,11 +20,11 @@ class Tv: GKEntity {
       let spriteComponent = SpriteComponent(entity: self, texture: texture, size: texture.size(), entityType: type)
       
       // Creating a Physical body for it
-      spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: spriteComponent.node.size.width, height: spriteComponent.node.size.height))
-      spriteComponent.node.physicsBody?.isDynamic = true
+      spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: spriteComponent.node.size.width + 10, height: spriteComponent.node.size.height + 15))
+      spriteComponent.node.physicsBody?.isDynamic = false
       spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.table
-      spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.child
-      spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.child
+      spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.child | PhysicsCategory.table
+      spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.child | PhysicsCategory.table
       spriteComponent.node.physicsBody?.usesPreciseCollisionDetection = true
 
       
