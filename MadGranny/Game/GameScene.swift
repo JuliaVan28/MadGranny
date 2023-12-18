@@ -19,7 +19,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     var entityManager: EntityManager!
     
     // this will be used to accelerate the child
-    var velocityMultiplier: CGFloat = 0.13
+    var velocityMultiplier: CGFloat = 0.17
     
     // Keeps track of when the last update happend.
     // Used to calculate how much time has passed between updates.

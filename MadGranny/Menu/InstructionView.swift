@@ -21,7 +21,7 @@ struct CustomGroupBoxStyle: GroupBoxStyle {
     }
 }
 
-let myColor = Color(red: 143/255, green: 222/255, blue: 93/255, opacity: 1.0)
+let myColor = Color(red: 159/255.0, green: 215/255.0, blue: 224/255.0, opacity: 1.0)
 
 struct InstructionView: View {
     
@@ -49,7 +49,7 @@ struct InstructionView: View {
                         HStack {
                             Image(instruction.icon)
                                 .resizable()
-                                .frame(width: 50, height: 50)
+                                .frame(width: 35, height: 45)
                             Text((instruction.description))
                                 .font(.headline)
                                 .foregroundStyle(.black)
