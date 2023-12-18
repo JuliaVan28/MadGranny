@@ -22,6 +22,7 @@ struct GameView: View {
 
         scene.size = CGSize(width: ScreenSize.width, height: ScreenSize.height)
         scene.scaleMode = .fill
+        //scene.addChild(SoundManager.sharedInstance.soundBackground
         
         return scene
     }()
@@ -46,7 +47,7 @@ struct GameView: View {
 
                     }
                 }) {
-                    Image("pause-btn")
+                    Image(gameLogic.isPaused ? "play-btn" : "pause-btn")
                         .resizable()
                         .frame(width: 56, height: 56)
                         .padding(.top, 3)

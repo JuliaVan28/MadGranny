@@ -9,6 +9,8 @@ import SpriteKit
 import SwiftUI
 
 class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
+    
+    let bgMusic = SKAudioNode(fileNamed: "background.mp3")
     /**
      * # The Game Logic
      *     The game logic keeps track of the game variables
@@ -49,6 +51,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         print("DidMove is called")
         // Create entity manager
         entityManager = EntityManager(scene: self)
+        
+        // Start background music
+        bgMusic.autoplayLooped = true
+        addChild(bgMusic)
         
         view.showsNodeCount = true
 
@@ -228,6 +234,7 @@ extension GameScene {
     
     private func restartGame() {
         gameLogic.isGameOver = false
+        self.addChild(bgMusic)
     }
     
     func resumeGame() {
@@ -245,6 +252,7 @@ extension GameScene {
     }
     private func finishGame() {
         gameLogic.isGameOver = true
+        bgMusic.removeFromParent()
     }
 }
 
@@ -267,6 +275,7 @@ extension GameScene {
         let removeExplodeAction = SKAction.run({explosion?.removeFromParent()})
         let explodeSequence = SKAction.sequence([explodeAction, wait, removeExplodeAction])
 
+        scene?.run(SoundManager.sharedInstance.soundExplode)
         self.run(explodeSequence)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
@@ -276,6 +285,8 @@ extension GameScene {
     
     func childDidCollideWithCarrot(carrot: SKSpriteNode, child: SKSpriteNode) {
         UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+        scene?.run(SoundManager.sharedInstance.soundCollect)
+
         print("i ate \(carrot.name!)")
         if self.velocityMultiplier < 0.4 {
             self.velocityMultiplier += 0.01
@@ -289,6 +300,8 @@ extension GameScene {
     
     func childDidCollideWithCandy(candy: SKSpriteNode, child: SKSpriteNode) {
         UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+        scene?.run(SoundManager.sharedInstance.soundCollect)
+
         print("i ate \(candy.name!)")
         if self.velocityMultiplier > 0.05 {
             self.velocityMultiplier -= 0.01

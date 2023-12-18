@@ -254,6 +254,7 @@ class EntityManager {
     
     func moveComponentsForObstacles() -> [MoveComponent] {
         var moveComponents = [MoveComponent]()
+        
         for entity in entities {
             if let spriteNode = entity.component(ofType: SpriteComponent.self) {
                 if spriteNode.entityType == .obstacle {
@@ -263,6 +264,7 @@ class EntityManager {
                 }
             }
         }
+        
         return moveComponents
     }
     
@@ -304,9 +306,11 @@ class EntityManager {
                     
                     entity.addComponent(movementComponent)
                     componentSystems.append(GKComponentSystem(componentClass: MoveComponent.self))
+                    
                     for componentSystem in componentSystems {
                         componentSystem.addComponent(foundIn: entity)
                     }
+                    
                     print("move Component is added")
                     //self.update(0.1)
                 }

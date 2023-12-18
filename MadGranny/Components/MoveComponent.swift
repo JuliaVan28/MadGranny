@@ -20,7 +20,7 @@ class MoveComponent : GKAgent2D, GKAgentDelegate {
         self.maxSpeed = maxSpeed
         self.maxAcceleration = maxAcceleration
         self.radius = radius
-       // print("mass: \(self.mass)")
+        // print("mass: \(self.mass)")
         self.mass = 0.01
     }
     
@@ -29,33 +29,36 @@ class MoveComponent : GKAgent2D, GKAgentDelegate {
     }
     
     func agentWillUpdate(_ agent: GKAgent) {
-      guard let spriteComponent = entity?.component(ofType: SpriteComponent.self) else {
-        print("no spriteComponent in agentWillUpdate moveComponent")
-          return
-      }
+        guard let spriteComponent = entity?.component(ofType: SpriteComponent.self) else {
+            print("no spriteComponent in agentWillUpdate moveComponent")
+            return
+        }
         position = simd_float2(Float(spriteComponent.node.position.x), Float(spriteComponent.node.position.y))
     }
     
     func agentDidUpdate(_ agent: GKAgent) {
-      guard let spriteComponent = entity?.component(ofType: SpriteComponent.self) else {
-        return
-      }
-
+        guard let spriteComponent = entity?.component(ofType: SpriteComponent.self) else {
+            return
+        }
+        
         spriteComponent.node.position = CGPoint(x: CGFloat(position.x), y: CGFloat(position.y))
     }
     
     override func update(deltaTime seconds: TimeInterval) {
-
-      super.update(deltaTime: seconds)
-     
         
-      // Find child
+        super.update(deltaTime: seconds)
+        
+        // Find child
         guard let child = entityManager.entities.first(where: {$0.component(ofType: SpriteComponent.self)?.entityType == .child}),
-        let childMoveComponent = child.component(ofType: MoveComponent.self), let granny = entityManager.entities.first(where: {$0.component(ofType: SpriteComponent.self)?.entityType == .granny}), let grannyMoveComponent = granny.component(ofType: MoveComponent.self) else {
-        print("couldn't find child")
+              let childMoveComponent = child.component(ofType: MoveComponent.self),
+              let granny = entityManager.entities.first(where: {$0.component(ofType: SpriteComponent.self)?.entityType == .granny}),
+              let grannyMoveComponent = granny.component(ofType: MoveComponent.self) else {
+            print("couldn't find child")
             return
-      }
+        }
+        
         var granniesMoveComp = [MoveComponent]()
+        
         for entity in entityManager.entities {
             if let spriteNode = entity.component(ofType: SpriteComponent.self) {
                 if spriteNode.entityType == .granny {
@@ -65,19 +68,24 @@ class MoveComponent : GKAgent2D, GKAgentDelegate {
                 }
             }
         }
-      
-      let targetMoveComponent: GKAgent2D = childMoveComponent
         
-      // Find obstacles to avoid
+        let targetMoveComponent: GKAgent2D = childMoveComponent
         
-     // let obstaclesMoveComponents = entityManager.moveComponentsForObstacles()
-       // print(obstaclesMoveComponents)
-      //  let avoidGoal = GKGoal(toAvoid: obstaclesMoveComponents, maxPredictionTime: 10)
+        // Find obstacles to avoid
+        
+        // let obstaclesMoveComponents = entityManager.moveComponentsForObstacles()
+        // print(obstaclesMoveComponents)
+        //  let avoidGoal = GKGoal(toAvoid: obstaclesMoveComponents, maxPredictionTime: 10)
         // behavior?.setWeight(200, for: avoidGoal)
-
-      
-      // Set behavior
-        granniesMoveComp.forEach( { $0.behavior = GKBehavior(goals: [GKGoal(toSeekAgent: targetMoveComponent), GKGoal(toReachTargetSpeed: maxSpeed)]) } )
-
+        
+        
+        // Set behavior
+        granniesMoveComp.forEach({
+            $0.behavior = GKBehavior(goals: [
+                GKGoal(toSeekAgent: targetMoveComponent),
+                GKGoal(toReachTargetSpeed: maxSpeed)
+            ])
+        })
+        
     }
 }

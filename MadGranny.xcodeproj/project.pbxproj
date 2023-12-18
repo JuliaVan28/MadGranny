@@ -32,6 +32,10 @@
 		325BDD932B263EDB0098149D /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD922B263EDB0098149D /* CGFloatExtension.swift */; };
 		325BDD952B263F060098149D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD942B263F060098149D /* Constants.swift */; };
 		325BDD972B2662A10098149D /* AnalogJoystickEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BDD962B2662A10098149D /* AnalogJoystickEntity.swift */; };
+		32873C682B3084780003EE21 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32873C672B3084780003EE21 /* SoundManager.swift */; };
+		32873C6B2B3089F40003EE21 /* background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 32873C6A2B3089F40003EE21 /* background.mp3 */; };
+		32873C6F2B308C090003EE21 /* explode.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 32873C6E2B308C090003EE21 /* explode.mp3 */; };
+		32873C712B308C0F0003EE21 /* collect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 32873C702B308C0F0003EE21 /* collect.mp3 */; };
 		3C46925A2B2AF7D200A48490 /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4692592B2AF7D200A48490 /* Table.swift */; };
 		3C46925C2B2B0AB200A48490 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C46925B2B2B0AB200A48490 /* Plant.swift */; };
 		3C8BFD3A2B2C5E75007A87D1 /* ChairFacingDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8BFD392B2C5E75007A87D1 /* ChairFacingDown.swift */; };
@@ -71,6 +75,10 @@
 		325BDD942B263F060098149D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		325BDD962B2662A10098149D /* AnalogJoystickEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogJoystickEntity.swift; sourceTree = "<group>"; };
 		327202632B2E578B00AA8876 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		32873C672B3084780003EE21 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		32873C6A2B3089F40003EE21 /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
+		32873C6E2B308C090003EE21 /* explode.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = explode.mp3; sourceTree = "<group>"; };
+		32873C702B308C0F0003EE21 /* collect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = collect.mp3; sourceTree = "<group>"; };
 		3C4692592B2AF7D200A48490 /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
 		3C46925B2B2B0AB200A48490 /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
 		3C8BFD392B2C5E75007A87D1 /* ChairFacingDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChairFacingDown.swift; sourceTree = "<group>"; };
@@ -119,10 +127,11 @@
 				325BDD6B2B2207630098149D /* Menu */,
 				325BDD6E2B22078E0098149D /* Game */,
 				325BDD782B2209680098149D /* Results */,
+				32873C692B3089E00003EE21 /* Sounds */,
 				325BDD752B2208D50098149D /* Supporting Files */,
 				32031CAD2B21E59B00F7AE47 /* Assets.xcassets */,
-				32031CAF2B21E59B00F7AE47 /* Preview Content */,
 				13778BB52B2E748700C3F7A5 /* Explosion.sks */,
+				32031CAF2B21E59B00F7AE47 /* Preview Content */,
 			);
 			path = MadGranny;
 			sourceTree = "<group>";
@@ -211,8 +220,19 @@
 				325BDD802B250F9F0098149D /* SpriteComponent.swift */,
 				325BDD862B2512150098149D /* MoveComponent.swift */,
 				325BDD902B2635E20098149D /* BonusComponent.swift */,
+				32873C672B3084780003EE21 /* SoundManager.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		32873C692B3089E00003EE21 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				32873C6A2B3089F40003EE21 /* background.mp3 */,
+				32873C6E2B308C090003EE21 /* explode.mp3 */,
+				32873C702B308C0F0003EE21 /* collect.mp3 */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,8 +293,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32873C6F2B308C090003EE21 /* explode.mp3 in Resources */,
 				32031CB12B21E59B00F7AE47 /* Preview Assets.xcassets in Resources */,
 				32031CAE2B21E59B00F7AE47 /* Assets.xcassets in Resources */,
+				32873C712B308C0F0003EE21 /* collect.mp3 in Resources */,
+				32873C6B2B3089F40003EE21 /* background.mp3 in Resources */,
 				13778BB62B2E748700C3F7A5 /* Explosion.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +326,7 @@
 				325BDD932B263EDB0098149D /* CGFloatExtension.swift in Sources */,
 				325BDD812B250F9F0098149D /* SpriteComponent.swift in Sources */,
 				3CAC0F2F2B2DE24A004A7F14 /* Wall.swift in Sources */,
+				32873C682B3084780003EE21 /* SoundManager.swift in Sources */,
 				325BDD872B2512150098149D /* MoveComponent.swift in Sources */,
 				9B033BF12B239E58008BC0E6 /* GamePointsView.swift in Sources */,
 				3C46925A2B2AF7D200A48490 /* Table.swift in Sources */,
@@ -450,7 +474,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MadGranny/Preview Content\"";
-				DEVELOPMENT_TEAM = RVV859V8MS;
+				DEVELOPMENT_TEAM = L6W3DL7P44;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MadGranny/Info.plist;
@@ -463,7 +487,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = co.alishafiei;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devacademy.MadGranytr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -479,7 +503,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MadGranny/Preview Content\"";
-				DEVELOPMENT_TEAM = RVV859V8MS;
+				DEVELOPMENT_TEAM = L6W3DL7P44;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MadGranny/Info.plist;
@@ -492,7 +516,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = co.alishafiei;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devacademy.MadGranytr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
