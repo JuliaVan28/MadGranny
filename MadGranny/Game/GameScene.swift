@@ -263,13 +263,15 @@ extension GameScene {
             self.addChild(explosion!)
             child.removeFromParent()
         })
-        let wait = SKAction.wait(forDuration: 0.5)
+        let wait = SKAction.wait(forDuration: 0.4)
         let removeExplodeAction = SKAction.run({explosion?.removeFromParent()})
         let explodeSequence = SKAction.sequence([explodeAction, wait, removeExplodeAction])
 
         self.run(explodeSequence)
         
-        finishGame()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            self.finishGame()
+        }
     }
     
     func childDidCollideWithCarrot(carrot: SKSpriteNode, child: SKSpriteNode) {
