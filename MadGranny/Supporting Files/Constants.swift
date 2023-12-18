@@ -22,10 +22,10 @@ struct MainScreenProperties {
     static let gameTitle: String = "app-logo"
     
     static let gameInstructions: [Instruction] = [
-        (icon: "controller-instruction", title: "lorem", description: "lorem."),
-        (icon: "granny-instruction", title: "lorem", description: "loremmm."),
-        (icon: "candy-instruction", title: "lorem", description: "loremmmmmmm."),
-        (icon: "table", title: "lorem", description: "loremmmmmmmmm."),
+        (icon: "controller-instruction", title: "lorem", description: "Use joystick to control the child."),
+        (icon: "granny-instruction", title: "lorem", description: "Run from Granny."),
+        (icon: "candy-instruction", title: "lorem", description: "Collect bonus items to get points."),
+        (icon: "table", title: "lorem", description: "Use obstacles to save your life, some of them are mooveable."),
     ]
 }
 
