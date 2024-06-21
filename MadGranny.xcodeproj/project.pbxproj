@@ -36,6 +36,10 @@
 		32873C6B2B3089F40003EE21 /* background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 32873C6A2B3089F40003EE21 /* background.mp3 */; };
 		32873C6F2B308C090003EE21 /* explode.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 32873C6E2B308C090003EE21 /* explode.mp3 */; };
 		32873C712B308C0F0003EE21 /* collect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 32873C702B308C0F0003EE21 /* collect.mp3 */; };
+		32C11BE92C230AD8002AC1C4 /* NodesZPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C11BE82C230AD8002AC1C4 /* NodesZPosition.swift */; };
+		32C11BF32C24764D002AC1C4 /* MadGrannyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C11BF22C24764D002AC1C4 /* MadGrannyTests.swift */; };
+		32C11BFA2C247676002AC1C4 /* GameLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C11BF92C247676002AC1C4 /* GameLogicTests.swift */; };
+		32C11BFC2C247830002AC1C4 /* EntityManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C11BFB2C247830002AC1C4 /* EntityManagerTests.swift */; };
 		3C46925A2B2AF7D200A48490 /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4692592B2AF7D200A48490 /* Table.swift */; };
 		3C46925C2B2B0AB200A48490 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C46925B2B2B0AB200A48490 /* Plant.swift */; };
 		3C8BFD3A2B2C5E75007A87D1 /* ChairFacingDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8BFD392B2C5E75007A87D1 /* ChairFacingDown.swift */; };
@@ -46,6 +50,16 @@
 		9B033BEF2B238D2D008BC0E6 /* GameScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B033BEE2B238D2D008BC0E6 /* GameScoreView.swift */; };
 		9B033BF12B239E58008BC0E6 /* GamePointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B033BF02B239E58008BC0E6 /* GamePointsView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		32C11BF42C24764D002AC1C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 32031C9E2B21E59800F7AE47 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 32031CA52B21E59800F7AE47;
+			remoteInfo = MadGranny;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		13778BB52B2E748700C3F7A5 /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
@@ -79,6 +93,11 @@
 		32873C6A2B3089F40003EE21 /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
 		32873C6E2B308C090003EE21 /* explode.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = explode.mp3; sourceTree = "<group>"; };
 		32873C702B308C0F0003EE21 /* collect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = collect.mp3; sourceTree = "<group>"; };
+		32C11BE82C230AD8002AC1C4 /* NodesZPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodesZPosition.swift; sourceTree = "<group>"; };
+		32C11BF02C24764D002AC1C4 /* MadGrannyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MadGrannyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		32C11BF22C24764D002AC1C4 /* MadGrannyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MadGrannyTests.swift; sourceTree = "<group>"; };
+		32C11BF92C247676002AC1C4 /* GameLogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogicTests.swift; sourceTree = "<group>"; };
+		32C11BFB2C247830002AC1C4 /* EntityManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManagerTests.swift; sourceTree = "<group>"; };
 		3C4692592B2AF7D200A48490 /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
 		3C46925B2B2B0AB200A48490 /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
 		3C8BFD392B2C5E75007A87D1 /* ChairFacingDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChairFacingDown.swift; sourceTree = "<group>"; };
@@ -98,6 +117,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		32C11BED2C24764D002AC1C4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -105,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				32031CA82B21E59800F7AE47 /* MadGranny */,
+				32C11BF12C24764D002AC1C4 /* MadGrannyTests */,
 				32031CA72B21E59800F7AE47 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -113,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				32031CA62B21E59800F7AE47 /* MadGranny.app */,
+				32C11BF02C24764D002AC1C4 /* MadGrannyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -161,6 +189,7 @@
 				325BDD732B2208320098149D /* GameLogic.swift */,
 				9B033BEE2B238D2D008BC0E6 /* GameScoreView.swift */,
 				9B033BF02B239E58008BC0E6 /* GamePointsView.swift */,
+				325BDD7C2B229C000098149D /* GameState.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -168,10 +197,10 @@
 		325BDD752B2208D50098149D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				325BDD7C2B229C000098149D /* GameState.swift */,
 				325BDD922B263EDB0098149D /* CGFloatExtension.swift */,
 				325BDD942B263F060098149D /* Constants.swift */,
 				32563FB92B2A03CD00D29088 /* IntExtension.swift */,
+				32C11BE82C230AD8002AC1C4 /* NodesZPosition.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -235,6 +264,16 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
+		32C11BF12C24764D002AC1C4 /* MadGrannyTests */ = {
+			isa = PBXGroup;
+			children = (
+				32C11BF22C24764D002AC1C4 /* MadGrannyTests.swift */,
+				32C11BF92C247676002AC1C4 /* GameLogicTests.swift */,
+				32C11BFB2C247830002AC1C4 /* EntityManagerTests.swift */,
+			);
+			path = MadGrannyTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -255,6 +294,24 @@
 			productReference = 32031CA62B21E59800F7AE47 /* MadGranny.app */;
 			productType = "com.apple.product-type.application";
 		};
+		32C11BEF2C24764D002AC1C4 /* MadGrannyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 32C11BF62C24764D002AC1C4 /* Build configuration list for PBXNativeTarget "MadGrannyTests" */;
+			buildPhases = (
+				32C11BEC2C24764D002AC1C4 /* Sources */,
+				32C11BED2C24764D002AC1C4 /* Frameworks */,
+				32C11BEE2C24764D002AC1C4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				32C11BF52C24764D002AC1C4 /* PBXTargetDependency */,
+			);
+			name = MadGrannyTests;
+			productName = MadGrannyTests;
+			productReference = 32C11BF02C24764D002AC1C4 /* MadGrannyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -262,11 +319,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					32031CA52B21E59800F7AE47 = {
 						CreatedOnToolsVersion = 15.0;
+					};
+					32C11BEF2C24764D002AC1C4 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = 32031CA52B21E59800F7AE47;
 					};
 				};
 			};
@@ -284,6 +345,7 @@
 			projectRoot = "";
 			targets = (
 				32031CA52B21E59800F7AE47 /* MadGranny */,
+				32C11BEF2C24764D002AC1C4 /* MadGrannyTests */,
 			);
 		};
 /* End PBXProject section */
@@ -299,6 +361,13 @@
 				32873C712B308C0F0003EE21 /* collect.mp3 in Resources */,
 				32873C6B2B3089F40003EE21 /* background.mp3 in Resources */,
 				13778BB62B2E748700C3F7A5 /* Explosion.sks in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		32C11BEE2C24764D002AC1C4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +390,7 @@
 				325BDD7D2B229C000098149D /* GameState.swift in Sources */,
 				325BDD722B22081E0098149D /* GameScene.swift in Sources */,
 				32031CAC2B21E59800F7AE47 /* ContentView.swift in Sources */,
+				32C11BE92C230AD8002AC1C4 /* NodesZPosition.swift in Sources */,
 				325BDD852B2511910098149D /* Granny.swift in Sources */,
 				325BDD6D2B2207770098149D /* MenuView.swift in Sources */,
 				325BDD932B263EDB0098149D /* CGFloatExtension.swift in Sources */,
@@ -344,7 +414,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		32C11BEC2C24764D002AC1C4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32C11BFA2C247676002AC1C4 /* GameLogicTests.swift in Sources */,
+				32C11BF32C24764D002AC1C4 /* MadGrannyTests.swift in Sources */,
+				32C11BFC2C247830002AC1C4 /* EntityManagerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		32C11BF52C24764D002AC1C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 32031CA52B21E59800F7AE47 /* MadGranny */;
+			targetProxy = 32C11BF42C24764D002AC1C4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		32031CB22B21E59B00F7AE47 /* Debug */ = {
@@ -524,6 +612,44 @@
 			};
 			name = Release;
 		};
+		32C11BF72C24764D002AC1C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L6W3DL7P44;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuliiavan.MadGrannyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MadGranny.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MadGranny";
+			};
+			name = Debug;
+		};
+		32C11BF82C24764D002AC1C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L6W3DL7P44;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuliiavan.MadGrannyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MadGranny.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MadGranny";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -541,6 +667,15 @@
 			buildConfigurations = (
 				32031CB52B21E59B00F7AE47 /* Debug */,
 				32031CB62B21E59B00F7AE47 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		32C11BF62C24764D002AC1C4 /* Build configuration list for PBXNativeTarget "MadGrannyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32C11BF72C24764D002AC1C4 /* Debug */,
+				32C11BF82C24764D002AC1C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

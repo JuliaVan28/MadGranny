@@ -8,7 +8,6 @@
 import SpriteKit
 import GameplayKit
 
-// 1
 class Wall: GKEntity {
     
     let type: EntityType = .wall

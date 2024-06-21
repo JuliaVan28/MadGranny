@@ -22,7 +22,6 @@ struct GameView: View {
 
         scene.size = CGSize(width: ScreenSize.width, height: ScreenSize.height)
         scene.scaleMode = .fill
-        //scene.addChild(SoundManager.sharedInstance.soundBackground
         
         return scene
     }()

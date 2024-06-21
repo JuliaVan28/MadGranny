@@ -33,6 +33,7 @@ struct MenuView: View {
                             Spacer()
                             Text("\(highScore)")
                                 .font(.system(size: 25, weight: .bold))
+                                .foregroundStyle(.black)
                         }.frame(width: 90)
                             .padding(.bottom, 15)
                         

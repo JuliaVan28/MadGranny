@@ -8,7 +8,6 @@
 import SpriteKit
 import GameplayKit
 
-// 1
 class Table: GKEntity {
     
     let type: EntityType = .obstacle

@@ -19,8 +19,9 @@ class Candy: GKEntity {
     let texture = SKTexture(imageNamed: "candy")
       let spriteComponent = SpriteComponent(entity: self, texture: texture, size: texture.size(), entityType: type)
       
-      // Creating a Physical body for it
-      spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: spriteComponent.node.size.width/2, height: spriteComponent.node.size.height/2))
+      // Physical body set up
+      spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: spriteComponent.node.size.width/2,
+                                                                           height: spriteComponent.node.size.height/2))
       spriteComponent.node.physicsBody?.isDynamic = true
       spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.candy
       spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.child

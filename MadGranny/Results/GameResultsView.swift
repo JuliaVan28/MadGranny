@@ -49,7 +49,8 @@ struct GameResultsView: View {
                         .frame(width: 150, height: 80)
                         .padding([.bottom, .leading, .trailing], 5)
                     
-                    Text("\(gameLogic.currentScore)")
+                    Text("\(gameLogic.currentScore-1)")
+                        .foregroundStyle(.black)
                         .font(.system(size: 25, weight: .bold))
                }
                 .padding(.bottom, 50)

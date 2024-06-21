@@ -27,20 +27,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     // Used to calculate how much time has passed between updates.
     var lastUpdate: TimeInterval = 0
     
-    // The Z Position for the Child and the JoyStick on the screen
-    enum NodesZPosition: CGFloat {
-        case child, granny, joystick
-    }
+   
     
-    //MARK: - Characters
+    //MARK: - AnalogJoystick
     
-    // Child
-    var child: Child?
-    
-    // Granny
-    var granny: Granny?
-    
-    // AnalogJoystick
     var analogJoystick: AnalogJoystickEntity?
     
     
@@ -72,7 +62,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         self.setupJoystick()
         
         // Adding Obstacles to the Scene
-        entityManager.spawnObstacle()
+        entityManager.spawnObstacles()
         
         //Spawning of bonus items every 5 sec
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run(entityManager.spawnCandy), SKAction.wait(forDuration: 5.0)])))
@@ -89,6 +79,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     func didBegin(_ contact: SKPhysicsContact) {
       var firstBody: SKPhysicsBody
       var secondBody: SKPhysicsBody
+        
       if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
         firstBody = contact.bodyA
         secondBody = contact.bodyB
@@ -97,7 +88,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         secondBody = contact.bodyA
       }
      
-      
+    // Collision child with granny
       if ((firstBody.categoryBitMask & PhysicsCategory.child != 0) &&
           (secondBody.categoryBitMask & PhysicsCategory.granny != 0)) {
         if let child = firstBody.node as? SKSpriteNode,
@@ -106,7 +97,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
             
         }
       }
-        
+        // Collision child with carrot
+
         if ((firstBody.categoryBitMask & PhysicsCategory.child != 0) &&
             (secondBody.categoryBitMask & PhysicsCategory.carrot != 0)) {
           if let child = firstBody.node as? SKSpriteNode,
@@ -115,6 +107,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
           }
         }
         
+        // Collision child with candy
         if ((firstBody.categoryBitMask & PhysicsCategory.child != 0) &&
             (secondBody.categoryBitMask & PhysicsCategory.candy != 0)) {
           if let child = firstBody.node as? SKSpriteNode,
@@ -126,12 +119,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
 
     
     override func update(_ currentTime: TimeInterval) {
+        if gameLogic.isPaused {
+            entityManager.pauseEntities()
+            scene?.isPaused = true
+            
+            print("paused scene")
+            return
+        }
         
         // If the game over condition is met, the game will finish
         
 // !!        if self.isGameOver { self.finishGame() }
         
-        // The first time the update function is called we must initialize the
+        // The first time the update function is called we initialize the
         // lastUpdate variable
         if self.lastUpdate == 0 { self.lastUpdate = currentTime }
         
@@ -146,11 +146,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         //Update Components in entityManager
         entityManager.update(timeElapsedSinceLastUpdate)
         
-        if gameLogic.isPaused {
-            scene?.isPaused = true
-            entityManager.pauseEntities()
-            print("paused scene")
-        }
+        
     }
 }
 
@@ -164,41 +160,8 @@ extension GameScene {
     }
     
     private func setUpCharacters() {
-        self.child = Child(entityManager: entityManager)
-        if let spriteComponent = child?.component(ofType: SpriteComponent.self) {
-            let xRange = SKRange(lowerLimit: 0, upperLimit: frame.width)
-            let xConstraint = SKConstraint.positionX(xRange)
-            
-            let yRange = SKRange(lowerLimit: 0, upperLimit: frame.height - 150)
-            let yConstraint = SKConstraint.positionY(yRange)
-            
-            spriteComponent.node.name = "child"
-            spriteComponent.node.size = CGSize(width: 25, height: 45)
-//            spriteComponent.node.position = CGPoint.zero
-            spriteComponent.node.position =  CGPoint(x: ScreenSize.width/2, y: ScreenSize.height/2)
-            spriteComponent.node.zPosition = NodesZPosition.child.rawValue
-            
-            
-            
-            
-            spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.child
-            
-            // Creating Physics body and binding its contact
-            spriteComponent.node.physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.size)
-            spriteComponent.node.physicsBody?.isDynamic = true
-            spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.child
-            spriteComponent.node.physicsBody?.allowsRotation = false
-            spriteComponent.node.physicsBody?.contactTestBitMask = PhysicsCategory.granny | PhysicsCategory.table | PhysicsCategory.chair
-            spriteComponent.node.physicsBody?.collisionBitMask = PhysicsCategory.table | PhysicsCategory.plant | PhysicsCategory.chair
-            
-            spriteComponent.node.constraints = [xConstraint, yConstraint]
-            
-            print("configured child")
-        }
-        if let child = child {
-            print("added child")
-            entityManager.add(child)
-        }
+        // CHILD
+        entityManager.spawnChild(position: CGPoint(x: ScreenSize.width/2, y: ScreenSize.height/2))
         
         //GRANNY
        let grannyPos =  CGPoint(x: ScreenSize.width - ScreenSize.width/4, y: ScreenSize.height - ScreenSize.height/4)
@@ -238,8 +201,10 @@ extension GameScene {
     }
     
     func resumeGame() {
-        entityManager.resumeEntities()
+        //entityManager.resumeEntities()
         scene?.isPaused = false
+        entityManager.resumeGrannies()
+        
     }
 }
 
