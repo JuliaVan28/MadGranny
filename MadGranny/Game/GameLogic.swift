@@ -36,7 +36,11 @@ class GameLogic: ObservableObject {
         print("setUpGame is called")
         self.isGameOver = false
     }
-
+    
+    func pauseGame() {
+        isPaused = true
+        stopTimer()
+    }
     
     func restartGame() {
         self.setUpGame()
@@ -57,7 +61,6 @@ class GameLogic: ObservableObject {
     
     //MARK: - Timer functions
     func stopTimer() {
-        isPaused = true
         self.timer.upstream.connect().cancel()
     }
     

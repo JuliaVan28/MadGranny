@@ -27,10 +27,7 @@ struct GamePointsView: View {
              //   .font(.headline)
         }
         .frame(minWidth: 60)
-        //.padding(24)
-       // .foregroundColor(.white)
-       // .background(Color(UIColor.systemGray))
-       // .cornerRadius(10)
+
     }
 }
 

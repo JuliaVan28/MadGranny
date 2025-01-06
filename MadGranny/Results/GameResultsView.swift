@@ -22,20 +22,26 @@ struct GameResultsView: View {
             Image("menu_background_parket")
                 .resizable()
                 .ignoresSafeArea()
-            
-            VStack(){
-                
+            VStack {
                 Image("gameOver")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 350, height: 350)
-                    .padding(.top, 90)
+                    .frame(width: 350)
+                    .padding(.top, 60)
+                Spacer()
+            }
+            
+            VStack {
+                Spacer()
                 
-                HStack{
+                
+                HStack(spacing: 10) {
                     Image("result_child")
-                    
-                    Spacer().frame(width: 20)
-                    
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 120)
+                        .padding(.top, 23)
+                                        
                     Image("result_granny")
                         .padding(.bottom,20)
                 }
@@ -48,10 +54,16 @@ struct GameResultsView: View {
                         .resizable()
                         .frame(width: 150, height: 80)
                         .padding([.bottom, .leading, .trailing], 5)
+                        .overlay {
+                            HStack {
+                                Spacer()
+                                Text("\(gameLogic.currentScore)")
+                                    .foregroundStyle(.black)
+                                    .font(.system(size: 25, weight: .bold))
+                            }.frame(width: 110)
+                        }
                     
-                    Text("\(gameLogic.currentScore-1)")
-                        .foregroundStyle(.black)
-                        .font(.system(size: 25, weight: .bold))
+                    
                }
                 .padding(.bottom, 50)
                 
@@ -78,7 +90,7 @@ struct GameResultsView: View {
                     
                     Spacer()
                 }
-                .padding(.bottom, 250)
+                Spacer().frame(height: 60)
             }
         }
         .statusBar(hidden: true)

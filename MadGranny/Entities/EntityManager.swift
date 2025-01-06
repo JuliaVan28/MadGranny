@@ -99,25 +99,9 @@ class EntityManager {
                     print(entity.component(ofType: MoveComponent.self)?.position)
                 } else if spriteNode.entityType == .granny {
                     print("found granny")
-                  /* if let moveComponent = entity.component(ofType: MoveComponent.self) {
-                       entity.removeComponent(ofType: MoveComponent.self)
-                       for componentSystem in componentSystems {
-                           componentSystem.removeComponent(foundIn: entity)
-                       }
-
-                       moveComponent.speed = 0
-                       moveComponent.maxSpeed = 0
-                       moveComponent.mass = 100
-                       moveComponent.maxAcceleration = 0
-                       grannyPositions.append(moveComponent.position)
-                       moveComponent.behavior = nil
-                      // GKBehavior(goal: GKGoal(toStayOn: GKPath(points: [SIMD2<Float>(moveComponent.position), SIMD2<Float>(moveComponent.position)], radius: 0.0, cyclical: true), maxPredictionTime: TimeInterval(1.0)), weight: 2)
-                      // entity.addComponent(MoveComponent(maxSpeed: 0, maxAcceleration: 0, radius: 0, entityManager: self))
-                        //componentSystems.removeAll()
-                        print("removed moveComponent")
-                    }*/
                     print("paused granny, it's moveComp position:")
                     print(entity.component(ofType: MoveComponent.self)?.position)
+                    print("granny position: \(spriteNode.node.position)")
                     grannyPositions.append(spriteNode.node.position)
                     entities.remove(entity)
                     scene.removeChildren(in: [spriteNode.node])
@@ -125,7 +109,6 @@ class EntityManager {
                 
             }
         }
-      //  scene.isPaused = true
     }
     
     func resumeGrannies() {
@@ -135,32 +118,11 @@ class EntityManager {
             spawnChild(position: childPosition)
         }
         
-         for grannyPosition in grannyPositions {
-         print(grannyPosition)
-         print("spawning granny")
-         spawnGrany(position: grannyPosition)
-         }
-        /*
-        for entity in entities {
-            
-            if let spriteNode = entity.component(ofType: SpriteComponent.self) {
-                if spriteNode.entityType == .granny {
-                   // if let moveComponent = entity.component(ofType: MoveComponent.self) {
-                      //  entity.removeComponent(ofType: MoveComponent.self)
-                        entity.addComponent(MoveComponent(maxSpeed: 100, maxAcceleration: 80, radius: Float(spriteNode.node.texture!.size().width * 0.3), entityManager: self))
-                    for componentSystem in componentSystems {
-                        componentSystem.addComponent(foundIn: entity)
-                    }
-                        //componentSystems.removeAll()
-//                        moveComponent.speed = 80
-//                        moveComponent.maxSpeed = 100
-//                        moveComponent.position = grannyPositions.removeFirst()
-                       // moveComponent.behavior =
-                        print("readded moveComponent")
-                    //}
-                }
-            }
-        }*/
+        for grannyPosition in grannyPositions {
+            print("spawning granny")
+            print(grannyPosition)
+            spawnGrany(position: grannyPosition)
+        }
         isPaused = false
     }
     
@@ -171,20 +133,6 @@ class EntityManager {
                 if spriteNode.entityType == .granny {
                     print("found granny in resume Entities")
                     let movementComponent = MoveComponent(maxSpeed: 50, maxAcceleration: 80, radius: Float((spriteNode.node.texture?.size().width)! * 0.3), entityManager: self)
-                    /*
-                    // Find child
-                      guard let child = entities.first(where: {$0.component(ofType: SpriteComponent.self)?.entityType == .child}),
-                      let childMoveComponent = child.component(ofType: MoveComponent.self) else {
-                      print("couldn't find child")
-                          return
-                    }
-                    print(entities.filter({$0.component(ofType: SpriteComponent.self)?.entityType == .child}))
-                    let targetMoveComponent: GKAgent2D = childMoveComponent
-                      
-                    // Set behavior
-                    movementComponent.behavior = GKBehavior(goals: [GKGoal(toSeekAgent: targetMoveComponent), GKGoal(toReachTargetSpeed: 1.0)])
-                     */
-                    
                     
                     entity.addComponent(movementComponent)
                     componentSystems.append(GKComponentSystem(componentClass: MoveComponent.self))
@@ -222,8 +170,7 @@ extension EntityManager {
             
             spriteComponent.node.name = "child"
             spriteComponent.node.size = CGSize(width: 25, height: 45)
-//            spriteComponent.node.position = CGPoint.zero
-            spriteComponent.node.position =  position 
+            spriteComponent.node.position =  position
             spriteComponent.node.zPosition = NodesZPosition.child.rawValue
             
             spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.child
@@ -240,7 +187,7 @@ extension EntityManager {
             
             print("configured child")
         }
-            add(child)
+        add(child)
     }
     
     func spawnGrany(position: CGPoint) {
@@ -256,7 +203,6 @@ extension EntityManager {
             spriteComponent.node.zPosition = 0
             
             spriteComponent.node.position = position
-                // spriteComponent.node.anchorPoint = CGPoint(x: 0, y: 0)
             spriteComponent.node.physicsBody?.categoryBitMask = PhysicsCategory.granny
             
             // Creating Physics body and binding its contact
@@ -274,9 +220,8 @@ extension EntityManager {
             print(spriteComponent.node.position)
             print(spriteComponent.node.anchorPoint)
         }
-            print("added granny")
-            add(granny)
-       // print("Entities: \(self.entities)")
+        print("added granny")
+        add(granny)
     }
     
     // MARK: Bonus Items
@@ -357,10 +302,10 @@ extension EntityManager {
             spriteComponent.node.xScale = -1
             spriteComponent.node.name = "chair"
             spriteComponent.node.zPosition = 5
-
+            
         }
         add(chairFacingLeft)
-
+        
         
         let verticalwall = Wall(entityManager: self)
         if let spriteComponent = verticalwall.component(ofType: SpriteComponent.self) {
@@ -369,7 +314,6 @@ extension EntityManager {
             spriteComponent.node.zRotation = 1.57
             spriteComponent.node.name = "wall"
             spriteComponent.node.zPosition = 5
-         //   scene.addChild(spriteComponent.node)
         }
         add(verticalwall)
         
@@ -379,18 +323,15 @@ extension EntityManager {
             spriteComponent.node.size = CGSize(width: 450, height: 10)
             spriteComponent.node.name = "wall"
             spriteComponent.node.zPosition = 5
-         //   scene.addChild(spriteComponent.node)
         }
         add(horizontalwall)
-
+        
         let tv = Tv(entityManager: self)
         if let spriteComponent = tv.component(ofType: SpriteComponent.self) {
             spriteComponent.node.position = CGPoint(x: ScreenSize.width / 2 - 90, y: ScreenSize.height / 2 + 240)
             spriteComponent.node.size = CGSize(width: 35, height: 35)
-//            spriteComponent.node.zRotation = 1.57
             spriteComponent.node.name = "tv"
             spriteComponent.node.zPosition = 5
-           // scene.addChild(spriteComponent.node)
         }
         add(tv)
     }

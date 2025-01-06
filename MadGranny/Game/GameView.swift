@@ -42,16 +42,19 @@ struct GameView: View {
                         gameScene.resumeGame()
                         gameLogic.startTimer()
                     } else {
-                        gameLogic.stopTimer()
+                        gameLogic.pauseGame()
 
                     }
-                }) {
+                })
+                {
                     Image(gameLogic.isPaused ? "play-btn" : "pause-btn")
                         .resizable()
                         .frame(width: 56, height: 56)
                         .padding(.top, 3)
                     
                 }
+                .hidden()
+                
             }
             .padding(.top, 30)
             .padding()
@@ -61,6 +64,7 @@ struct GameView: View {
             print("game state is \(self.currentGameState)")
             if gameLogic.isGameOver {
                 print("in gameView highScore is \(highScore), curScore is \(gameLogic.currentScore)")
+                gameLogic.stopTimer()
                 setHighScore()
                 withAnimation {
                     self.presentGameResultsScreen()
